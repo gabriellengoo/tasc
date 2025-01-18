@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* h1{
+    font-size: 30vw;
+} */
+
+
+/* Hide vertical scrollbar */
+::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  /* Hide horizontal scrollbar */
+  ::-webkit-scrollbar {
+    height: 0;
+  }
+
+#__nuxt,
+#__layout,
+body,
+html {
+  height: auto;
+  min-height: 100vh !important;
+  overflow-x: hidden;
+  /* overflow-y: hidden; */
+}
+
+body{
+    /* padding: 1vw; */
+    font-size: 1vw;
+}
+
+a{
+    text-decoration: none;
+    font-size: 1vw;
+}
+
+button{
+    font-size: 1vw;
+}
+
+span{
+    font-size: 1vw;
+}
+
+ .logo{
+    font-family: 'Algerian', sans-serif; 
+    font-size: 3.5vw;
+ }
+
+ .linkscol{
+    /* top: -0.3vw;
+    position: relative; */
+ }
+
+ .navlinks{
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+ }
+ 
+ .hometext{
+    display: flex;
+        align-items: baseline;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 20vh;
+        z-index: 1;
+        position: relative;
+        pointer-events: none;
+ }
+
+ .maintexthome{
+    font-size: 1.8vw;
+    pointer-events: auto !important;
+ }
+
+ .footerstyle{
+    border-top: .1px solid #c3c3c3;
+    text-transform: uppercase;
+
+ }
+
+ .fotsections{
+    padding: 10px 15px;
+    font-size: 1.7vw;
+ }
+
+ @media only screen and (max-width: 768px) { 
+    body{
+        padding: 2vw;
+        font-size: 5vw;
+    }
+    
+    a{
+        text-decoration: none;
+        font-size: 5vw;
+    }
+    
+    button{
+        font-size: 5vw;
+    }
+    
+    span{
+        font-size: 5vw;
+    }
+
+    .fotsections a{
+        font-size: 3.5vw;
+     }
+
+    .maintexthome{
+        font-size: 5vw;
+     }
+
+    .logo{
+        font-family: 'Algerian', sans-serif; 
+        font-size: 6vw;
+     }
+
+     .navlinks{
+        justify-content: flex-start;
+        display: none;
+     }
+ }

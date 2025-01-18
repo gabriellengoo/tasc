@@ -1,0 +1,15 @@
+# Node.js
+node_modules/
+.npm/
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Cache
+.cache/
+*.cache

@@ -1,0 +1,45 @@
+<template>
+    <div>
+      <h1 class="text-4xl font-bold mb-6">Welcome to the Store</h1>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div v-for="product in products" :key="product._id" class="border p-4">
+          <img :src="product.imageUrl" alt="" class="w-full h-64 object-cover" />
+          <h2 class="text-xl mt-4">{{ product.title }}</h2>
+          <p class="text-lg text-gray-600">${{ product.price }}</p>
+          <router-link :to="`/product/${product._id}`" class="text-blue-500 underline">View Details</router-link>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  import { createClient } from '@sanity/client';
+  
+  const sanity = createClient({
+    projectId: 'your-project-id',
+    dataset: 'production',
+    useCdn: true,
+    apiVersion: '2023-01-01',
+  });
+  
+  export default {
+    async asyncData() {
+      const products = await sanity.fetch(`
+        *[_type == "product"]{
+          _id,
+          title,
+          price,
+          "imageUrl": image.asset->url
+        }
+      `);
+      return { products };
+    },
+  };
+  </script>
+  
+  <style>
+  .grid {
+    display: grid;
+  }
+  </style>
+  

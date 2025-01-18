@@ -1,0 +1,20 @@
+{
+  "ProductCard": {
+    "description": "Auto imported from components/ProductCard.vue"
+  },
+  "ThreeModel": {
+    "description": "Auto imported from components/ThreeModel.vue"
+  },
+  "LayoutFooter": {
+    "description": "Auto imported from components/layout/Footer.vue"
+  },
+  "LayoutHeader": {
+    "description": "Auto imported from components/layout/Header.vue"
+  },
+  "LayoutHeaderMin": {
+    "description": "Auto imported from components/layout/HeaderMin.vue"
+  },
+  "LayoutMenu": {
+    "description": "Auto imported from components/layout/Menu.vue"
+  }
+}
