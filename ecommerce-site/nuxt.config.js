@@ -88,6 +88,7 @@ export default {
     //   });
     // },
 
+    transpile: ['three'],
     // build: {
       postcss: {
         plugins: {

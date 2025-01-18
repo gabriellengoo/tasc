@@ -1,9 +1,9 @@
-export { default as ProductCard } from '../../components/ProductCard.vue'
-export { default as ThreeModel } from '../../components/ThreeModel.vue'
-export { default as LayoutFooter } from '../../components/layout/Footer.vue'
-export { default as LayoutHeader } from '../../components/layout/Header.vue'
-export { default as LayoutHeaderMin } from '../../components/layout/HeaderMin.vue'
-export { default as LayoutMenu } from '../../components/layout/Menu.vue'
+export const ProductCard = () => import('../../components/ProductCard.vue' /* webpackChunkName: "components/product-card" */).then(c => wrapFunctional(c.default || c))
+export const ThreeModel = () => import('../../components/ThreeModel.vue' /* webpackChunkName: "components/three-model" */).then(c => wrapFunctional(c.default || c))
+export const LayoutFooter = () => import('../../components/layout/Footer.vue' /* webpackChunkName: "components/layout-footer" */).then(c => wrapFunctional(c.default || c))
+export const LayoutHeader = () => import('../../components/layout/Header.vue' /* webpackChunkName: "components/layout-header" */).then(c => wrapFunctional(c.default || c))
+export const LayoutHeaderMin = () => import('../../components/layout/HeaderMin.vue' /* webpackChunkName: "components/layout-header-min" */).then(c => wrapFunctional(c.default || c))
+export const LayoutMenu = () => import('../../components/layout/Menu.vue' /* webpackChunkName: "components/layout-menu" */).then(c => wrapFunctional(c.default || c))
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {
