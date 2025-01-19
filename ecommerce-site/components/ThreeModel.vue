@@ -29,14 +29,29 @@
     </div>
 
     <!-- Navigation Buttons -->
-    <button class="prev-button" @click="prevModel">‹</button>
-    <button class="next-button" @click="nextModel">›</button>
+    <button class="prev-button" @click="prevModel"><svg height="auto" width="auto" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffffff" stroke="#ffffff" stroke-width="2.56" transform="rotate(180)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#bdedff" stroke-width="21.503999999999998"> <path style="fill:#3dcfff;" d="M108.432,512c-5.363,0-10.754-1.238-15.775-3.752c-11.973-5.995-19.41-18.04-19.41-31.429V199.195 c0-7.642,6.196-13.836,13.836-13.836c7.64,0,13.836,6.195,13.836,13.836v277.624c0,4.168,2.888,6.063,4.129,6.686 c1.241,0.621,4.49,1.799,7.826-0.699L408.08,261.987c2.61-1.951,2.998-4.588,2.998-5.987s-0.389-4.036-2.998-5.988L112.875,29.195 c-3.335-2.497-6.586-1.32-7.826-0.699c-1.241,0.623-4.129,2.518-4.129,6.686v57.144c0,7.642-6.196,13.836-13.836,13.836 s-13.836-6.195-13.836-13.836V35.182c0-13.389,7.437-25.433,19.41-31.429c11.97-5.995,26.069-4.739,36.795,3.282l295.206,220.818 c8.958,6.701,14.095,16.961,14.095,28.147c0,11.187-5.137,21.446-14.095,28.146l-295.207,220.82 C123.224,509.623,115.857,512,108.432,512z"></path> <polygon style="fill:#bdedff;" points="150.989,120.234 150.989,391.766 332.492,256 "></polygon> <path style="fill:#3dcfff;" d="M150.987,405.604c-2.113,0-4.235-0.483-6.195-1.465c-4.684-2.345-7.64-7.134-7.64-12.371V120.233 c0-5.238,2.958-10.027,7.64-12.371c4.682-2.345,10.292-1.844,14.484,1.292L340.78,244.921c3.491,2.612,5.548,6.719,5.548,11.08 c0,4.361-2.056,8.468-5.548,11.08L159.277,402.849C156.839,404.671,153.922,405.604,150.987,405.604z M164.825,147.863v216.276 l144.566-108.137L164.825,147.863z"></path> </g><g id="SVGRepo_iconCarrier"> <path style="fill:#3dcfff;" d="M108.432,512c-5.363,0-10.754-1.238-15.775-3.752c-11.973-5.995-19.41-18.04-19.41-31.429V199.195 c0-7.642,6.196-13.836,13.836-13.836c7.64,0,13.836,6.195,13.836,13.836v277.624c0,4.168,2.888,6.063,4.129,6.686 c1.241,0.621,4.49,1.799,7.826-0.699L408.08,261.987c2.61-1.951,2.998-4.588,2.998-5.987s-0.389-4.036-2.998-5.988L112.875,29.195 c-3.335-2.497-6.586-1.32-7.826-0.699c-1.241,0.623-4.129,2.518-4.129,6.686v57.144c0,7.642-6.196,13.836-13.836,13.836 s-13.836-6.195-13.836-13.836V35.182c0-13.389,7.437-25.433,19.41-31.429c11.97-5.995,26.069-4.739,36.795,3.282l295.206,220.818 c8.958,6.701,14.095,16.961,14.095,28.147c0,11.187-5.137,21.446-14.095,28.146l-295.207,220.82 C123.224,509.623,115.857,512,108.432,512z"></path> <polygon style="fill:#bdedff;" points="150.989,120.234 150.989,391.766 332.492,256 "></polygon> <path style="fill:#3dcfff;" d="M150.987,405.604c-2.113,0-4.235-0.483-6.195-1.465c-4.684-2.345-7.64-7.134-7.64-12.371V120.233 c0-5.238,2.958-10.027,7.64-12.371c4.682-2.345,10.292-1.844,14.484,1.292L340.78,244.921c3.491,2.612,5.548,6.719,5.548,11.08 c0,4.361-2.056,8.468-5.548,11.08L159.277,402.849C156.839,404.671,153.922,405.604,150.987,405.604z M164.825,147.863v216.276 l144.566-108.137L164.825,147.863z"></path> </g></svg></button>
+    <button class="next-button" @click="nextModel"><svg height="auto" width="auto" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#ffffff" stroke="#ffffff" stroke-width="2.56"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#bdedff" stroke-width="21.503999999999998"> <path style="fill:#3dcfff;" d="M108.432,512c-5.363,0-10.754-1.238-15.775-3.752c-11.973-5.995-19.41-18.04-19.41-31.429V199.195 c0-7.642,6.196-13.836,13.836-13.836c7.64,0,13.836,6.195,13.836,13.836v277.624c0,4.168,2.888,6.063,4.129,6.686 c1.241,0.621,4.49,1.799,7.826-0.699L408.08,261.987c2.61-1.951,2.998-4.588,2.998-5.987s-0.389-4.036-2.998-5.988L112.875,29.195 c-3.335-2.497-6.586-1.32-7.826-0.699c-1.241,0.623-4.129,2.518-4.129,6.686v57.144c0,7.642-6.196,13.836-13.836,13.836 s-13.836-6.195-13.836-13.836V35.182c0-13.389,7.437-25.433,19.41-31.429c11.97-5.995,26.069-4.739,36.795,3.282l295.206,220.818 c8.958,6.701,14.095,16.961,14.095,28.147c0,11.187-5.137,21.446-14.095,28.146l-295.207,220.82 C123.224,509.623,115.857,512,108.432,512z"></path> <polygon style="fill:#bdedff;" points="150.989,120.234 150.989,391.766 332.492,256 "></polygon> <path style="fill:#3dcfff;" d="M150.987,405.604c-2.113,0-4.235-0.483-6.195-1.465c-4.684-2.345-7.64-7.134-7.64-12.371V120.233 c0-5.238,2.958-10.027,7.64-12.371c4.682-2.345,10.292-1.844,14.484,1.292L340.78,244.921c3.491,2.612,5.548,6.719,5.548,11.08 c0,4.361-2.056,8.468-5.548,11.08L159.277,402.849C156.839,404.671,153.922,405.604,150.987,405.604z M164.825,147.863v216.276 l144.566-108.137L164.825,147.863z"></path> </g><g id="SVGRepo_iconCarrier"> <path style="fill:#3dcfff;" d="M108.432,512c-5.363,0-10.754-1.238-15.775-3.752c-11.973-5.995-19.41-18.04-19.41-31.429V199.195 c0-7.642,6.196-13.836,13.836-13.836c7.64,0,13.836,6.195,13.836,13.836v277.624c0,4.168,2.888,6.063,4.129,6.686 c1.241,0.621,4.49,1.799,7.826-0.699L408.08,261.987c2.61-1.951,2.998-4.588,2.998-5.987s-0.389-4.036-2.998-5.988L112.875,29.195 c-3.335-2.497-6.586-1.32-7.826-0.699c-1.241,0.623-4.129,2.518-4.129,6.686v57.144c0,7.642-6.196,13.836-13.836,13.836 s-13.836-6.195-13.836-13.836V35.182c0-13.389,7.437-25.433,19.41-31.429c11.97-5.995,26.069-4.739,36.795,3.282l295.206,220.818 c8.958,6.701,14.095,16.961,14.095,28.147c0,11.187-5.137,21.446-14.095,28.146l-295.207,220.82 C123.224,509.623,115.857,512,108.432,512z"></path> <polygon style="fill:#bdedff;" points="150.989,120.234 150.989,391.766 332.492,256 "></polygon> <path style="fill:#3dcfff;" d="M150.987,405.604c-2.113,0-4.235-0.483-6.195-1.465c-4.684-2.345-7.64-7.134-7.64-12.371V120.233 c0-5.238,2.958-10.027,7.64-12.371c4.682-2.345,10.292-1.844,14.484,1.292L340.78,244.921c3.491,2.612,5.548,6.719,5.548,11.08 c0,4.361-2.056,8.468-5.548,11.08L159.277,402.849C156.839,404.671,153.922,405.604,150.987,405.604z M164.825,147.863v216.276 l144.566-108.137L164.825,147.863z"></path> </g></svg>
+    </button>
+
+  
+    <!-- Select Model Message -->
+    <div v-if="!selectedModel" class="select-message">
+      <p>Please select a body</p>
+    </div>
+
+    <!-- Select This Model Button -->
+    <button 
+      v-if="!selectedModel" 
+      class="select-button" 
+      @click="selectModel"
+    >
+      Select this body
+    </button>
   </div>
 </template>
 
 <script>
 import { onMounted, ref, reactive, nextTick, computed } from "vue"; // Added 'computed' import
-
 import * as THREE from "three";
 
 export default {
@@ -47,9 +62,9 @@ export default {
     const state = reactive({
       models: [
         {
-          image: "pose.png",
-          path: "models/test.glb",
-          scale: 3,
+          image: "hg.png",
+          path: "models/test3.glb",
+          scale: 0.03,
           position: [0, -3, 0],
           loaded: false,
         },
@@ -61,19 +76,12 @@ export default {
           loaded: false,
         },
         {
-          image: "pose.png",
-          path: "models/test.glb",
-          scale: 3,
-          position: [0, -2, 0],
+          image: "intri.png",
+          path: "models/test4.glb",
+          scale: 0.03,
+          position: [0, -3, 0],
           loaded: false,
         },
-        // {
-        //   image: "model3.png",
-        //   path: "models/test3.glb",
-        //   scale: 2,
-        //   position: [0, -3, 0],
-        //   loaded: false,
-        // },
       ],
       currentIndex: 0,
       isLoading: false, // Indicates if the model is currently loading
@@ -167,7 +175,7 @@ export default {
         const ambientLight = new THREE.AmbientLight(0xffffff, 1);
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 3);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
         directionalLight.position.set(5, 5, 10);
         scene.add(directionalLight);
 
@@ -177,8 +185,8 @@ export default {
             controls = new OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
             controls.dampingFactor = 0.25;
-            controls.minDistance = 2;
-            controls.maxDistance = 10;
+            controls.minDistance = 4;
+            controls.maxDistance = 3;
             controls.target.set(0, 0, 0);
             controls.update();
           }
@@ -218,6 +226,43 @@ export default {
 
 <style scoped>
 
+.select-message {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+}
+
+.select-button {
+  position: absolute;
+    top: 47vh;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    /* background-color: #007bff; */
+        /* background-color: rgb(0 0 0); */
+        color: #000000;
+    /* color: white; */
+    text-transform: uppercase;
+    border: none;
+    /* border-radius: 5px; */
+    cursor: pointer;
+    font-size: 1vw;
+    margin: 0;
+    height: max-content;
+    transition-duration:background-color 3sec ease;
+}
+
+.select-button:hover {
+  background-color: #5fd8fa;
+  background-color: rgb(0 0 0); 
+  transition-duration: background-color 3sec ease;
+  color: white; 
+}
+
 
 .three-container {
   width: 100%;
@@ -239,14 +284,16 @@ export default {
 }
 
 .carousel-item {
-  width: 30%;
-  height: 100%;
-  position: absolute;
+  width: 54%;
+    opacity: .2;
+    height: 100%;
+    position: absolute;
     /* top: 13vh; */
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
 }
 
 .static-left {
@@ -325,5 +372,13 @@ button {
 
 .next-button {
   right: 1rem;
+}
+
+.prev-button svg {
+  width: 7vw;
+}
+
+.next-button svg{
+  width: 7vw;
 }
 </style>

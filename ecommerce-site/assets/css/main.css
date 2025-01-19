@@ -53,12 +53,42 @@ canvas{
 
  .logo{
     font-family: 'Algerian', sans-serif; 
-    font-size: 3.5vw;
+    font-size: 3vw;
+    top: .6vh;
+    position: relative;
+ }
+
+ .more{
+    font-family: 'Algerian', sans-serif; 
+    pointer-events: auto;
+    position: absolute;
+    right: 0;
+    top: .6vh;
+    line-height: normal;
+    font-size: 5vw;
  }
 
  .linkscol{
     /* top: -0.3vw;
     position: relative; */
+ }
+
+ .infobut{
+    /* z-index: 20; */
+ }
+
+ .slideinfo{
+    z-index: 100;
+    width: 20vw;
+    border-left: 1px solid black;
+    background-color: white;
+ }
+
+ .slideinfotext{
+    font-size: 1vw;
+ }
+ .slideinfotext button{
+    font-size: 1vw;
  }
 
  .navlinks{
@@ -72,15 +102,21 @@ canvas{
         align-items: baseline;
         flex-direction: column;
         justify-content: flex-end;
-        padding-bottom: 20vh;
+        padding-bottom: 10vh;
         z-index: 1;
         position: relative;
         pointer-events: none;
  }
 
  .maintexthome{
-    font-size: 1.8vw;
+    font-size: 1.5vw;
     pointer-events: auto !important;
+ }
+
+ .homesub{
+    font-size: 1vw;
+    color: #363636;
+    width: 30vw;
  }
 
  .footerstyle{

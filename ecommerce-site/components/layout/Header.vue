@@ -10,19 +10,23 @@
         <!-- <div class="pr-[2vw]"> -->
           <NuxtLink class="logo pr-[2vw]" to="/">Tasc</NuxtLink>
         <!-- </div> -->
-        <div class="linkscol flex-col pr-[2vw] w-1/16 md:flex ">
+        <!-- <div class="linkscol flex-col pr-[2vw] w-1/16 md:flex ">
           <NuxtLink class="" to="/mens">Menswear</NuxtLink>
           <NuxtLink class="" to="/womens">Womenswear</NuxtLink>
-        </div>
+        </div> -->
         <div class="flex items-center">
-          <span class="block mr-[5vw] uppercase">title</span>
+          <!-- <span class="block mr-[5vw] uppercase">title</span> -->
+          <NuxtLink class="block mr-[3vw] uppercase" to="/mens">Menswear</NuxtLink>
           <span class="block">
-            <a href="title">
+            <!-- <a href="title">
               title
-            </a>
+            </a> -->
+
+            <NuxtLink class="" to="/womens">Womenswear</NuxtLink> 
           
           </span>
         </div>
+        <NuxtLink class="more" to="/womens">+</NuxtLink> 
         <!-- <NuxtLink to="/production">Production</NuxtLink> -->
       </nav>
       <!-- <Animation></Animation>
