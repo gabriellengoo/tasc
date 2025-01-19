@@ -4,7 +4,7 @@
     <div class="h-[100vh] pl-[2vw] w-[100%] hometext">
    <div class="maintexthome">
     <h1 class="mb-4  uppercase">Build your avatar to start <br/>  shopping -- it's free</h1>
-    <p class=" mb-4 " >bla bla</p>
+    <p class="mb-4" >bla bla</p>
    </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

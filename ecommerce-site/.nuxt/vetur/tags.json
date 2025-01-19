@@ -5,6 +5,9 @@
   "ThreeModel": {
     "description": "Auto imported from components/ThreeModel.vue"
   },
+  "ThreeModelold": {
+    "description": "Auto imported from components/ThreeModelold.vue"
+  },
   "LayoutFooter": {
     "description": "Auto imported from components/layout/Footer.vue"
   },

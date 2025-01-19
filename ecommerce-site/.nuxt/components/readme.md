@@ -8,6 +8,7 @@ You can directly use them in pages and other components without the need to impo
 
 - `<ProductCard>` | `<product-card>` (components/ProductCard.vue)
 - `<ThreeModel>` | `<three-model>` (components/ThreeModel.vue)
+- `<ThreeModelold>` | `<three-modelold>` (components/ThreeModelold.vue)
 - `<LayoutFooter>` | `<layout-footer>` (components/layout/Footer.vue)
 - `<LayoutHeader>` | `<layout-header>` (components/layout/Header.vue)
 - `<LayoutHeaderMin>` | `<layout-header-min>` (components/layout/HeaderMin.vue)
