@@ -24,11 +24,13 @@ html {
   height: auto;
   min-height: 100vh !important;
   overflow-x: hidden;
+  background-color: #f9f9f1;
   /* overflow-y: hidden; */
 }
 
 body{
     /* padding: 1vw; */
+    background-color: #f9f9f1;
     font-size: 1vw;
 }
 
@@ -51,6 +53,10 @@ canvas{
       z-index: 0;
   }
 
+  header{
+   background-color: #f9f9f1;
+  }
+
  .logo{
     font-family: 'Algerian', sans-serif; 
     font-size: 3vw;
@@ -67,6 +73,15 @@ canvas{
     line-height: normal;
     font-size: 5vw;
  }
+
+ .more2{
+   pointer-events: auto;
+   position: absolute;
+   right: 0;
+   top: .6vh;
+   padding: 2vw;
+   line-height: normal;
+}
 
  .linkscol{
     /* top: -0.3vw;
@@ -98,19 +113,20 @@ canvas{
  }
  
  .hometext{
-    display: flex;
-        align-items: baseline;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding-bottom: 10vh;
-        z-index: 1;
-        position: relative;
-        pointer-events: none;
+   display: flex;
+       align-items: flex-end;
+       flex-direction: column;
+       justify-content: flex-end;
+       padding-bottom: 10vh;
+       z-index: 1;
+       position: relative;
+       pointer-events: none;
  }
 
  .maintexthome{
     font-size: 1.5vw;
     pointer-events: auto !important;
+    display:flex;
  }
 
  .homesub{
@@ -119,16 +135,33 @@ canvas{
     width: 30vw;
  }
 
+ .homesub2{
+   font-size: 1vw;
+   color: #363636;
+}
+
  .footerstyle{
     border-top: .1px solid #c3c3c3;
     text-transform: uppercase;
 
  }
 
+ .footline{
+   border-right: .1px solid #c3c3c3;
+   text-transform: uppercase;
+
+}
+
  .fotsections{
-    padding: 10px 15px;
+    padding: .5vw;
     font-size: 1.7vw;
  }
+
+ .fotsections2{
+   padding: 1vw;
+   padding-left: .5vw;
+   font-size: 1.7vw;
+}
 
  @media only screen and (max-width: 768px) { 
     body{

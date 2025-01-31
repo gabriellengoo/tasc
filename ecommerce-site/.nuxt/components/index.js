@@ -1,3 +1,5 @@
+export { default as ImageScroller } from '../../components/ImageScroller.vue'
+export { default as ImageScrollercopy } from '../../components/ImageScrollercopy.vue'
 export { default as ProductCard } from '../../components/ProductCard.vue'
 export { default as ThreeModel } from '../../components/ThreeModel.vue'
 export { default as ThreeModelold } from '../../components/ThreeModelold.vue'

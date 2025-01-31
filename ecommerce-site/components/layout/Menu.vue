@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-col w-full pt-2 normal-case md:hidden">
+  <div class="flex-col w-full pt-2 normal-case spacea ">
     <div class="flex">
       <span class="mobileheadsize w-29 -mr-0.5"></span> 
       <div class="flex-1">
@@ -15,7 +15,7 @@
         <div class="flex">
           <span class="block w-24 uppercase">title</span>
           <span class="block">
-            <a href="title">
+            <a class="block w-24 uppercase" href="title">
               title
             </a>
           
@@ -40,6 +40,12 @@ export default {
 }
 </script>
 <style scoped>
+
+.spacea{
+  position: relative;
+  top: 3vw;
+  left: 3vw;
+}
 
 @media (max-width: 768px) {
 .mobileheadsize{

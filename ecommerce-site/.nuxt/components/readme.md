@@ -6,6 +6,8 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
+- `<ImageScroller>` | `<image-scroller>` (components/ImageScroller.vue)
+- `<ImageScrollercopy>` | `<image-scrollercopy>` (components/ImageScrollercopy.vue)
 - `<ProductCard>` | `<product-card>` (components/ProductCard.vue)
 - `<ThreeModel>` | `<three-model>` (components/ThreeModel.vue)
 - `<ThreeModelold>` | `<three-modelold>` (components/ThreeModelold.vue)

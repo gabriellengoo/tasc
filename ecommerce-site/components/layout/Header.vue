@@ -1,53 +1,28 @@
 <template>
   <header
-    class="fixed  text-[1vw] p-[1vw] z-20 w-full pt-8 text-xs leading-snug uppercase bg-white  md:pb-2 md:pt-2"
+    class="fixed  text-[1vw] p-[1vw] z-20 w-full pt-8 text-xs leading-snug uppercase  md:pb-2 md:pt-2"
   >
     <div
       class="relative flex flex-wrap items-end gap-4  md:items-start md:flex-nowrap"
     > 
 
-      <nav class="hidden navlinks w-1/16 ">
-        <!-- <div class="pr-[2vw]"> -->
+      <!-- <nav class="hidden navlinks w-1/16 ">
           <NuxtLink class="logo pr-[2vw]" to="/">Tasc</NuxtLink>
-        <!-- </div> -->
-        <!-- <div class="linkscol flex-col pr-[2vw] w-1/16 md:flex ">
-          <NuxtLink class="" to="/mens">Menswear</NuxtLink>
-          <NuxtLink class="" to="/womens">Womenswear</NuxtLink>
-        </div> -->
+    
         <div class="flex items-center">
-          <!-- <span class="block mr-[5vw] uppercase">title</span> -->
           <NuxtLink class="block mr-[3vw] uppercase" to="/mens">Menswear</NuxtLink>
           <span class="block">
-            <!-- <a href="title">
-              title
-            </a> -->
+          
 
             <NuxtLink class="" to="/womens">Womenswear</NuxtLink> 
           
           </span>
         </div>
         <NuxtLink class="more" to="/womens">+</NuxtLink> 
-        <!-- <NuxtLink to="/production">Production</NuxtLink> -->
-      </nav>
-      <!-- <Animation></Animation>
-      <div class="flex-col hidden normal-case md:flex">
-        <div class="flex" v-for="item in contact" :key="item._key">
-          <span class="block w-24 uppercase">{{ item.title }}</span>
-          <span class="block">
-            <a :href="item.link.link" v-if="item.link.link">{{
-              item.link.title
-            }}</a>
-            <span v-else>{{ item.link.title }}</span>
-          </span>
-        </div>
-      </div> -->
-    
-      <!-- <button
-        class="absolute bottom-0 right-0 w-6 h-4 md:hidden"
-        @click="TOGGLE_MENU()"
-      > -->
+      </nav> -->
+   
       <button
-        class=" bottom-0 right-0 w-6 h-4 md:hidden"
+        class=" bottom-0 right-0 w-6 h-4 "
         @click="TOGGLE_MENU()"
       >
       <p class="logo pr-[2vw]" >Tasc</p>
@@ -65,6 +40,7 @@
         ></span>
       </button>
     </div>
+    <NuxtLink class="more2" to="/womens">menu</NuxtLink> 
     <LayoutMenu v-if="menu"></LayoutMenu>
   </header>
 </template>

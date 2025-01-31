@@ -1,4 +1,10 @@
 {
+  "ImageScroller": {
+    "description": "Auto imported from components/ImageScroller.vue"
+  },
+  "ImageScrollercopy": {
+    "description": "Auto imported from components/ImageScrollercopy.vue"
+  },
   "ProductCard": {
     "description": "Auto imported from components/ProductCard.vue"
   },
