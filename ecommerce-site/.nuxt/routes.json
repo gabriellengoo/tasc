@@ -3,14 +3,12 @@
     "name": "index",
     "path": "/",
     "component": "/Users/gabriellengoo/Documents/work/tasc/ecommerce-site/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_f56113b4"
+    "chunkName": "pages/index"
   },
   {
     "name": "products-id",
     "path": "/products/:id?",
     "component": "/Users/gabriellengoo/Documents/work/tasc/ecommerce-site/pages/products/_id.vue",
-    "chunkName": "pages/products/_id",
-    "_name": "_5e39626b"
+    "chunkName": "pages/products/_id"
   }
 ]
