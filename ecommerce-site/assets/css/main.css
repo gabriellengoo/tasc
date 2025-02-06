@@ -122,13 +122,18 @@ canvas{
 
  .infobut{
     /* z-index: 20; */
-    width: 4vw;
+    width: 3vw;
+ }
+
+ .adborder{
+   border-top: 1px solid #C3C3C3;
+   border-bottom: 1px solid #C3C3C3;
  }
 
  .slideinfo{
     z-index: 100;
-    width: 20vw;
-    border-left: 1px solid black;
+    width: 50vw;
+    /* border-left: 1px solid black; */
     background-color: white;
  }
 
@@ -137,6 +142,33 @@ canvas{
  }
  .slideinfotext button{
     font-size: .7vw;
+ }
+
+ .flashing-text-container {
+   position: absolute;
+   top: 35vw;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   text-align: center;
+   z-index: 100;
+   font-family: 'typewriter';
+ }
+ 
+ .flashing-text {
+   font-size: 1.3vw; /* Adjust size if needed */
+   /* font-weight: bold; */
+   /* color: black; */
+   color: #7f828b;
+   animation: flash 1s infinite alternate;
+ }
+ 
+ @keyframes flash {
+   0% {
+     opacity: 1;
+   }
+   100% {
+     opacity: 0.2;
+   }
  }
 
  .navlinks{
@@ -151,9 +183,10 @@ canvas{
        align-items: flex-end;
        flex-direction: column;
        justify-content: flex-end;
-       padding-bottom: 20vh;
+       padding-bottom: 2vw;
        z-index: 1;
        position: relative;
+       padding-right: 2vw;
        pointer-events: none;
  }
 
@@ -166,7 +199,7 @@ canvas{
  .homesub{
     font-size: .7vw;
     color: #363636;
-    width: 20vw;
+    width: 15vw;
  }
 
  .homesub2{
@@ -177,6 +210,7 @@ canvas{
  .footerstyle{
     border-top: .1px solid #c3c3c3;
     text-transform: uppercase;
+    min-height: 20vh;
 
  }
 

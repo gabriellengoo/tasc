@@ -42,9 +42,9 @@ const hoveredIndex = ref(null);
 const isHovered = ref(false);
 
 const getText = (image) => {
-  if (image.includes("pear")) return "Feminine <br> Pear Body <br> 01/10";
-  if (image.includes("squ")) return "Feminine <br> Square Body <br> 02/10";
-  if (image.includes("intri")) return "Feminine <br> Intricate Body <br> 03/10";
+  if (image.includes("pear")) return "WOMENSWEAR <br> Pear Body <br> 01/10";
+  if (image.includes("squ")) return "WOMENSWEAR <br> Square Body <br> 02/10";
+  if (image.includes("intri")) return "WOMENSWEAR <br> Inverted Triangle <br> 03/10";
   return "";
 };
 </script>
@@ -56,7 +56,7 @@ const getText = (image) => {
   height: 40vw;
   white-space: nowrap;
   position: absolute;
-  top: 20vh;
+  top: 13vh;
   left: 0;
 }
 
@@ -76,8 +76,9 @@ const getText = (image) => {
 .image-group {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 3vw;
   min-width: 10vw;
+  min-width: 20vw;
 }
 
 .image-loop {
@@ -89,7 +90,7 @@ const getText = (image) => {
 
 .loop-image {
   width: auto;
-  height: 40vw;
+  height: 36vw;
   object-fit: contain;
   opacity: 1;
 }
@@ -118,26 +119,38 @@ const getText = (image) => {
   margin-bottom: 8px;
 }
 
-.tooltip-line {
+.tooltip-line-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 1px;
-  background-color: black;
-  width: 0;
-  animation: line-span 1s forwards;
+  bottom: -10px; /* Adjust this value to align the line properly */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.tooltip-line::before {
+.tooltip-line {
+  position: absolute;
+  width: 50px; /* Adjust length as needed */
+  height: 2px;
+  top: -1vw;
+  left: -8vw;
+  background-color: black;
+  transform: rotate(-45deg); /* Makes it diagonal pointing upwards */
+  transform-origin: left center;
+}
+
+
+/* .tooltip-line::before {
   content: "";
   position: absolute;
-  top: -3px;
-  left: -3px;
+  top: -2vw;
+  left: 0vw;
   width: 6px;
   height: 6px;
   border-radius: 50%;
+  transform: rotate(-45deg);
   background-color: black;
-}
+} */
+
+
 
 .tooltip-text {
   opacity: 0;
@@ -176,9 +189,9 @@ const getText = (image) => {
 }
 
 /* Example line with bends */
-.tooltip-line-container:nth-child(2) .tooltip-line {
+/* .tooltip-line-container:nth-child(2) .tooltip-line {
   animation: line-span 1s forwards, line-bend 2s forwards;
-}
+} */
 
 @keyframes line-bend {
   0% {
