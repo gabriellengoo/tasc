@@ -5,6 +5,9 @@
   "ImageScrollercopy": {
     "description": "Auto imported from components/ImageScrollercopy.vue"
   },
+  "ImageScrollermb": {
+    "description": "Auto imported from components/ImageScrollermb.vue"
+  },
   "ProductCard": {
     "description": "Auto imported from components/ProductCard.vue"
   },
@@ -22,6 +25,9 @@
   },
   "LayoutHeaderMin": {
     "description": "Auto imported from components/layout/HeaderMin.vue"
+  },
+  "LayoutHeadermb": {
+    "description": "Auto imported from components/layout/Headermb.vue"
   },
   "LayoutMenu": {
     "description": "Auto imported from components/layout/Menu.vue"

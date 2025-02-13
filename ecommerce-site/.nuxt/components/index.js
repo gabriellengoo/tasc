@@ -1,11 +1,13 @@
 export { default as ImageScroller } from '../../components/ImageScroller.vue'
 export { default as ImageScrollercopy } from '../../components/ImageScrollercopy.vue'
+export { default as ImageScrollermb } from '../../components/ImageScrollermb.vue'
 export { default as ProductCard } from '../../components/ProductCard.vue'
 export { default as ThreeModel } from '../../components/ThreeModel.vue'
 export { default as ThreeModelold } from '../../components/ThreeModelold.vue'
 export { default as LayoutFooter } from '../../components/layout/Footer.vue'
 export { default as LayoutHeader } from '../../components/layout/Header.vue'
 export { default as LayoutHeaderMin } from '../../components/layout/HeaderMin.vue'
+export { default as LayoutHeadermb } from '../../components/layout/Headermb.vue'
 export { default as LayoutMenu } from '../../components/layout/Menu.vue'
 
 // nuxt/nuxt.js#8607

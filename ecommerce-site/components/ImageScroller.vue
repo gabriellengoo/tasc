@@ -6,23 +6,28 @@
       @mouseleave="isHovered = false"
     >
       <div
-        v-for="(image, index) in infiniteImages"
+        v-for="(pair, index) in pairedImages"
         :key="index"
         class="image-group"
       >
-        <div class="image-loop">
+        <div 
+          v-for="(image, imgIndex) in pair"
+          :key="imgIndex"
+          class="image-loop"
+          :class="imgIndex === 0 ? 'higher' : 'lower'"
+          @mouseover="hoveredIndex = image.default"
+          @mouseleave="hoveredIndex = null"
+        >
           <img
-            :src="image"
+            :src="hoveredIndex === image.default ? image.hover : image.default"
             alt="Scrolling image"
             class="loop-image"
-            @mouseover="hoveredIndex = image"
-            @mouseleave="hoveredIndex = null"
           />
-          <div v-if="hoveredIndex === image" class="tooltip">
+          <div v-if="hoveredIndex === image.default" class="tooltip">
             <div class="tooltip-line-container">
               <div class="tooltip-line"></div>
             </div>
-            <div class="tooltip-text" v-html="getText(image)"></div>
+            <div class="tooltip-text" v-html="getText(image.default)"></div>
           </div>
         </div>
       </div>
@@ -30,24 +35,55 @@
   </div>
 </template>
 
+
 <script setup>
 import { ref, computed } from "vue";
 
-const images = ["/pear.png", "/squ.png", "/intri.png"];
+const images = [
+  { default: "/ovalm.png", hover: "/ovalm.png" },
+  { default: "/pear.png", hover: "/pear.png" },
+  { default: "/squarem.png", hover: "/squarem.png" },
+  { default: "/squw.png", hover: "/squw.png" },
+  { default: "/intrim.png", hover: "/intrim.png" },
+  { default: "/intriw.png", hover: "/intriw.png" },
+  { default: "/maledefult.png", hover: "/menhh.png" },
+  { default: "/hour.png", hover: "/hour.png" },
+  { default: "/trim.png", hover: "/trim.png" },
+  { default: "/apple.png", hover: "/apple.png" },
+];
 
-// Duplicate images to ensure seamless scrolling
-const infiniteImages = computed(() => [...images, ...images, ...images]);
+// Pair images together
+const pairedImages = computed(() => {
+  let pairs = [];
+  for (let i = 0; i < images.length; i += 2) {
+    pairs.push([images[i], images[i + 1]]);
+  }
+  return [...pairs, ...pairs, ...pairs]; // Duplicate for seamless scrolling
+});
 
 const hoveredIndex = ref(null);
 const isHovered = ref(false);
 
 const getText = (image) => {
   if (image.includes("pear")) return "WOMENSWEAR <br> Pear Body <br> 01/10";
-  if (image.includes("squ")) return "WOMENSWEAR <br> Square Body <br> 02/10";
-  if (image.includes("intri")) return "WOMENSWEAR <br> Inverted Triangle <br> 03/10";
+  if (image.includes("squw")) return "WOMENSWEAR <br> Square Body <br> 02/10";
+  if (image.includes("intriw")) return "WOMENSWEAR <br> Inverted Triangle Body <br> 03/10";
+  if (image.includes("apple")) return "WOMENSWEAR <br> Apple Body <br> 04/10";
+  if (image.includes("hour")) return "WOMENSWEAR <br> Hourglass Body <br> 05/10";
+  if (image.includes("maledefult")) return "MENSWEAR <br> Trapezoid Body <br> 06/10";
+  if (image.includes("ovalm")) return "MENSWEAR <br> Oval Body <br> 07/10";
+  if (image.includes("squarem")) return "MENSWEAR <br> Square Body <br> 08/10";
+  if (image.includes("intrim")) return "MENSWEAR <br> Inverted Triangle Body <br> 09/10";
+  if (image.includes("trim")) return "MENSWEAR <br> Triangle Body <br> 10/10";
+
+
+
+
   return "";
 };
 </script>
+
+
 
 <style scoped>
 .scroller-wrapper {
@@ -64,7 +100,7 @@ const getText = (image) => {
   display: flex;
   gap: 2px;
   width: max-content;
-  animation: scroll 7s linear infinite;
+  animation: scroll 17s linear infinite;
   animation-play-state: running;
   transition: animation-play-state 0.3s;
 }
@@ -102,7 +138,7 @@ const getText = (image) => {
 .tooltip {
   position: absolute;
   bottom: 43vw;
-  left: 70%;
+  left: 13vw;
   color: black;
   padding: 5px 10px;
   border-radius: 5px;
@@ -122,7 +158,7 @@ const getText = (image) => {
 .tooltip-line-container {
   position: absolute;
   bottom: -10px; /* Adjust this value to align the line properly */
-  left: 50%;
+  left: 70%;
   transform: translateX(-50%);
 }
 
@@ -156,6 +192,7 @@ const getText = (image) => {
   opacity: 0;
   overflow: hidden;
   width: 0;
+  left: -8vw;
   white-space: nowrap;
   animation: typing 1s steps(30) 0.1s forwards;
 }
@@ -207,4 +244,41 @@ const getText = (image) => {
     transform: translateX(100px) rotate(0deg);
   }
 }
+
+
+.image-group {
+  display: flex;
+  flex-direction: column;
+  flex-direction: row;
+  gap: 1vw;
+  min-width: 20vw;
+  padding: 5vw ;
+}
+
+.image-loop {
+  position: relative;
+  width: auto;
+  height: 50vw;
+}
+
+.loop-image {
+  width: auto;
+  height: 36vw;
+  object-fit: contain;
+  opacity: 1;
+}
+
+/* Adjust positioning */
+.higher {
+  transform: translateY(-5vw);
+}
+
+.lower {
+  transform: translateY(-5vw);
+
+  /*     transform: translateY(-4vw);
+    height: 20vw;
+    width: 15.5vw; */
+}
+
 </style>

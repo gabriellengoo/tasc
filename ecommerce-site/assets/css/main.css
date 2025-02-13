@@ -231,10 +231,28 @@ canvas{
    font-size: 1.7vw;
 }
 
+
+
+.nomb{
+   display: contents;
+ }
+ 
+ .nodesk{
+   display: none;
+}
+
  @media only screen and (max-width: 768px) { 
     body{
-        padding: 2vw;
+        padding: 0vw;
         font-size: 5vw;
+    }
+
+    .nomb{
+      display: none;
+   }
+
+   .nodesk{
+      display: contents;
     }
     
     a{
@@ -247,7 +265,7 @@ canvas{
     }
     
     span{
-        font-size: 5vw;
+        font-size: 3vw;
     }
 
     .fotsections a{
@@ -267,4 +285,89 @@ canvas{
         justify-content: flex-start;
         display: none;
      }
+
+     .flashing-text-container {
+      position: absolute;
+      top: 50vh;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 100;
+      font-family: 'typewriter';
+  }
+
+  .flashing-text{
+   font-size: 4.3vw;
+  }
+
+  .more2 {
+   pointer-events: auto;
+   position: absolute;
+   right: 2vw;
+   top: .6vh;
+   padding: 2vw;
+   font-size: 3vw;
+   line-height: normal;
+}
+
+.maintexthome {
+   font-size: 1.5vw;
+   pointer-events: auto !important;
+   display: flex;
+   flex-direction: column;
+}
+
+.hometext {
+   display: flex;
+   align-items: unset;
+   flex-direction: column;
+   justify-content: flex-end;
+   padding-bottom: 0vw;
+   z-index: 1;
+   position: relative;
+   padding-right: 2vw;
+   pointer-events: none;
+}
+
+
+.homesub {
+   font-size: 2.7vw;
+   color: #363636;
+   width: auto;
+}
+
+.homesub2 {
+   font-size: 4vw;
+   color: #363636;
+}
+
+.mbinfobot{
+   display: flex;
+           width: 100%;
+           align-content: center;
+           flex-direction: row;
+           justify-content: space-between;
+           align-items: flex-start;
+}
+
+.fotsections a {
+   font-size: 1.5vw;
+}
+
+a {
+   -webkit-text-decoration: none;
+   text-decoration: none;
+   font-size: 2vw;
+}
+
+
+
+ .text-container span {
+   font-size: 2vw;
+}
+
+.big-text {
+   font-size: 4vw !important; /* Adjust this as needed */
+   display: block; /* Ensures it stays on its own line if needed */
+ }
  }

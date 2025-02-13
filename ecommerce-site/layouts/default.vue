@@ -1,47 +1,35 @@
 <template>
-    <main class="min-h-full">
-      <LayoutHeader
-        :class="
-          $nuxt.$route.name == 'index' ||
-          $nuxt.$route.name == 'index-bak' ||
-          $nuxt.$route.name == 'about' ||
-          $nuxt.$route.name == 'production' ||
-          $nuxt.$route.name == 'artists'
-            ? ''
-            : ' md:hidden'
-        "
-      ></LayoutHeader>
-      <!-- <LayoutHeaderMin
-        :class="
-          $nuxt.$route.name == 'index' ||
-          $nuxt.$route.name == 'index-bak' ||
-          $nuxt.$route.name == 'about' ||
-          $nuxt.$route.name == 'production' ||
-          $nuxt.$route.name == 'artists'
-            ? 'hidden'
-            : 'hidden md:flex'
-        "
-      ></LayoutHeaderMin> -->
-      <Nuxt />
-      <LayoutFooter
+  <main class="min-h-full">
+    <!-- Desktop Header -->
+    <LayoutHeader
       :class="
-          $nuxt.$route.name == 'index' ||
-          $nuxt.$route.name == 'about' ||
-          $nuxt.$route.name == 'production' ||
-          $nuxt.$route.name == 'artists'
-            ? 'reletive bottom-0'
-            : ''
-        "
-      ></LayoutFooter>
+        ['index', 'index-bak', 'about', 'production', 'artists'].includes($route.name)
+          ? 'hidden md:block'  // Hide on mobile, show on md+
+          : 'hidden md:contents'
+      "
+    />
 
-      <!--  v-if="
-          $nuxt.$route.name = 'index' &&
-          // if not these pages dont show footer
-          $nuxt.$route.name != 'project-slug' &&
-          $nuxt.$route.name != 'slug'
-        " -->
-    </main>
-  </template>
+    <!-- Mobile Header -->
+    <LayoutHeadermb
+      :class="
+        ['index', 'index-bak', 'about', 'production', 'artists'].includes($route.name)
+          ? 'block md:hidden'  // Show on mobile, hide on md+
+          : 'block md:hidden'
+      "
+    />
+
+    <Nuxt />
+
+    <LayoutFooter
+      :class="
+        ['index', 'about', 'production', 'artists'].includes($route.name)
+          ? 'relative bottom-0'
+          : ''
+      "
+    />
+  </main>
+</template>
+
   <script>
   import { mapActions, mapMutations } from 'vuex'
   export default {
