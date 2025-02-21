@@ -3,8 +3,10 @@
     <div class="scroller" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
       <div v-for="(pair, index) in pairedImages" :key="index" class="image-group">
         <div v-for="(image, imgIndex) in pair" :key="imgIndex" class="image-loop">
-          <img :src="image.default" alt="Scrolling image" class="loop-image" />
-          
+          <router-link :to="`/model/${image.default.split('/').pop().replace('.png', '')}`">
+  <img :src="image.default" alt="Scrolling image" class="loop-image" />
+</router-link>
+
           <!-- Text with alignment -->
           <div :class="imgIndex === 0 ? 'text-left text-container' : 'text-right text-container'">
             <!-- SVG before first text -->

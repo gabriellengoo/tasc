@@ -1,10 +1,24 @@
 [
   {
+    "name": "model-viewer-[id]",
+    "path": "/model-viewer/%5Bid%5D",
+    "component": "/Users/gabriellengoo/Documents/work/tasc/ecommerce-site/pages/model-viewer/[id].vue",
+    "chunkName": "pages/model-viewer/[id]",
+    "_name": "_4fbfa1f4"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/Users/gabriellengoo/Documents/work/tasc/ecommerce-site/pages/index.vue",
     "chunkName": "pages/index",
     "_name": "_f56113b4"
+  },
+  {
+    "name": "model-id",
+    "path": "/model/:id?",
+    "component": "/Users/gabriellengoo/Documents/work/tasc/ecommerce-site/pages/model/_id.vue",
+    "chunkName": "pages/model/_id",
+    "_name": "_2804cc28"
   },
   {
     "name": "products-id",

@@ -11,11 +11,26 @@
   "ProductCard": {
     "description": "Auto imported from components/ProductCard.vue"
   },
+  "StepFour": {
+    "description": "Auto imported from components/StepFour.vue"
+  },
+  "StepOne": {
+    "description": "Auto imported from components/StepOne.vue"
+  },
+  "StepThree": {
+    "description": "Auto imported from components/StepThree.vue"
+  },
+  "StepTwo": {
+    "description": "Auto imported from components/StepTwo.vue"
+  },
   "ThreeModel": {
     "description": "Auto imported from components/ThreeModel.vue"
   },
   "ThreeModelold": {
     "description": "Auto imported from components/ThreeModelold.vue"
+  },
+  "Form": {
+    "description": "Auto imported from components/form.vue"
   },
   "LayoutFooter": {
     "description": "Auto imported from components/layout/Footer.vue"

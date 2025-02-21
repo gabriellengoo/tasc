@@ -3,7 +3,7 @@
     <!-- Desktop Header -->
     <LayoutHeader
       :class="
-        ['index', 'index-bak', 'about', 'production', 'artists'].includes($route.name)
+        ['index', 'index-bak', 'about', 'model',].includes($route.name)
           ? 'hidden md:block'  // Hide on mobile, show on md+
           : 'hidden md:contents'
       "
@@ -12,7 +12,7 @@
     <!-- Mobile Header -->
     <LayoutHeadermb
       :class="
-        ['index', 'index-bak', 'about', 'production', 'artists'].includes($route.name)
+        ['index', 'index-bak', 'about', ].includes($route.name)
           ? 'block md:hidden'  // Show on mobile, hide on md+
           : 'block md:hidden'
       "
@@ -22,7 +22,7 @@
 
     <LayoutFooter
       :class="
-        ['index', 'about', 'production', 'artists'].includes($route.name)
+        ['index', 'about', ].includes($route.name)
           ? 'relative bottom-0'
           : ''
       "

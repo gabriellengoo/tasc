@@ -78,14 +78,35 @@ span{
     font-size: .7vw;
 }
 
-canvas{
+/* canvas{
     position: absolute;
       top: 0;
       z-index: 0;
-  }
+      width: 50vw !important;
+    height: 100vh !important;
+  } */
+
+  canvas {
+   width: 100vw !important;
+   height: 100vh !important;
+   position: absolute;
+   top: 2vh;
+   left: 30vw;
+   z-index: 0;
+
+ }
 
   header{
    background-color: #f9f9f1;
+   z-index: 10000;
+   position: fixed;
+   top: 0vh;
+   background: transparent;
+   border-bottom-color: #fff6;
+   background-color: #ffffff4d !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: black .5px solid;
   }
 
  .logo{
@@ -105,6 +126,17 @@ canvas{
     font-size: 5vw;
  }
 
+ .headerform{
+   font-family: 'Algerian', sans-serif; 
+   pointer-events: auto;
+   /* position: absolute;
+   right: 0; */
+   /* top: .6vh; */
+   line-height: normal;
+   font-size: 2vw;
+   padding-bottom: 2vw;
+ }
+
  .more2{
    pointer-events: auto;
    position: absolute;
@@ -112,6 +144,7 @@ canvas{
    top: .6vh;
    padding: 2vw;
    font-size: 1vw;
+   z-index: 1000;
    line-height: normal;
 }
 
@@ -231,7 +264,11 @@ canvas{
    font-size: 1.7vw;
 }
 
-
+.formstyle{
+   display: flex;
+       flex-direction: column;
+       width: 50vw;
+}
 
 .nomb{
    display: contents;
@@ -371,3 +408,10 @@ a {
    display: block; /* Ensures it stays on its own line if needed */
  }
  }
+
+
+
+
+
+
+ 
