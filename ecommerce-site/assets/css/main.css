@@ -92,6 +92,11 @@ input[type="range"]:focus {
    width: 100%;
  }
  
+ .formstyle{
+   padding-top: 2vw;
+   height: 70vh;
+   overflow: scroll;
+ }
 .subheadform{
    font-size: 1.1vw;
    padding-bottom: 2vw;

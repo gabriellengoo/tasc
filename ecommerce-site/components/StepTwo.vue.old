@@ -1,264 +1,222 @@
-<!-- StepTwo.vue -->
 <template>
-  <div class="formstyle">
-    <h1 class="headerform">Step 2.1</h1>
-    <label for="faceShape">What face shape do you have?</label>
-    <!-- <select v-model="formData.faceShape" @change="updateModel">
-      <option value="oval">Oval</option>
-      <option value="round">Round</option>
-      <option value="square">Square</option>
-      <option value="heart">Heart</option>
-    </select> -->
-    <label for="faceShape">Adjust Face Shape</label>
-<input type="range" min="0" max="1" step="0.01" v-model="formData.faceShapeValue" @input="updateModel">
-
-
-    <label for="skinTone">Please select your skin tone</label>
-    <select v-model="formData.skinTone" @change="updateModel">
-      <option value="light">Light</option>
-      <option value="medium">Medium</option>
-      <option value="dark">Dark</option>
-    </select>
-
-    <button @click="nextStep">Next</button>
+  <div>
+    <h2>Step 2: Body Selection</h2>
+    
+    <!-- Hairstyle Selection (Does not reflect on avatar) -->
+    <div>
+      <h3>Please tell us about your current hairstyle</h3>
+      <p>Texture:</p>
+      <div>
+        <button>Straight</button>
+        <button>Wavy</button>
+        <button>Curly</button>
+        <button>Afro</button>
+      </div>
+      <p>Length:</p>
+      <div>
+        <button>Bald</button>
+        <button>Short</button>
+        <button>Medium</button>
+        <button>Long</button>
+      </div>
+      <p>Colour:</p>
+      <div>
+        <button>Black</button>
+        <button>Brown</button>
+        <button>Blonde</button>
+        <button>Red</button>
+        <button>Auburn</button>
+        <button>Grey/White</button>
+      </div>
+    </div>
+    
+    <!-- Skin Tone Selection (Reflects on avatar arms) -->
+    <div>
+      <h3>Please select your closest skin tone match</h3>
+      <p>This helps us to tailor our recommendations to you.</p>
+      <div>
+        <button>Light Skin Tone (Type I)</button>
+        <button>Fair Skin Tone (Type II)</button>
+        <button>Medium Skin Tone (Type III)</button>
+        <button>Medium-Dark Skin Tone (Type IV)</button>
+        <button>Dark Skin Tone (Type V-VI)</button>
+      </div>
+    </div>
+    
+    <!-- Face Shape Selection (Reflects on avatar) -->
+    <div>
+      <h3>What face shape do you have?</h3>
+      <p>This helps us suggest the best accessory styles for you.</p>
+      <div>
+        <button>Oval</button>
+        <button>Round</button>
+        <button>Square</button>
+        <button>Heart</button>
+        <button>Triangular</button>
+        <button>Rectangular</button>
+        <button>Diamond</button>
+      </div>
+    </div>
+    
+    <!-- Eye Colour Selection (Does not reflect on avatar) -->
+    <div>
+      <h3>Please tell us your eye colour</h3>
+      <div>
+        <button>Blue</button>
+        <button>Green</button>
+        <button>Brown</button>
+        <button>Hazel</button>
+        <button>Grey</button>
+      </div>
+    </div>
+    
+    <!-- Height Selection (Reflects on avatar, gender-specific) -->
+    <div>
+      <h3>Please select your height range (Women)</h3>
+      <input type="range" min="1" max="4" list="heights-women">
+      <datalist id="heights-women">
+        <option value="1" label="Petite (<5'3)"></option>
+        <option value="2" label="Average (5'3 - 5'7)"></option>
+        <option value="3" label="Tall (5'7-5'10)"></option>
+        <option value="4" label="Very Tall (5'10+)"></option>
+      </datalist>
+    </div>
+    
+    <div>
+      <h3>Please select your height range (Men)</h3>
+      <input type="range" min="1" max="4" list="heights-men">
+      <datalist id="heights-men">
+        <option value="1" label="Short: Below 5'7"></option>
+        <option value="2" label="Average: 5'7 to 5'11"></option>
+        <option value="3" label="Tall: 6'0 to 6'3"></option>
+        <option value="4" label="Very Tall: Above 6'3"></option>
+      </datalist>
+    </div>
+    
+    <!-- Clothing Size Selection (Reflects on avatar build) -->
+    <div>
+      <h3>Please tell us your typical size for tops</h3>
+      <div>
+        <button>S (6-8)</button>
+        <button>M (10-12)</button>
+        <button>L (14-16)</button>
+        <button>XL+ (18+)</button>
+      </div>
+    </div>
+    
+    <div>
+      <h3>Please tell us your typical size for bottoms</h3>
+      <div>
+        <button>S (6-8)</button>
+        <button>M (10-12)</button>
+        <button>L (14-16)</button>
+        <button>XL+ (18+)</button>
+      </div>
+    </div>
+    
+    <!-- Footwear Size Selection (Does not reflect on avatar) -->
+    <div>
+      <h3>Please tell us your typical footwear size</h3>
+      <input type="number" min="3" max="14">
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['model'],
+  props: ["model"],
   data() {
-return { 
-  formData: {
-    faceShape: '',
-    faceShapeValue: 0, // Ensure this exists
-    skinTone: ''
-  }
-};
-},
+    return {
+      formData: {
+        hair: "",
+        skin: "",
+        eyeColor: "",
+      },
+      morphTargets: {},
+      morphValues: {},
+      mesh: null,
+    };
+  },
 
-watch: {
-model: {
-  immediate: true,
-  handler(newModel) {
-    if (newModel && newModel.scene) {
-      console.log("Model is now loaded:", newModel);
-      this.updateModel(); // Call updateModel when model is ready
+  watch: {
+    model: {
+      immediate: true,
+      handler(newModel) {
+        if (newModel) {
+          this.updateModel();
+        }
+      },
+    },
+  },
+
+  mounted() {
+    if (this.model) {
+      this.updateModel();
     }
-  }
-}
-},
-
-
-mounted() {
-console.log("Received model in StepTwo.vue:", this.model);
-},
+  },
 
   methods: {
+    nextStep() {
+      this.$emit("next", this.formData);
+    },
+
     updateModel() {
-if (!this.model || !this.model.scene) {
-  console.warn("Model is not loaded yet");
-  return;
-}
+      if (!this.model) return;
+      if (!this.mesh) {
+        this.mesh = this.model;
+      }
 
-this.model.scene.traverse((child) => {
-  if (child.isMesh && child.morphTargetInfluences) {
-    console.log("Updating morph targets for:", child.name);
-    
-    // Reset all morph targets
-    child.morphTargetInfluences.fill(0);
+      if (this.mesh.morphTargetDictionary) {
+        const targetMap = {
+          "Arm_Mount_Left.001": "Cheekbones",
+          "Arm_Mount_Left.002": "Jaw",
+        };
 
-    // Apply to the first morph target dynamically
-    for (let i = 0; i < child.morphTargetInfluences.length; i++) {
-      console.log(`Setting Morph Target ${i}:`, this.formData.faceShapeValue);
-      child.morphTargetInfluences[i] = this.formData.faceShapeValue;
-    }
-  }
-});
-}
+        this.morphTargets = {};
 
+        Object.keys(this.mesh.morphTargetDictionary).forEach((key) => {
+          if (targetMap[key]) {
+            this.morphTargets[key] = targetMap[key];
+            this.morphValues[key] = 0.5;
+          }
+        });
+      }
+    },
 
+    applyMorph(morphKey, value) {
+      if (!this.mesh || !this.mesh.morphTargetDictionary) return;
 
-
-},
-
-
-
+      const index = this.mesh.morphTargetDictionary[morphKey];
+      if (index !== undefined) {
+        this.$set(this.mesh.morphTargetInfluences, index, value);
+      }
+    },
+  },
 };
 </script>
 
-
 <style scoped>
-/* Global Styles */
-html, body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f7fa; /* Light background for the whole page */
-  color: #333; /* Dark text color for readability */
-}
-
-/* Container for the form */
-.form-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff; /* White background for the form */
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  margin-top: 30px;
-}
-
-/* Title and Step Indicator */
-.form-container h1 {
-  font-size: 2rem;
-  color: #444;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* Sub-title or instructions */
-.form-container p {
-  font-size: 1rem;
-  color: #777;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* Form Step */
-.form-step {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-/* Input Fields */
-input[type="text"], input[type="email"], select {
-  padding: 10px;
-  font-size: 1rem;
-  margin: 5px 0;
-  /* border-radius: 5px; */
-  border: 1px solid #ecf0f1;
+.slider {
+  width: 100%;
+  height: 0.3vw;
+  background: #d2d2d2;
+  border-radius: 5px;
   outline: none;
-  transition: border-color 0.3sease;
 }
-
-/* Focus state for inputs */
-input[type="text"]:focus, input[type="email"]:focus, select:focus {
-  border-color: #3498db; /* Highlight border when focused */
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3); /* Optional focus effect */
+.slider::-webkit-slider-thumb {
+  width: 1vw;
+  height: 1vw;
+  background: #000;
+  border-radius: 50%;
+  cursor: pointer;
 }
-
-/* Labels for inputs */
 label {
   font-size: 1.1vw;
-  color: #555;
-  margin-bottom: 5px;
 }
-
-/* Button Styling */
 button {
-  /* background-color: #3498db;
-  color: #fff; */
   font-size: 1.1vw;
   padding: 12px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
   margin-top: 20px;
-  align-self: center;
-  font-family: 'Algerian', sans-serif; 
-}
-
-/* Hover effect for buttons */
-button:hover {
-  /* background-color: #2980b9; */
-}
-
-/* Button disabled state */
-button:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
-}
-
-/* Progress Bar between steps */
-.progress-bar {
-  width: 100%;
-  height: 8px;
-  background-color: #e0e0e0;
-  margin: 20px 0;
-  border-radius: 5px;
-}
-
-.progress-bar span {
-  display: block;
-  width: 0;
-  height: 100%;
-  background-color: #3498db;
-  border-radius: 5px;
-  transition: width 0.3s ease;
-}
-
-/* Step navigation and buttons */
-.navigation-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.prev-button, .next-button {
-  padding: 10px 15px;
-  font-size: 1rem;
-  background-color: #ecf0f1;
-  color: #333;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
-
-.prev-button:hover, .next-button:hover {
-  background-color: #bdc3c7;
-}
-
-/* Error messages or warnings */
-.error-message {
-  color: red;
-  font-size: 0.9rem;
-  margin-top: 5px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .form-container {
-    padding: 15px;
-  }
-
-  .form-container h1 {
-    font-size: 1.5rem;
-  }
-
-  input[type="text"], input[type="email"], select {
-    font-size: 1rem;
-    padding: 8px;
-  }
-
-  button {
-    padding: 10px 18px;
-  }
-
-  .navigation-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .prev-button, .next-button {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-}
-
-
 </style>

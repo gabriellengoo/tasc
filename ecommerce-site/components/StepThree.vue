@@ -85,6 +85,20 @@ export default {
 </script>
 
 <style scoped>
+button {
+  padding: 10px 15px;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background: #3498db;
+  color: white;
+}
   /* Global Styles */
   html, body {
     font-family: 'Arial', sans-serif;
@@ -161,31 +175,7 @@ margin-bottom: 2vw;
     margin-bottom: 5px;
   }
   
-  /* Button Styling */
-  button {
-    /* background-color: #3498db;
-    color: #fff; */
-    font-size: 1.1vw;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-    align-self: center;
-    font-family: 'Algerian', sans-serif; 
-  }
-  
-  /* Hover effect for buttons */
-  button:hover {
-    /* background-color: #2980b9; */
-  }
-  
-  /* Button disabled state */
-  button:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
-  }
+ 
   
   /* Progress Bar between steps */
   .progress-bar {
