@@ -86,6 +86,13 @@
     margin-bottom: 20px;
   }
   
+  input {
+margin-bottom: 2vw;
+margin-bottom: 2vw;
+    background: none;
+    border-bottom: black .1vw solid;
+}
+
   /* Input Fields */
   input[type="text"], input[type="email"], select {
     padding: 10px;
@@ -102,6 +109,19 @@
     border-color: #3498db; /* Highlight border when focused */
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.3); /* Optional focus effect */
   }
+  input[type="range"]:focus {
+  border-color: #ffffff00; 
+  /* box-shadow: 0 0 5px rgba(52, 152, 219, 0.3); Optional focus effect */
+}
+
+  input[type="range"] {
+  font-size: 1rem;
+  margin: 5px 0;
+  /* border: 1px solid #ecf0f1; */
+  outline: none;
+  transition: border-color 0.3sease;
+  width: 100%;
+}
   
   /* Labels for inputs */
   label {

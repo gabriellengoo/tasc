@@ -78,6 +78,20 @@ span{
     font-size: .7vw;
 }
 
+input[type="range"]:focus {
+   border-color: #ffffff00; 
+   /* box-shadow: 0 0 5px rgba(52, 152, 219, 0.3); Optional focus effect */
+ }
+
+ input[type="range"] {
+   font-size: 1rem;
+   margin: 5px 0;
+   /* border: 1px solid #ecf0f1; */
+   outline: none;
+   transition: border-color 0.3sease;
+   width: 100%;
+ }
+ 
 .subheadform{
    font-size: 1.1vw;
    padding-bottom: 2vw;

@@ -1,10 +1,26 @@
 <template>
   <div class="formstyle">
     <h1 class="headerform">Step 2</h1>
-    <h2 class="subheadform">Adjust Facial Structure</h2>
+
+    <label for="hair">Please tell us about your current hairstyle</label>
+    <input type="text" v-model="formData.name" id="hair" />
+
+    <label for="skin"> Please select your closest skin tone match </label>
+    <h2>
+      Sub text: This helps us to tailor our recommendations to you.
+    </h2>
+    <input type="text" v-model="formData.name" id="skin" />
+
+    <!-- class="subheadform" -->
+    <label for="face"> What face shape do you have? </label>
+    <!-- <h2 >Adjust Facial Structure</h2> -->
     <div v-if="Object.keys(morphTargets).length">
-      <div class="formscaler" v-for="(morphName, key) in morphTargets" :key="key">
-        <label>{{ morphName }}</label>
+      <div
+        class="formscaler"
+        v-for="(morphName, key) in morphTargets"
+        :key="key"
+      >
+        <label class="w-[20vw]">{{ morphName }}</label>
         <input
           type="range"
           min="0"
@@ -19,6 +35,10 @@
     <div v-else>
       <p>No morph targets detected.</p>
     </div>
+
+    <label class="pt-[2vw]" for="name">Please tell us your eye colour</label>
+    <input type="text" v-model="formData.name" id="name" />
+
     <button @click="nextStep">Next</button>
   </div>
 </template>
@@ -28,9 +48,14 @@ export default {
   props: ["model"],
   data() {
     return {
-      morphTargets: {},  // Stores named morph targets
-      morphValues: {},   // Stores slider values for each morph target
-      mesh: null,        // Store the mesh with morph targets
+      formData: {
+        hair: '',
+        skin: '',
+          age: ''
+        },
+      morphTargets: {}, // Stores named morph targets
+      morphValues: {}, // Stores slider values for each morph target
+      mesh: null, // Store the mesh with morph targets
     };
   },
 
@@ -54,8 +79,8 @@ export default {
 
   methods: {
     nextStep() {
-        this.$emit('next', this.formData); // Emit data to parent
-      },
+      this.$emit("next", this.formData); // Emit data to parent
+    },
 
     updateModel() {
       if (!this.model) {
@@ -72,7 +97,7 @@ export default {
       if (this.mesh.morphTargetDictionary) {
         // Map raw morph names to more readable names
         const targetMap = {
-          "Arm_Mount_Left.001":  "Cheekbones",
+          "Arm_Mount_Left.001": "Cheekbones",
           "Arm_Mount_Left.002": "Jaw",
         };
 
@@ -100,7 +125,9 @@ export default {
 
       if (index !== undefined) {
         this.$set(this.mesh.morphTargetInfluences, index, value);
-        console.log(`StepTwo Applying morph: ${this.morphTargets[morphKey]} (Index: ${index}, Value: ${value})`);
+        console.log(
+          `StepTwo Applying morph: ${this.morphTargets[morphKey]} (Index: ${index}, Value: ${value})`
+        );
       } else {
         console.warn(`Morph target StepTwo "${morphKey}" not found.`);
       }
@@ -109,19 +136,18 @@ export default {
 };
 </script>
 
-
 <style scoped>
-
 /* Style the slider track (the background) */
 .slider {
   webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: .3vw;
-    background: #d2d2d2;
-    border-radius: 5px;
-    outline: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 0.3vw;
+  background: #d2d2d2;
+  border-radius: 5px;
+  outline: none;
+  border-bottom: rgba(0, 0, 0, 0) .1vw solid;
 }
 
 /* Style the thumb (the part you drag) */
@@ -158,8 +184,9 @@ export default {
 }
 
 /* Global Styles */
-html, body {
-  font-family: 'Arial', sans-serif;
+html,
+body {
+  /* font-family: "Arial", sans-serif; */
   margin: 0;
   padding: 0;
   background-color: #f4f7fa; /* Light background for the whole page */
@@ -194,18 +221,25 @@ html, body {
 }
 
 /* Input Fields */
+input {
+margin-bottom: 2vw;
+margin-bottom: 2vw;
+    background: none;
+    border-bottom: black .1vw solid;
+}
+
 input[type="range"] {
   font-size: 1rem;
-    margin: 5px 0;
-    /* border: 1px solid #ecf0f1; */
-    outline: none;
-    transition: border-color 0.3sease;
-    width: 100%;
+  margin: 5px 0;
+  /* border: 1px solid #ecf0f1; */
+  outline: none;
+  transition: border-color 0.3sease;
+  width: 100%;
 }
 
 /* Focus state for range input */
 input[type="range"]:focus {
-  /* border-color: #3498db; Highlight border when focused */
+  border-color: #ffffff00; 
   /* box-shadow: 0 0 5px rgba(52, 152, 219, 0.3); Optional focus effect */
 }
 
@@ -214,35 +248,36 @@ label {
   font-size: 1.1vw;
   /* color: #555; */
   margin-bottom: 5px;
-  width: 20vw;
+  /* width: 20vw; */
+  /* font-weight: bold; */
 }
 
 /* Button Styling */
- /* Button Styling */
- button {
-    /* background-color: #3498db;
+/* Button Styling */
+button {
+  /* background-color: #3498db;
     color: #fff; */
-    font-size: 1.1vw;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-    align-self: center;
-    font-family: 'Algerian', sans-serif; 
-  }
-  
-  /* Hover effect for buttons */
-  button:hover {
-    /* background-color: #2980b9; */
-  }
-  
-  /* Button disabled state */
-  button:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
-  }
+  font-size: 1.1vw;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  align-self: center;
+  font-family: "Algerian", sans-serif;
+}
+
+/* Hover effect for buttons */
+button:hover {
+  /* background-color: #2980b9; */
+}
+
+/* Button disabled state */
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {

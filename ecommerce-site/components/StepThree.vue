@@ -129,6 +129,14 @@ export default {
     margin-bottom: 20px;
   }
   
+
+  input {
+margin-bottom: 2vw;
+margin-bottom: 2vw;
+    background: none;
+    border-bottom: black .1vw solid;
+}
+
   /* Input Fields */
   input[type="text"], input[type="email"], select {
     padding: 10px;
