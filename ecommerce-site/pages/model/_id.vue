@@ -114,10 +114,10 @@ export default {
           }
 
           // Add more light
-          const ambientLight = new THREE.AmbientLight(0x404040, 3); // Ambient light
+          const ambientLight = new THREE.AmbientLight(0xffffff, 3); // Ambient light
           scene.add(ambientLight);
 
-          const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Directional light
+          const directionalLight = new THREE.DirectionalLight(0xffffff, 5); // Directional light
           directionalLight.position.set(5, 5, 5); // Position the light
           scene.add(directionalLight);
 
