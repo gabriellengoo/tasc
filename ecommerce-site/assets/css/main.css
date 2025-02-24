@@ -78,6 +78,15 @@ span{
     font-size: .7vw;
 }
 
+.subheadform{
+   font-size: 1.1vw;
+   padding-bottom: 2vw;
+}
+
+.formscaler{
+   display: flex;
+       align-items: center;
+}
 /* canvas{
     position: absolute;
       top: 0;

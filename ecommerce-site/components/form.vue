@@ -35,6 +35,7 @@
   import StepFour from '~/components/StepFour.vue';
   
   export default {
+    props: ["model"],
     components: { StepOne, StepTwo , StepThree , StepFour },
     data() {
       return {
@@ -45,7 +46,8 @@
           height: null,
           bodySize: null,
           // Add more model properties here...
-        }
+        },
+        morphTargets: {}, 
       };
     },
     methods: {

@@ -1,10 +1,10 @@
 <template>
-  <div v-if="!modelPath" class="error">Model Not Found </div>
-  
+  <div v-if="!modelPath" class="error">Model Not Found</div>
+
   <div v-else class="model-wrapper">
     <div class="content">
       <!-- Your text content here -->
-      <Form />
+      <Form :model="morphMesh" />
     </div>
     <div class="model-viewer">
       <canvas ref="canvas"></canvas>
@@ -33,23 +33,24 @@ export default {
         intrim: "/models/intrim.glb",
         trim: "/models/trim.glb",
         maledefault: "/models/maledefault.glb",
-        hour: "/models/hour.glb",
+        hour: "/models/hourt.glb",
         W_02: "/models/squw.glb",
         W_03: "/models/intriw.glb",
         W_04: "/models/apple.glb",
         W_01: "/models/pear.glb",
       },
       controls: null, // Declare controls here
-      mixer: null,   // Declare animation mixer
+      mixer: null, // Declare animation mixer
       model: null, // Store model object
-      morphTargets: [], // Store morph target information
+      morphTargets: {},  // Store morph target information
+      morphMesh: null,
     };
   },
   mounted() {
     this.modelPath = this.models[this.$route.params.id];
 
     if (!this.modelPath) {
-      console.error("Model not found!");
+      console.error("Model StepID.vue not found!");
       return;
     }
 
@@ -60,11 +61,19 @@ export default {
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(0xf9f9f1); // Light blue background color
 
-      const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const camera = new THREE.PerspectiveCamera(
+        50,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
       camera.position.set(0, 1, 3);
 
       this.canvas = this.$refs.canvas;
-      const renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
+      const renderer = new THREE.WebGLRenderer({
+        canvas: this.canvas,
+        antialias: true,
+      });
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
@@ -75,13 +84,20 @@ export default {
           this.model = gltf.scene;
           this.model.scale.set(1.5, 1.5, 1.5); // Scale down the model
           this.model.position.y = -1.5; // Lower the model by 1 unit
+          this.model.rotation.y = -Math.PI / 2; // Rotates 45 degrees on the Y-axis
+
           scene.add(this.model);
 
           // Check if model has morph targets
-          if (this.model.morphTargetDictionary && this.model.morphTargetInfluences) {
-            this.morphTargets = this.model.morphTargetDictionary;
-            console.log('Morph Targets Available:', this.morphTargets);
-          }
+           // Find and store the mesh with morph targets
+      this.model.traverse((child) => {
+        if (child.isMesh && child.morphTargetDictionary) {
+          this.morphMesh = child;
+          console.log("Morph Mesh Found StepID.vue:", this.morphMesh);
+        }
+      });
+
+          console.log("Model StepID.vue Loaded:", this.model);
 
           // Add orbit controls
           this.controls = new OrbitControls(camera, renderer.domElement); // Assign to data property
@@ -108,7 +124,7 @@ export default {
           animate();
         },
         undefined,
-        (error) => console.error("Error loading model:", error)
+        (error) => console.error("Error loading model StepID.vue:", error)
       );
 
       const animate = () => {
@@ -136,13 +152,16 @@ export default {
       if (targetIndex !== undefined) {
         // Set the influence for the morph target (0 - 1)
         this.model.traverse((child) => {
-          if (child.isMesh) {
-            child.morphTargetInfluences[targetIndex] = influence;
+          if (child.isMesh && child.morphTargetDictionary) {
+            console.log(
+              "Morph Targets in id.vue StepID.vue:",
+              child.morphTargetDictionary
+            );
           }
         });
       }
     },
-  }
+  },
 };
 </script>
 
