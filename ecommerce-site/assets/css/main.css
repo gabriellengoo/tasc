@@ -440,6 +440,84 @@ a {
 
 
 
+ .smalllable{
+   font-size: 1.2vw;
+   padding-top: 3vw;
+ }
+
+ .smalllable2{
+   font-size: 1vw;
+   padding-top: 3vw;
+   color: #222222;
+   text-transform: uppercase;
+ }
 
 
+ .inputa{
+   font-size: 1vw;
+   background-color: #f9f9f100;
+   border: none;
+   border-bottom: 1px solid #030303;
+   /* margin-bottom: 3vw; */
+ }
+
+   .inputa:focus{
+      border: none;
+      border-bottom: 1px solid #030303;
+   }
+
+   .inputa::placeholder{
+      font-size: 1vw;
+   }
+
+   .inputa:focus::placeholder{
+      font-size: 1vw;
+   }
+
+ .nextbtn{
+   padding-top: 2vw;
+   font-size: 1vw;
+}
+
+ .stepbtncontainer{
+   display: flex;
+   justify-content: space-between;
+   padding-top: 2vw;
+   width: 100%;
+
+ }
+
+   .btns{
+      font-size: 1vw;
+      padding: 1vw;
+      border: 1px solid #030303;
+   }
+
+   .formstyle{
+      padding-top: 2vw;
+      height: 60vh;
+      overflow: scroll;
+      border: 1px solid #030303;
+      padding: 2vw;
+   }
+
+   .headerform{
+      font-family: 'Algerian', sans-serif; 
+      pointer-events: auto;
+      line-height: normal;
+      font-size: 2vw;
+      padding-bottom: 2vw;
+   }
+
+
+.divinhead{
+   height: 5vw;
+   border-bottom: black solid 1px;
+   z-index: 1000000;
+   position: relative;
+}
+
+.logo{
+   padding: .5vw;
+}
  

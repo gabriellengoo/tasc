@@ -2,29 +2,25 @@
   {
     "name": "model-viewer-[id]",
     "path": "/model-viewer/%5Bid%5D",
-    "component": "/Users/gabriellengoo/Documents/work/tasc/ecommerce-site/pages/model-viewer/[id].vue",
-    "chunkName": "pages/model-viewer/[id]",
-    "_name": "_4fbfa1f4"
+    "component": "/Users/admin/Desktop/tasc/ecommerce-site/pages/model-viewer/[id].vue",
+    "chunkName": "pages/model-viewer/[id]"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/Users/gabriellengoo/Documents/work/tasc/ecommerce-site/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_f56113b4"
+    "component": "/Users/admin/Desktop/tasc/ecommerce-site/pages/index.vue",
+    "chunkName": "pages/index"
   },
   {
     "name": "model-id",
     "path": "/model/:id?",
-    "component": "/Users/gabriellengoo/Documents/work/tasc/ecommerce-site/pages/model/_id.vue",
-    "chunkName": "pages/model/_id",
-    "_name": "_2804cc28"
+    "component": "/Users/admin/Desktop/tasc/ecommerce-site/pages/model/_id.vue",
+    "chunkName": "pages/model/_id"
   },
   {
     "name": "products-id",
     "path": "/products/:id?",
-    "component": "/Users/gabriellengoo/Documents/work/tasc/ecommerce-site/pages/products/_id.vue",
-    "chunkName": "pages/products/_id",
-    "_name": "_5e39626b"
+    "component": "/Users/admin/Desktop/tasc/ecommerce-site/pages/products/_id.vue",
+    "chunkName": "pages/products/_id"
   }
 ]
