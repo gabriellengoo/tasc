@@ -438,7 +438,10 @@ a {
  }
 
 
-
+ .smalllable1{
+   font-size: 1.2vw;
+   /* padding-top: 3vw; */
+ }
 
  .smalllable{
    font-size: 1.2vw;
@@ -481,17 +484,30 @@ a {
 
  .stepbtncontainer{
    display: flex;
-   justify-content: space-between;
-   padding-top: 2vw;
+   justify-content: space-evenly;
+   padding-top: .5vw;
    width: 100%;
 
  }
 
    .btns{
-      font-size: 1vw;
+      font-size: .7vw;
       padding: 1vw;
       border: 1px solid #030303;
+
+      /* background-color: white; */
+      /* border: 2px solid black; */
+      /* padding: 8px 12px; */
+      /* border-radius: 5px; */
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease-in-out;
    }
+
+   .selected {
+      background-color: black;
+      color: white;
+    }
 
    .formstyle{
       padding-top: 2vw;
@@ -520,4 +536,44 @@ a {
 .logo{
    padding: .5vw;
 }
+ 
+/* Slider Styling */
+.slider {
+   -webkit-appearance: none;
+   width: 100%;
+   max-width: 100%;
+   height: .15vw;
+   background: #000000;
+   outline: none;
+   border-radius: 5px;
+   transition: 0.3s;
+ }
+ 
+ /* Thumb (Draggable part of the slider) */
+ .slider::-webkit-slider-thumb {
+   -webkit-appearance: none;
+   appearance: none;
+   width: 1vw;
+   height: 1vw;
+   background: black;
+   border-radius: 50%;
+   cursor: pointer;
+   transition: 0.3s;
+ }
+ 
+ .slider::-moz-range-thumb {
+   -webkit-appearance: none;
+   appearance: none;
+   width: 1vw;
+   height: 1vw;
+   background: black;
+   border-radius: 50%;
+   cursor: pointer;
+   transition: 0.3s;
+ }
+ 
+ /* Highlight the range bar when interacted */
+ .slider:focus {
+   background: #bbb;
+ }
  

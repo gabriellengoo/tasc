@@ -1,9 +1,9 @@
 <template>
 <div>
-  <h1 class="headerform">Step 1</h1>
+  <h1 class="headerform">Step 1 - Basic infomation</h1>
   <div class="formstyle">
  
-    <label class="smalllable" for="name">What's your name?</label>
+    <label class="smalllable1" for="name">What's your name?</label>
     <input class="inputa" v-model="formData.name" id="name" />
     
     <label class="smalllable" for="email">What's your e-mail?</label>

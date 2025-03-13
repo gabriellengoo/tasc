@@ -48,7 +48,7 @@
           // Add more model properties here...
         },
         morphTargets: {}, 
-      };
+      }; 
     },
     methods: {
       nextStep(data) {

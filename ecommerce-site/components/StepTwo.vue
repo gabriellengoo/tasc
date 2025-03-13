@@ -1,27 +1,27 @@
 <template>
-<div>
-  <h2 class="headerform">Step 2: Body Selection</h2>
+<div> 
+  <h2 class="headerform">Step 2 - Face</h2>
 
   <div class="formstyle">
     
     <div class="form-section">
-      <h3 class="smalllable">Hairstyle Selection</h3>
+      <h3 class="smalllable1">Hairstyle Selection</h3>
       <p class="smalllable2">Texture</p>
-      <div class="button-group">
+      <div class="stepbtncontainer">
         <button class="btns">Straight</button>
         <button class="btns">Wavy</button>
         <button class="btns">Curly</button>
         <button class="btns">Afro</button>
       </div>
       <p class="smalllable2">Length</p>
-      <div class="button-group">
+      <div class="stepbtncontainer">
         <button class="btns">Bald</button>
         <button class="btns">Short</button>
         <button class="btns">Medium</button>
         <button class="btns">Long</button>
       </div>
       <p class="smalllable2">Colour</p>
-      <div class="button-group">
+      <div class="stepbtncontainer">
         <button class="btns">Black</button>
         <button class="btns">Brown</button>
         <button class="btns">Blonde</button>
@@ -55,7 +55,7 @@
     
     <div class="form-section">
       <h3 class="smalllable">Eye Colour</h3>
-      <div class="button-group">
+      <div class="stepbtncontainer">
         <button class="btns">Blue</button>
         <button class="btns">Green</button>
         <button class="btns">Brown</button>
@@ -64,7 +64,7 @@
       </div>
     </div>
     
-    <div class="form-section">
+    <!-- <div class="form-section">
   <h3 class="smalllable">Height Selection (Women)</h3>
   <input 
   class="inputa"
@@ -75,7 +75,7 @@
     @input="updateHeightLabel"
   />
   <p class="smalllable2">{{ heightLabels[selectedHeightWomen] }}</p>
-</div>
+</div> -->
 
     
 
