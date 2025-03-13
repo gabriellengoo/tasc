@@ -68,7 +68,7 @@
   <h3 class="smalllable">Height Selection (Women)</h3>
   <input 
   class="inputa"
-    type="range" 
+    type="range"  
     min="1" 
     max="4" 
     v-model="selectedHeightWomen"

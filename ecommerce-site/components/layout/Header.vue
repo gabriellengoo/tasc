@@ -1,10 +1,10 @@
 <template>
   <!-- bg-[#f9f9f1] -->
   <header
-    class="fixed h-[5vw]  text-[1vw] p-[1vw] z-20 w-full pt-8 text-xs leading-snug uppercase  md:pb-2 md:pt-2"
+    class="fixed divinhead h-[5vw]  text-[1vw] p-[1vw] z-20 w-full pt-8 text-xs leading-snug uppercase  md:pb-2 md:pt-2"
   >
     <div
-      class="divinhead relative flex flex-wrap items-end gap-4  md:items-start md:flex-nowrap"
+      class=" relative flex flex-wrap items-end gap-4  md:items-start md:flex-nowrap"
     > 
 
       <!-- <nav class="hidden navlinks w-1/16 ">

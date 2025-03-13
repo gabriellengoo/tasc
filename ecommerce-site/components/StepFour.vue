@@ -147,7 +147,7 @@ export default {
     margin-bottom: 20px;
     text-align: center;
   }
-  
+   
   /* Sub-title or instructions */
   .form-container p {
     font-size: 1rem;

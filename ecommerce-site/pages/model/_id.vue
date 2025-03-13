@@ -28,16 +28,16 @@ export default {
       canvas: null,
       modelPath: null,
       models: {
-        ovalm: "/models/ovalm.glb",
+        ovalm: "/models/maovam.glb",
         squarem: "/models/squarem.glb",
-        intrim: "/models/intrim.glb",
-        trim: "/models/trim.glb",
-        maledefault: "/models/maledefault.glb",
+        intrim: "/models/inrimam.glb",
+        trim: "/models/inrifem.glb",
+        maledefault: "/models/mendefultm.glb",
         hour: "/models/hourt.glb",
-        W_02: "/models/squw.glb",
-        W_03: "/models/intriw.glb",
-        W_04: "/models/apple.glb",
-        W_01: "/models/pear.glb",
+        squw: "/models/squw.glb",
+        intriw: "/models/inrifem.glb",
+        apple: "/models/applefem.glb",
+        pear: "/models/pearfem.glb",
       },
       controls: null, // Declare controls here
       mixer: null, // Declare animation mixer
@@ -82,8 +82,8 @@ export default {
         this.modelPath,
         (gltf) => {
           this.model = gltf.scene;
-          this.model.scale.set(1.5, 1.5, 1.5); // Scale down the model
-          this.model.position.y = -1.5; // Lower the model by 1 unit
+          this.model.scale.set(1.2, 1.2, 1.2); // Scale down the model
+          this.model.position.y = -0; // Lower the model by 1 unit
           this.model.rotation.y = -Math.PI / 2; // Rotates 45 degrees on the Y-axis
 
           scene.add(this.model);
@@ -100,10 +100,10 @@ export default {
           console.log("Model StepID.vue Loaded:", this.model);
 
           // Add orbit controls
-          this.controls = new OrbitControls(camera, renderer.domElement); // Assign to data property
-          this.controls.enableDamping = true; // Smooth controls
-          this.controls.dampingFactor = 0.25;
-          this.controls.screenSpacePanning = false; // Prevent panning in screen space
+          // this.controls = new OrbitControls(camera, renderer.domElement); // Assign to data property
+          // this.controls.enableDamping = true; // Smooth controls
+          // this.controls.dampingFactor = 0.25;
+          // this.controls.screenSpacePanning = false; // Prevent panning in screen space
 
           // Set up animation if available
           if (gltf.animations && gltf.animations.length) {

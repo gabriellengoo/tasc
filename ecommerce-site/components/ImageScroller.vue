@@ -21,9 +21,12 @@
         <router-link
   :to="`/model/${image.model}`"
 >
-            <img
-              :src="
+<!--   :src="
                 hoveredIndex === image.default ? image.hover : image.default
+              " -->
+            <img
+            :src="
+                image.default
               "
               alt="Scrolling image"
               class="loop-image"
@@ -59,9 +62,25 @@ const images = [
   {
     id: "M_01",
     default: "/ovalm.png",
-    model: "ovalm",
+    model: "maovam",
     hover: "/ovalm.png",
   },
+  {
+    id: "W_01",
+    default: "/pear.png",
+    model: "pearfem",
+    hover: "/pear.png",
+  },
+
+
+
+  {
+    id: "W_02",
+    default: "/auth.png",
+    model: "auth",
+    hover: "/auth.png",
+  },
+
   {
     id: "M_02",
     default: "/squarem.png",
@@ -72,16 +91,32 @@ const images = [
   // { id: "M_03", default: "/intrim.png", model: "intrim.glb", hover: "/intrim.png" },
   {
     id: "M_03",
+    default: "/maleintri.png",
+    model: "maleintri",
+    hover: "/maleintri.png",
+  },
+  {
+    id: "W_03",
     default: "/intriw.png",
-    model: "intrim",
+    model: "intriw",
     hover: "/intriw.png",
   },
+
+
   {
     id: "M_04",
     default: "/trim.png",
     model: "trim",
     hover: "/trim.png",
   },
+  
+  {
+    id: "W_04",
+    default: "/apple.png",
+    model: "applefem",
+    hover: "/apple.png",
+  },
+
 
   {
     id: "M_05",
@@ -97,31 +132,8 @@ const images = [
   },
 
   // { id: "W_02", default: "/squw.png", model: "squw.glb", hover: "/squw.png" },
-  {
-    id: "W_02",
-    default: "/squarem.png",
-    model: "squw.glb",
-    hover: "/squarem.png",
-  },
-  {
-    id: "W_03",
-    default: "/intriw.png",
-    model: "intriw.glb",
-    hover: "/intriw.png",
-  },
-
-  {
-    id: "W_04",
-    default: "/apple.png",
-    model: "apple.glb",
-    hover: "/apple.png",
-  },
-  {
-    id: "W_01",
-    default: "/pear.png",
-    model: "pear.glb",
-    hover: "/pear.png",
-  },
+ 
+ 
 ];
 
 // Pair images together
@@ -147,6 +159,7 @@ const getText = (image) => {
   if (image.includes("maledefult"))
     return "MENSWEAR <br> Trapezoid Body <br> 06/10";
   if (image.includes("ovalm")) return "MENSWEAR <br> Oval Body <br> 07/10";
+  if (image.includes("auth")) return "WOMENSWEAR <br> Oval Body <br> 07/10";
   if (image.includes("squarem")) return "MENSWEAR <br> Square Body <br> 08/10";
   if (image.includes("intrim"))
     return "MENSWEAR <br> Inverted Triangle Body <br> 09/10";
@@ -240,8 +253,10 @@ const getText = (image) => {
   top: -1vw;
   left: -8vw;
   background-color: black;
-  transform: rotate(-45deg); /* Makes it diagonal pointing upwards */
-  transform-origin: left center;
+  display: none;
+  /* transform: rotate(-45deg);  */
+  /* Makes it diagonal pointing upwards */
+  /* transform-origin: left center; */
 }
 
 /* .tooltip-line::before {
@@ -260,7 +275,8 @@ const getText = (image) => {
   opacity: 0;
   overflow: hidden;
   width: 0;
-  left: -8vw;
+  left: 0vw;
+  /* left: -8vw; */
   white-space: nowrap;
   animation: typing 1s steps(30) 0.1s forwards;
 }
