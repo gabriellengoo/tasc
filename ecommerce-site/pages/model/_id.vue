@@ -1,47 +1,43 @@
 <template>
   <div v-if="!modelPath" class="error">Model Not Found</div>
 
-  
+
   <div v-else class="model-wrapper">
+
     <div class="content1">
-      <!-- Your text content here -->
-      <!-- <h1>Customize Your Model</h1> -->
-       <Name />
-       
+      <Name />
     </div>
+
     <div class="content">
-      <!-- Your text content here -->
-      <Form :model="morphMesh" />
+      <Form :model="morphMesh" @update-morph="applyMorphUpdate" />
     </div>
-    <!-- <div class="model-viewer">
-      <canvas ref="canvas"></canvas>
-    </div>  -->
-    <ModelViewer  :modelPath="modelPath" width="40vw" height="40vh" />
+
+    <ModelViewer 
+      :modelPath="modelPath" 
+      width="40vw" 
+      height="40vh" 
+      :morphMesh="morphMesh" 
+    />
+
   </div>
 </template>
 
 <script>
-import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import ModelViewer from "~/components/ModelViewer.vue";
 import Form from "~/components/form.vue";
 import Name from '~/components/Name.vue';
 
 export default {
-  props: { 
-    modelPath: String,
-    heightMorphValue: { type: Number, default: 0 } // New prop for height morph
-  },
   async asyncData({ params }) {
     console.log("Route Params:", params);
     return { id: params.id };
   },
-  components: { ModelViewer, Form, Name},
+  components: { ModelViewer, Form, Name },
   data() {
     return {
       canvas: null,
       modelPath: null,
+      morphMesh: {},
       models: {
         maovam: "/models/maovam.glb",
         squarem: "/models/squarem.glb",
@@ -59,20 +55,41 @@ export default {
   mounted() {
     this.modelPath = this.models[this.$route.params.id] || null;
   },
+  methods: {
+  applyMorphUpdate({ key, value }) {
+    console.log(`👨‍👨‍👧‍👧 Received morph update: ${key} = ${value}`);
 
+    if (this.morphMesh && this.morphMesh.morphTargetDictionary) {
+      const index = this.morphMesh.morphTargetDictionary[key];
+
+      if (index !== undefined) {
+        // Update Three.js morph target influence
+        this.morphMesh.morphTargetInfluences[index] = parseFloat(value);
+        console.log(`👨‍👨‍👧‍👧 ✅ Updated morph target ${key} to ${value}`);
+
+        // Trigger render if necessary
+        this.$nextTick(() => {
+          this.$refs.modelViewer.renderScene();
+        });
+      } else {
+        console.warn(`👨‍👨‍👧‍👧 ⚠️ Morph target ${key} not found in dictionary`);
+      }
+    }
+  }
+},
 };
 </script>
 
 <style scoped>
 .model-wrapper {
   display: flex;
-    width: 100%;
-    height: 100vh;
-    /* top: 5vh; */
-    /* padding-top: 5vh; */
-    margin-top: 7vh;
-    position: relative;
-  border-top:#333 solid .1vw;
+  width: 100%;
+  height: 100vh;
+  /* top: 5vh; */
+  /* padding-top: 5vh; */
+  margin-top: 7vh;
+  position: relative;
+  border-top: #333 solid .1vw;
   /* border-bottom:#333 solid .1vw; */
 }
 
@@ -95,7 +112,7 @@ export default {
   align-items: center;
   color: #333;
   z-index: 2;
-  border-right:#333 solid .1vw;
+  border-right: #333 solid .1vw;
 }
 
 .content1 {
@@ -108,7 +125,7 @@ export default {
   align-items: center;
   color: #333;
   z-index: 2;
-  border-right:#333 solid .1vw;
+  border-right: #333 solid .1vw;
 }
 
 .content h1 {
