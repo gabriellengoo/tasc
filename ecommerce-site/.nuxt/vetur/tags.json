@@ -1,4 +1,7 @@
 {
+  "FinalForm": {
+    "description": "Auto imported from components/FinalForm.vue"
+  },
   "ImageScroller": {
     "description": "Auto imported from components/ImageScroller.vue"
   },
@@ -8,8 +11,17 @@
   "ImageScrollermb": {
     "description": "Auto imported from components/ImageScrollermb.vue"
   },
+  "ModelViewer": {
+    "description": "Auto imported from components/ModelViewer.vue"
+  },
+  "Name": {
+    "description": "Auto imported from components/Name.vue"
+  },
   "ProductCard": {
     "description": "Auto imported from components/ProductCard.vue"
+  },
+  "ProgressBar": {
+    "description": "Auto imported from components/ProgressBar.vue"
   },
   "StepFour": {
     "description": "Auto imported from components/StepFour.vue"
@@ -25,9 +37,6 @@
   },
   "ThreeModel": {
     "description": "Auto imported from components/ThreeModel.vue"
-  },
-  "ThreeModelold": {
-    "description": "Auto imported from components/ThreeModelold.vue"
   },
   "Form": {
     "description": "Auto imported from components/form.vue"

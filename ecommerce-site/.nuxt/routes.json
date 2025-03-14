@@ -3,24 +3,28 @@
     "name": "model-viewer-[id]",
     "path": "/model-viewer/%5Bid%5D",
     "component": "/Users/admin/Desktop/tasc/ecommerce-site/pages/model-viewer/[id].vue",
-    "chunkName": "pages/model-viewer/[id]"
+    "chunkName": "pages/model-viewer/[id]",
+    "_name": "_c9c81e5e"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/admin/Desktop/tasc/ecommerce-site/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_126d6883"
   },
   {
     "name": "model-id",
     "path": "/model/:id?",
     "component": "/Users/admin/Desktop/tasc/ecommerce-site/pages/model/_id.vue",
-    "chunkName": "pages/model/_id"
+    "chunkName": "pages/model/_id",
+    "_name": "_35f84805"
   },
   {
     "name": "products-id",
     "path": "/products/:id?",
     "component": "/Users/admin/Desktop/tasc/ecommerce-site/pages/products/_id.vue",
-    "chunkName": "pages/products/_id"
+    "chunkName": "pages/products/_id",
+    "_name": "_40970524"
   }
 ]

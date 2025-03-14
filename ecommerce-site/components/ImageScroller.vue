@@ -1,37 +1,16 @@
 <template>
   <div class="scroller-wrapper">
-    <div
-      class="scroller"
-      @mouseover="isHovered = true"
-      @mouseleave="isHovered = false"
-    >
-      <div
-        v-for="(pair, index) in pairedImages"
-        :key="index"
-        class="image-group"
-      >
-        <div
-          v-for="(image, imgIndex) in pair"
-          :key="imgIndex"
-          class="image-loop"
-          :class="imgIndex === 0 ? 'higher' : 'lower'"
-          @mouseover="hoveredIndex = image.default"
-          @mouseleave="hoveredIndex = null"
-        >
-        <router-link
-  :to="`/model/${image.model}`"
->
-<!--   :src="
+    <div class="scroller" @mouseover="isHovered = true" @mouseleave="isHovered = false">
+      <div v-for="(pair, index) in pairedImages" :key="index" class="image-group">
+        <div v-for="(image, imgIndex) in pair" :key="imgIndex" class="image-loop"
+          :class="imgIndex === 0 ? 'higher' : 'lower'" @mouseover="hoveredIndex = image.default"
+          @mouseleave="hoveredIndex = null">
+          <router-link :to="`/model/${image.model}`">
+            <!--   :src="
                 hoveredIndex === image.default ? image.hover : image.default
               " -->
-            <img
-            :src="
-                image.default
-              "
-              alt="Scrolling image"
-              class="loop-image"
-              @click="selectModel(image)"
-            />
+            <img :src="image.default
+              " alt="Scrolling image" class="loop-image" @click="selectModel(image)" />
           </router-link>
           <div v-if="hoveredIndex === image.default" class="tooltip">
             <div class="tooltip-line-container">
@@ -77,7 +56,7 @@ const images = [
   {
     id: "W_02",
     default: "/auth.png",
-    model: "auth",
+    model: "athfm",
     hover: "/auth.png",
   },
 
@@ -91,14 +70,14 @@ const images = [
   // { id: "M_03", default: "/intrim.png", model: "intrim.glb", hover: "/intrim.png" },
   {
     id: "M_03",
-    default: "/maleintri.png",
-    model: "maleintri",
-    hover: "/maleintri.png",
+    default: "/menhh.png",
+    model: "inrimam",
+    hover: "/menhh.png",
   },
   {
     id: "W_03",
     default: "/intriw.png",
-    model: "intriw",
+    model: "inrifem",
     hover: "/intriw.png",
   },
 
@@ -109,7 +88,7 @@ const images = [
     model: "trim",
     hover: "/trim.png",
   },
-  
+
   {
     id: "W_04",
     default: "/apple.png",
@@ -120,20 +99,20 @@ const images = [
 
   {
     id: "M_05",
-    default: "/maledefult.png",
+    default: "/mende.png",
     model: "maledefault",
     hover: "/menhh.png",
   },
   {
     id: "W_05",
-    default: "/hour.png",
+    default: "/femh.png",
     model: "hour",
     hover: "/femh.png",
   },
 
   // { id: "W_02", default: "/squw.png", model: "squw.glb", hover: "/squw.png" },
- 
- 
+
+
 ];
 
 // Pair images together
@@ -154,14 +133,14 @@ const getText = (image) => {
   if (image.includes("intriw"))
     return "WOMENSWEAR <br> Inverted Triangle Body <br> 03/10";
   if (image.includes("apple")) return "WOMENSWEAR <br> Apple Body <br> 04/10";
-  if (image.includes("hour"))
+  if (image.includes("femh"))
     return "WOMENSWEAR <br> Hourglass Body <br> 05/10";
-  if (image.includes("maledefult"))
+  if (image.includes("mende"))
     return "MENSWEAR <br> Trapezoid Body <br> 06/10";
   if (image.includes("ovalm")) return "MENSWEAR <br> Oval Body <br> 07/10";
   if (image.includes("auth")) return "WOMENSWEAR <br> Oval Body <br> 07/10";
   if (image.includes("squarem")) return "MENSWEAR <br> Square Body <br> 08/10";
-  if (image.includes("intrim"))
+  if (image.includes("menhh"))
     return "MENSWEAR <br> Inverted Triangle Body <br> 09/10";
   if (image.includes("trim")) return "MENSWEAR <br> Triangle Body <br> 10/10";
 
@@ -218,11 +197,10 @@ const getText = (image) => {
 .loop-image:hover {
   cursor: pointer;
 }
-
 .tooltip {
   position: absolute;
   bottom: 43vw;
-  left: 13vw;
+  left: 70%;
   color: black;
   padding: 5px 10px;
   border-radius: 5px;
@@ -239,44 +217,31 @@ const getText = (image) => {
   margin-bottom: 8px;
 }
 
-.tooltip-line-container {
-  position: absolute;
-  bottom: -10px; /* Adjust this value to align the line properly */
-  left: 70%;
-  transform: translateX(-50%);
-}
-
 .tooltip-line {
   position: absolute;
-  width: 50px; /* Adjust length as needed */
-  height: 2px;
-  top: -1vw;
-  left: -8vw;
+  top: 0;
+  left: 0;
+  height: 1px;
   background-color: black;
-  display: none;
-  /* transform: rotate(-45deg);  */
-  /* Makes it diagonal pointing upwards */
-  /* transform-origin: left center; */
+  width: 0;
+  animation: line-span 1s forwards;
 }
 
-/* .tooltip-line::before {
+.tooltip-line::before {
   content: "";
   position: absolute;
-  top: -2vw;
-  left: 0vw;
+  top: -3px;
+  left: -3px;
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  transform: rotate(-45deg);
   background-color: black;
-} */
+}
 
 .tooltip-text {
   opacity: 0;
   overflow: hidden;
   width: 0;
-  left: 0vw;
-  /* left: -8vw; */
   white-space: nowrap;
   animation: typing 1s steps(30) 0.1s forwards;
 }
@@ -285,6 +250,7 @@ const getText = (image) => {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-33.33%);
   }
@@ -294,9 +260,11 @@ const getText = (image) => {
   0% {
     width: 0;
   }
+
   50% {
     width: 50%;
   }
+
   100% {
     width: 100%;
   }
@@ -319,10 +287,12 @@ const getText = (image) => {
     width: 0;
     transform: translateX(0) rotate(0deg);
   }
+
   50% {
     width: 50%;
     transform: translateX(50px) rotate(45deg);
   }
+
   100% {
     width: 100%;
     transform: translateX(100px) rotate(0deg);

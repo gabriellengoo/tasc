@@ -106,23 +106,20 @@ input[type="range"]:focus {
    display: flex;
        align-items: center;
 }
-/* canvas{
-    position: absolute;
-      top: 0;
-      z-index: 0;
-      width: 50vw !important;
-    height: 100vh !important;
-  } */
 
-  canvas {
+
+  /* canvas {
    width: 100vw !important;
    height: 100vh !important;
    position: absolute;
    top: 2vh;
    left: 30vw;
    z-index: 0;
-
- }
+ } */
+ /* canvas {
+   width: 100%  !important;
+   height: 100%  !important;
+ } */
 
   header{
    background-color: #f9f9f1;
@@ -455,6 +452,15 @@ a {
    text-transform: uppercase;
  }
 
+ .smalllablen{
+   font-size: 1.2vw;
+   padding-top: 3vw;
+   color: #222222;
+   text-transform: uppercase;
+   font-weight: bold;
+   /* font-family: 'Algerian', sans-serif;  */
+ }
+
 
  .inputa{
    font-size: 1vw;
@@ -465,7 +471,7 @@ a {
  }
 
    .inputa:focus{
-      border: none;
+      /* border: none !important; */
       border-bottom: 1px solid #030303;
    }
 
@@ -477,9 +483,46 @@ a {
       font-size: 1vw;
    }
 
+   input:focus {
+      outline: none !important;
+      /* border: none !important; */
+      border-bottom: 1px solid #030303 !important;
+    }
+    
+
+   select{
+      font-size: 1vw;
+      background-color: #f9f9f100;
+      border: none;
+      border-bottom: 1px solid #030303;
+      /* margin-bottom: 3vw; */
+   }
+
+   select option {
+      padding: 10px;
+      font-size: 1rem;
+      background-color: #fff;
+      color: #333;
+    }
+    
+    select option:hover {
+      background-color: #f1f1f1;
+      color: #000000;
+    }
+ 
+
+   
+
  .nextbtn{
    padding-top: 2vw;
    font-size: 1vw;
+   width: 5vw;
+}
+
+.nextbtn2{
+   padding-top: 2vw;
+   font-size: 1.3vw;
+   width: 5vw;
 }
 
  .stepbtncontainer{
@@ -487,7 +530,6 @@ a {
    justify-content: space-evenly;
    padding-top: .5vw;
    width: 100%;
-
  }
 
    .btns{
@@ -504,18 +546,43 @@ a {
       transition: all 0.2s ease-in-out;
    }
 
+   .btnsn{
+      font-size: .7vw;
+      padding: 1vw;
+      /* border: 1px solid #030303; */
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease-in-out;
+   }
+
+   .btns:hover{
+      background-color: rgb(0, 0, 0);
+      color: white;
+   }
+
+   .btnsn:hover{
+      background-color: rgb(210, 210, 210);
+      color: white;
+   }
+
    .selected {
       background-color: black;
       color: white;
     }
 
    .formstyle{
-      padding-top: 2vw;
-      height: 60vh;
-      overflow: scroll;
-      border: 1px solid #030303;
-      padding: 2vw;
-   }
+  
+    height: 60vh;
+    display: flex;
+    width: 100%;
+    width: 40vw;
+    overflow: scroll;
+    /* border: 1px solid #030303; */
+    padding: 2vw;
+    /* padding-top: 4vw; */
+    /* justify-content: center; */
+}
+   
 
    .headerform{
       font-family: 'Algerian', sans-serif; 
@@ -523,6 +590,24 @@ a {
       line-height: normal;
       font-size: 2vw;
       padding-bottom: 2vw;
+      padding-top: 4vw;
+   }
+
+   .namecon{
+      display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          width: 100%;
+          padding-top: 3vw;
+   }
+
+   .name{
+      pointer-events: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 84%;
+      width: 100%;
    }
 
 

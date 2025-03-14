@@ -1,14 +1,22 @@
 <template>
   <div v-if="!modelPath" class="error">Model Not Found</div>
 
+  
   <div v-else class="model-wrapper">
+    <div class="content1">
+      <!-- Your text content here -->
+      <!-- <h1>Customize Your Model</h1> -->
+       <Name />
+       
+    </div>
     <div class="content">
       <!-- Your text content here -->
       <Form :model="morphMesh" />
     </div>
-    <div class="model-viewer">
+    <!-- <div class="model-viewer">
       <canvas ref="canvas"></canvas>
-    </div>
+    </div>  -->
+    <ModelViewer  :modelPath="modelPath" width="40vw" height="40vh" />
   </div>
 </template>
 
@@ -16,167 +24,60 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import ModelViewer from "~/components/ModelViewer.vue";
 import Form from "~/components/form.vue";
+import Name from '~/components/Name.vue';
 
 export default {
+  props: { 
+    modelPath: String,
+    heightMorphValue: { type: Number, default: 0 } // New prop for height morph
+  },
   async asyncData({ params }) {
     console.log("Route Params:", params);
     return { id: params.id };
   },
+  components: { ModelViewer, Form, Name},
   data() {
     return {
       canvas: null,
       modelPath: null,
       models: {
-        ovalm: "/models/maovam.glb",
+        maovam: "/models/maovam.glb",
         squarem: "/models/squarem.glb",
-        intrim: "/models/inrimam.glb",
-        trim: "/models/inrifem.glb",
-        maledefault: "/models/mendefultm.glb",
-        hour: "/models/hourt.glb",
+        inrimam: "/models/inrimam.glb",
+        inrifem: "/models/inrifem.glb",
+        mendefultm: "/models/mendefultm.glb",
+        hourt: "/models/hourt.glb",
         squw: "/models/squw.glb",
-        intriw: "/models/inrifem.glb",
-        apple: "/models/applefem.glb",
-        pear: "/models/pearfem.glb",
+        applefem: "/models/applefem.glb",
+        pearfem: "/models/pearfem.glb",
+        athfm: "/models/athfm.glb",
       },
-      controls: null, // Declare controls here
-      mixer: null, // Declare animation mixer
-      model: null, // Store model object
-      morphTargets: {},  // Store morph target information
-      morphMesh: null,
     };
   },
   mounted() {
-    this.modelPath = this.models[this.$route.params.id];
-
-    if (!this.modelPath) {
-      console.error("Model StepID.vue not found!");
-      return;
-    }
-
-    this.initThreeJS();
+    this.modelPath = this.models[this.$route.params.id] || null;
   },
-  methods: {
-    initThreeJS() {
-      const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xf9f9f1); // Light blue background color
 
-      const camera = new THREE.PerspectiveCamera(
-        50,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      );
-      camera.position.set(0, 1, 3);
-
-      this.canvas = this.$refs.canvas;
-      const renderer = new THREE.WebGLRenderer({
-        canvas: this.canvas,
-        antialias: true,
-      });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.body.appendChild(renderer.domElement);
-
-      const loader = new GLTFLoader();
-      loader.load(
-        this.modelPath,
-        (gltf) => {
-          this.model = gltf.scene;
-          this.model.scale.set(1.2, 1.2, 1.2); // Scale down the model
-          this.model.position.y = -0; // Lower the model by 1 unit
-          this.model.rotation.y = -Math.PI / 2; // Rotates 45 degrees on the Y-axis
-
-          scene.add(this.model);
-
-          // Check if model has morph targets
-           // Find and store the mesh with morph targets
-      this.model.traverse((child) => {
-        if (child.isMesh && child.morphTargetDictionary) {
-          this.morphMesh = child;
-          console.log("Morph Mesh Found StepID.vue:", this.morphMesh);
-        }
-      });
-
-          console.log("Model StepID.vue Loaded:", this.model);
-
-          // Add orbit controls
-          // this.controls = new OrbitControls(camera, renderer.domElement); // Assign to data property
-          // this.controls.enableDamping = true; // Smooth controls
-          // this.controls.dampingFactor = 0.25;
-          // this.controls.screenSpacePanning = false; // Prevent panning in screen space
-
-          // Set up animation if available
-          if (gltf.animations && gltf.animations.length) {
-            this.mixer = new THREE.AnimationMixer(this.model);
-            gltf.animations.forEach((clip) => {
-              this.mixer.clipAction(clip).play(); // Play the first animation
-            });
-          }
-
-          // Add more light
-          const ambientLight = new THREE.AmbientLight(0xffffff, 3); // Ambient light
-          scene.add(ambientLight);
-
-          const directionalLight = new THREE.DirectionalLight(0xffffff, 5); // Directional light
-          directionalLight.position.set(5, 5, 5); // Position the light
-          scene.add(directionalLight);
-
-          animate();
-        },
-        undefined,
-        (error) => console.error("Error loading model StepID.vue:", error)
-      );
-
-      const animate = () => {
-        requestAnimationFrame(animate);
-
-        // Update the controls
-        if (this.controls) {
-          this.controls.update();
-        }
-
-        // Update animation mixer if available
-        if (this.mixer) {
-          this.mixer.update(0.01); // Update animation
-        }
-
-        // Render the scene
-        renderer.render(scene, camera);
-      };
-
-      animate();
-    },
-    // Method to adjust the morph target based on user selection
-    updateMorphTarget(targetName, influence) {
-      const targetIndex = this.morphTargets[targetName];
-      if (targetIndex !== undefined) {
-        // Set the influence for the morph target (0 - 1)
-        this.model.traverse((child) => {
-          if (child.isMesh && child.morphTargetDictionary) {
-            console.log(
-              "Morph Targets in id.vue StepID.vue:",
-              child.morphTargetDictionary
-            );
-          }
-        });
-      }
-    },
-  },
 };
 </script>
 
 <style scoped>
 .model-wrapper {
   display: flex;
-  width: 100%;
-  height: 100%;
-  top: 5vh;
-  position: relative;
-  /* border-top:#333 solid .1vw; */
+    width: 100%;
+    height: 100vh;
+    /* top: 5vh; */
+    /* padding-top: 5vh; */
+    margin-top: 7vh;
+    position: relative;
+  border-top:#333 solid .1vw;
+  /* border-bottom:#333 solid .1vw; */
 }
 
 .model-viewer {
-  width: 50vw;
+  /* width: 50vw; */
   /* height: 100vh; */
   display: flex;
   align-items: center;
@@ -184,8 +85,22 @@ export default {
 }
 
 .content {
-  width: 70vw;
-  height: 100vh;
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+  background-color: #e7ecea;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  z-index: 2;
+  border-right:#333 solid .1vw;
+}
+
+.content1 {
+  width: 30%;
+  height: 100%;
   padding: 20px;
   /* background-color: #f0f0f0; */
   display: flex;
@@ -193,7 +108,7 @@ export default {
   align-items: center;
   color: #333;
   z-index: 2;
-  /* border-right:#333 solid .1vw; */
+  border-right:#333 solid .1vw;
 }
 
 .content h1 {
