@@ -608,11 +608,14 @@ select option:hover {
    color: rgb(231, 231, 231);
 }
 
+
+
+
 /* Add animation to the selected class */
 .selected {
    background-color: rgb(81, 81, 81);
    color: rgb(231, 231, 231);
-   animation: flash 1s ease-out 1;
+   animation: flash2 1s ease-out 1;
    /* 1.5s duration, ease-out timing, run once */
 }
 
@@ -620,7 +623,7 @@ select option:hover {
    opacity: .2;
 }
 
-@keyframes flash {
+@keyframes flash2 {
    0% {
       background-color: rgb(81, 81, 81);
       color: rgb(231, 231, 231);
