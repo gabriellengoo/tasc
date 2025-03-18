@@ -36,7 +36,7 @@
       </svg></button>
         </div>
       </transition>
-    </div>
+    </div> 
 
     <!-- Already Have an Account -->
     <h3 class="smalllable2 m-[1vw]">

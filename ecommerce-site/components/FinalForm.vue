@@ -9,16 +9,16 @@
             <h3 class="smalllable1">BODY - STEP 2.4 (Modesty Check)</h3>
             <label class="smalllable2">Are there any areas you would like to highlight in your outfits?</label>
             
-            <!-- Custom Dropdown -->
-            <div class="dropdown-container">
-              <div class="dropdown-button" @click="toggleDropdown('modesty')">
-                {{ modesty || 'Select an option' }}
-              </div>
-              <div v-if="showDropdowns.modesty" class="dropdown-list">
-                <div @click="selectOption('modesty', 'no')" class="dropdown-option">No</div>
-                <div @click="selectOption('modesty', 'neutral')" class="dropdown-option">Neutral</div>
-                <div @click="selectOption('modesty', 'highlight')" class="dropdown-option">Highlight</div>
-              </div>
+            <!-- Custom Buttons -->
+            <div class="stepbtncontainer">
+              <button 
+                v-for="option in ['No', 'Neutral', 'Highlight']"
+                :key="option"
+                class="btns"
+                :class="{ selected: modesty === option }"
+                @click="selectOption('modesty', option)">
+                {{ option }}
+              </button>
             </div>
           </div>
         </transition>
@@ -30,13 +30,13 @@
             <div v-for="item in budgetItems" :key="item.key">
               <label class="smalllable2">{{ item.name }}</label>
               <div class="budget-container">
-                <span 
-                  v-for="level in ['£', '££', '£££', '££££']" 
-                  :key="level" 
+                <button 
+                  v-for="level in ['£', '££', '£££', '££££']"
+                  :key="level"
                   :class="{'selected': budget[item.key] === level, 'unselected': budget[item.key] !== level}"
                   @click="selectBudget(item.key, level)">
                   {{ level }}
-                </span>
+                </button>
               </div>
             </div>
           </div>
@@ -48,16 +48,16 @@
             <h3 class="smalllable1 pt-[2vw]">PREFERENCES - STEP 4</h3>
             <label class="smalllable2">How do you like your clothes to fit?</label>
             
-            <!-- Custom Dropdown -->
-            <div class="dropdown-container">
-              <div class="dropdown-button" @click="toggleDropdown('fit')">
-                {{ fit || 'Select Fit' }}
-              </div>
-              <div v-if="showDropdowns.fit" class="dropdown-list">
-                <div @click="selectOption('fit', 'fitted')" class="dropdown-option">Fitted</div>
-                <div @click="selectOption('fit', 'true')" class="dropdown-option">True to Size</div>
-                <div @click="selectOption('fit', 'oversized')" class="dropdown-option">Oversized</div>
-              </div>
+            <!-- Custom Buttons -->
+            <div class="stepbtncontainer">
+              <button 
+                v-for="option in ['Fitted', 'True to Size', 'Oversized']"
+                :key="option"
+                class="btns"
+                :class="{ selected: fit === option }"
+                @click="selectOption('fit', option)">
+                {{ option }}
+              </button>
             </div>
           </div>
         </transition>
@@ -77,7 +77,7 @@
   export default {
     data() {
       return {
-        currentChunk: 0,  // Track the current step
+        currentChunk: 0,
         modesty: "",
         budget: {
           outerwear: "",
@@ -100,10 +100,6 @@
           { name: "Accessories", key: "accessories" },
           { name: "Jewellery", key: "jewellery" },
         ],
-        showDropdowns: {
-          modesty: false,
-          fit: false,
-        },
       };
     },
     methods: {
@@ -113,12 +109,8 @@
       prevStep() {
         if (this.currentChunk > 0) this.currentChunk--;
       },
-      toggleDropdown(dropdownKey) {
-        this.showDropdowns[dropdownKey] = !this.showDropdowns[dropdownKey];
-      },
-      selectOption(dropdownKey, value) {
-        this[dropdownKey] = value;
-        this.showDropdowns[dropdownKey] = false;
+      selectOption(category, value) {
+        this[category] = value;
       },
       selectBudget(category, level) {
         this.budget[category] = level;
@@ -146,6 +138,51 @@
   </script>
   
   <style scoped>
-  /* Add your existing styles or additional styles here */
+  /* Button Styling */
+  .btns {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btns.selected {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .stepbtncontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+  }
+  
+  .stepbtncontainer2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+  }
+  
+  .stepbtncontainer button {
+    margin-right: 10px;
+  }
+  
+  .selected2 {
+    background-color: #FF5733;
+    color: white;
+  }
+  
+  .slide-enter-active, .slide-leave-active {
+    transition: transform 0.5s ease;
+  }
+  .slide-enter, .slide-leave-to {
+    transform: translateY(100%);
+  }
+  
+  .nextbtn {
+    margin-top: 20px;
+  }
   </style>
   
