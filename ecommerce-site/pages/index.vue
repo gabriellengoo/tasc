@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="nomb p-[1vw] relative">
+  <div class="nomb p-[1vw]  relative">
     <!-- <ThreeModel /> -->
     <ImageScroller />
     <div class="h-[100vh] pl-[2vw] w-[100%] hometext">
@@ -125,7 +125,21 @@
         </button>
       </div>
     </div>
-  </div>
+
+  
+
+</div>
+
+<div class="video-container">
+  <iframe 
+    src="https://www.youtube.com/embed/8sLJnt0fuUQ?autoplay=1&mute=1&loop=1&controls=0&playlist=8sLJnt0fuUQ" 
+    frameborder="0" 
+    allowfullscreen
+    allow="autoplay; fullscreen; picture-in-picture">
+  </iframe>
+</div>
+
+
 </div>
 </template>
 
@@ -154,3 +168,25 @@ export default {
 };
 </script>
 
+<style>
+.video-container {
+  position: relative;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw; /* 16:9 Aspect Ratio */
+  max-height: 100vh;
+  max-width: 177.78vh; /* 16:9 Aspect Ratio */
+  transform: translate(-50%, -50%);
+}
+</style>

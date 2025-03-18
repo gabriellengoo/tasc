@@ -2,23 +2,16 @@
   <div v-if="!modelPath" class="error">Model Not Found</div>
 
 
-  <div v-else class="model-wrapper">
+  <div v-else class="">
 
-    <div class="content1">
-      <Name />
-    </div>
 
-    <div class="content">
-      <Form :model="morphMesh" @update-morph="applyMorphUpdate" />
-    </div>
+    <!-- <div class="content"> -->
+      <Form :modelPath="modelPath" :morphMesh="morphMesh" @update-morph="applyMorphUpdate" />
+    <!-- </div> -->
 
-    <ModelViewer 
-      :modelPath="modelPath" 
-      width="40vw" 
-      height="40vh" 
-      :morphMesh="morphMesh" 
-    />
 
+    <!-- <ModelViewer :modelPath="modelPath" width="40vw" height="40vh" :morphMesh="morphMesh" /> -->
+  
   </div>
 </template>
 
@@ -56,26 +49,7 @@ export default {
     this.modelPath = this.models[this.$route.params.id] || null;
   },
   methods: {
-  applyMorphUpdate({ key, value }) {
-    console.log(`👨‍👨‍👧‍👧 Received morph update: ${key} = ${value}`);
-
-    if (this.morphMesh && this.morphMesh.morphTargetDictionary) {
-      const index = this.morphMesh.morphTargetDictionary[key];
-
-      if (index !== undefined) {
-        // Update Three.js morph target influence
-        this.morphMesh.morphTargetInfluences[index] = parseFloat(value);
-        console.log(`👨‍👨‍👧‍👧 ✅ Updated morph target ${key} to ${value}`);
-
-        // Trigger render if necessary
-        this.$nextTick(() => {
-          this.$refs.modelViewer.renderScene();
-        });
-      } else {
-        console.warn(`👨‍👨‍👧‍👧 ⚠️ Morph target ${key} not found in dictionary`);
-      }
-    }
-  }
+  
 },
 };
 </script>

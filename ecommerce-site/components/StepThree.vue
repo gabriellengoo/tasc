@@ -3,48 +3,64 @@
     <h1 class="headerform">Step 2.2 - Body</h1>
 
     <div class="formstyle">
+      <!-- Height Range Women Section -->
+      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+        <div v-if="currentChunk === 0" class="form-section">
+          <label class="smalllable1" for="heightRangeWomen">Please select your height range (women only)</label>
+          <input class="slider" type="range" min="1" max="4" v-model="formData.heightRangeWomen" @input="updateHeightLabelWomen" />
+          <p class="text-[#b2b2b2]">{{ heightLabelsWomen[formData.heightRangeWomen] }}</p>
+        </div>
+      </transition>
 
-      <label class="smalllable1" for="heightRangeWomen">Please select your height range (women only)</label>
-      <input class="slider" type="range" min="1" max="4" v-model="formData.heightRangeWomen"
-        @input="updateHeightLabelWomen" />
-      <p class="text-[#b2b2b2]">{{ heightLabelsWomen[formData.heightRangeWomen] }}</p>
+      <!-- Height Range Men Section -->
+      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+        <div v-if="currentChunk === 1" class="form-section">
+          <label class="smalllable1" for="heightRangeMen">Please select your height range (men only)</label>
+          <input class="slider" type="range" min="1" max="4" v-model="formData.heightRangeMen" @input="updateHeightLabelMen" />
+          <p class="text-[#b2b2b2]">{{ heightLabelsMen[formData.heightRangeMen] }}</p>
+        </div>
+      </transition>
 
-      <label class="smalllable" for="heightRangeMen">Please select your height range (men only)</label>
-      <input class="slider" type="range" min="1" max="4" v-model="formData.heightRangeMen"
-        @input="updateHeightLabelMen" />
-      <p class="text-[#b2b2b2]">{{ heightLabelsMen[formData.heightRangeMen] }}</p>
+      <!-- Top Size Selection Section -->
+      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+        <div v-if="currentChunk === 2" class="form-section">
+          <label class="smalllable">Please tell us your typical size for tops</label>
+          <div class="stepbtncontainer">
+            <button class="btns" v-for="(size, key) in topSizes" :key="key" :class="{ 'selected': formData.topSize === key }" @click="selectTopSize(key)">
+              {{ size }}
+            </button>
+          </div>
+        </div>
+      </transition>
 
-      <!-- Top Size Selection -->
-      <label class="smalllable">Please tell us your typical size for tops</label>
-      <div class="stepbtncontainer">
-        <button class="btns" v-for="(size, key) in topSizes" :key="key" :class="{ 'selected': formData.topSize === key }"
-          @click="selectTopSize(key)">
-          {{ size }}
-        </button>
-      </div>
+      <!-- Bottom Size Selection Section -->
+      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+        <div v-if="currentChunk === 3" class="form-section">
+          <label class="smalllable">Please tell us your typical size for bottoms</label>
+          <div class="stepbtncontainer">
+            <button class="btns" v-for="(size, key) in bottomSizes" :key="key" :class="{ 'selected': formData.bottomSize === key }" @click="selectBottomSize(key)">
+              {{ size }}
+            </button>
+          </div>
+        </div>
+      </transition>
 
-      <!-- Bottom Size Selection -->
-      <label class="smalllable">Please tell us your typical size for bottoms</label>
-      <div class="stepbtncontainer">
-        <button class="btns" v-for="(size, key) in bottomSizes" :key="key" :class="{ 'selected': formData.bottomSize === key }"
-          @click="selectBottomSize(key)">
-          {{ size }}
-        </button>
-      </div>
-
-      <label class="smalllable" for="footSize">Please tell us your typical footwear size</label>
-      <div class="stepbtncontainer">
-        <button class="btns" v-for="size in footSizes" :key="size" @click="selectFootSize(size)"
-          :class="{ 'selected': formData.footSize === size }">
-          {{ size }}
-        </button>
-      </div>
-
+      <!-- Foot Size Selection Section -->
+      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+        <div v-if="currentChunk === 4" class="form-section">
+          <label class="smalllable" for="footSize">Please tell us your typical footwear size</label>
+          <div class="stepbtncontainer">
+            <button class="btns" v-for="size in footSizes" :key="size" @click="selectFootSize(size)" :class="{ 'selected': formData.footSize === size }">
+              {{ size }}
+            </button>
+          </div>
+        </div>
+      </transition>
     </div>
+
     <button class="nextbtn" @click="nextStep">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M11 16L15 12M15 12L11 8M15 12H3M4.51555 17C6.13007 19.412 8.87958 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C8.87958 3 6.13007 4.58803 4.51555 7" stroke="#000000"
-          stroke-width="0.8879999999999999" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M11 16L15 12M15 12L11 8M15 12H3M4.51555 17C6.13007 19.412 8.87958 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C8.87958 3 6.13007 4.58803 4.51555 7" stroke="#000000" stroke-width="0.8879999999999999" stroke-linecap="round" stroke-linejoin="round"></path>
       </svg>
     </button>
   </div>
@@ -52,18 +68,15 @@
 
 <script>
 export default {
-  props: {
-    setMorphValue: Function, // Function from parent to update morph targets
-    model: Object, // Data bound from parent component (to handle v-model)
-  },
   data() {
     return {
+      currentChunk: 0,
       formData: {
-        heightRangeWomen: this.model.heightRangeWomen || 2,
-        heightRangeMen: this.model.heightRangeMen || 2,
-        topSize: this.model.topSize || '',
-        bottomSize: this.model.bottomSize || '',
-        footSize: this.model.footSize || '',
+        heightRangeWomen: 2,
+        heightRangeMen: 2,
+        topSize: '',
+        bottomSize: '',
+        footSize: '',
       },
       heightLabelsWomen: {
         1: "Petite (<5'3)",
@@ -89,45 +102,80 @@ export default {
         L: "L (14-16)",
         XL: "XL+ (18+)",
       },
-      footSizes: [5, 6, 7, 8, 9, 10, 11, 12]
+      footSizes: [5, 6, 7, 8, 9, 10, 11, 12],
     };
   },
   methods: {
     updateHeightLabelWomen() {
-      console.log("Height Range (Women) changed:", this.formData.heightRangeWomen);
       this.updateModel('heightRangeWomen', this.formData.heightRangeWomen);
     },
     updateHeightLabelMen() {
-      console.log("Height Range (Men) changed:", this.formData.heightRangeMen);
       this.updateModel('heightRangeMen', this.formData.heightRangeMen);
     },
     updateModel(morphName, value) {
+      const normalizedValue = (value - 1) / 3;
       if (this.setMorphValue) {
-        const normalizedValue = (value - 1) / 3;
-        console.log(`Updating morph value: ${morphName} = ${normalizedValue}`);
         this.setMorphValue(morphName, normalizedValue);
       }
     },
     selectTopSize(size) {
-      console.log("Top Size selected:", size);
       this.formData.topSize = size;
     },
     selectBottomSize(size) {
-      console.log("Bottom Size selected:", size);
       this.formData.bottomSize = size;
     },
     selectFootSize(size) {
-      console.log("Foot Size selected:", size);
       this.formData.footSize = size;
     },
     nextStep() {
-      console.log("Submitting form data:", this.formData);
-      this.$emit('next', this.formData);
+      if (this.currentChunk < 4) {
+        this.currentChunk++;
+      } else {
+        this.$emit('next', this.formData);
+      }
+    },
+    beforeEnter(el) {
+      el.style.transform = 'translateY(100%)';
+    },
+    enter(el, done) {
+      el.offsetHeight;
+      el.style.transition = 'transform 0.5s ease';
+      el.style.transform = 'translateY(0)';
+      done();
+    },
+    leave(el, done) {
+      el.style.transition = 'transform 0.5s ease';
+      el.style.transform = 'translateY(-100%)';
+      done();
     },
   },
 };
 </script>
 
 <style scoped>
-/* Add styles for your form as needed */
+/* .form-section {
+  margin-bottom: 20px;
+}
+
+.slide-enter-active, .slide-leave-active {
+  transition: transform 0.5s ease;
+}
+
+.slide-enter, .slide-leave-to {
+  transform: translateY(100%);
+}
+
+.selected {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.selected2 {
+  background-color: #FF5733;
+  color: white;
+}
+
+.nextbtn {
+  margin-top: 20px;
+} */
 </style>

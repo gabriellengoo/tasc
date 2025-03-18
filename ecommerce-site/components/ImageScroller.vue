@@ -1,28 +1,29 @@
 <template>
-  <div class="scroller-wrapper">
+  <div class="scroller-wrapper pt-[3vw]">
     <div class="scroller" @mouseover="isHovered = true" @mouseleave="isHovered = false">
       <div v-for="(pair, index) in pairedImages" :key="index" class="image-group">
         <div v-for="(image, imgIndex) in pair" :key="imgIndex" class="image-loop"
-          :class="imgIndex === 0 ? 'higher' : 'lower'" @mouseover="hoveredIndex = image.default"
+          :class="imgIndex === 0 ? 'higher' : 'lower'" 
+          @mouseover="hoveredIndex = image.default"
           @mouseleave="hoveredIndex = null">
+          
           <router-link :to="`/model/${image.model}`">
-            <!--   :src="
-                hoveredIndex === image.default ? image.hover : image.default
-              " -->
-            <img :src="image.default
-              " alt="Scrolling image" class="loop-image" @click="selectModel(image)" />
+            <img :src="image.default" alt="Scrolling image" class="loop-image" @click="selectModel(image)" />
           </router-link>
-          <div v-if="hoveredIndex === image.default" class="tooltip">
-            <div class="tooltip-line-container">
-              <div class="tooltip-line"></div>
-            </div>
-            <div class="tooltip-text" v-html="getText(image.default)"></div>
-          </div>
+        
         </div>
       </div>
     </div>
+
+    <!-- Hover text box outside the image-group -->
+    <div class="hover-text-box" v-if="hoveredIndex">
+      <p class=" text-lg uppercase">current selection:</p>
+      <span v-html="getText(hoveredIndex)"></span>
+    </div>
   </div>
 </template>
+
+
 
 <script setup>
 import { ref, computed } from "vue";
@@ -152,7 +153,7 @@ const getText = (image) => {
 .scroller-wrapper {
   overflow: hidden;
   width: 100vw;
-  height: 40vw;
+  height: 100vh;
   white-space: nowrap;
   position: absolute;
   top: 13vh;
@@ -197,54 +198,33 @@ const getText = (image) => {
 .loop-image:hover {
   cursor: pointer;
 }
-.tooltip {
+
+
+
+.hover-text-box {
   position: absolute;
-  bottom: 43vw;
-  left: 70%;
-  color: black;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 14px;
+  bottom: 20vh; /* Adjust the distance from bottom */
+  left: 15vw;
+  transform: translateX(-50%);
+  /* background: rgba(0, 0, 0, 0.7); */
+  /* color: white; */
+  border: black solid 2px;
+  padding: 1vw 2vw;
+  font-size: 4.2vw;
+  text-align: left;
   white-space: nowrap;
-  opacity: 1;
+  border-radius: 0px;
+  width: 20vw;
   transition: opacity 0.3s ease-in-out;
-  z-index: 10;
-  width: auto;
+  opacity: 1;
 }
 
-.tooltip-line-container {
-  position: relative;
-  margin-bottom: 8px;
+.hover-text-box span {
+  display: block;
+  line-height: 1.5;
 }
 
-.tooltip-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 1px;
-  background-color: black;
-  width: 0;
-  animation: line-span 1s forwards;
-}
 
-.tooltip-line::before {
-  content: "";
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: black;
-}
-
-.tooltip-text {
-  opacity: 0;
-  overflow: hidden;
-  width: 0;
-  white-space: nowrap;
-  animation: typing 1s steps(30) 0.1s forwards;
-}
 
 @keyframes scroll {
   from {

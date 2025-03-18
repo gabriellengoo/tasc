@@ -38,6 +38,7 @@
     background-color: #f9f9f2;
     /* margin: 1vw 2vw; */
    padding: 1vw 2vw;
+   margin-top: 6vw;
   }
   
   .progress-bar {
@@ -45,6 +46,7 @@
     height: 0.4vw;
     background-color: #ececec;
     margin: 5px 0;
+    z-index: 1;
     /* border-radius: 5px; */
   }
   
