@@ -19,6 +19,7 @@ You can directly use them in pages and other components without the need to impo
 - `<StepThree>` | `<step-three>` (components/StepThree.vue)
 - `<StepTwo>` | `<step-two>` (components/StepTwo.vue)
 - `<ThreeModel>` | `<three-model>` (components/ThreeModel.vue)
+- `<TransitionComponent>` | `<transition-component>` (components/TransitionComponent.vue)
 - `<Form>` | `<form>` (components/form.vue)
 - `<LayoutFooter>` | `<layout-footer>` (components/layout/Footer.vue)
 - `<LayoutHeader>` | `<layout-header>` (components/layout/Header.vue)

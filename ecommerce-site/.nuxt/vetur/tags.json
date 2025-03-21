@@ -38,6 +38,9 @@
   "ThreeModel": {
     "description": "Auto imported from components/ThreeModel.vue"
   },
+  "TransitionComponent": {
+    "description": "Auto imported from components/TransitionComponent.vue"
+  },
   "Form": {
     "description": "Auto imported from components/form.vue"
   },

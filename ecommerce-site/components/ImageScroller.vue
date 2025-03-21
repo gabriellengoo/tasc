@@ -206,9 +206,13 @@ const getText = (image) => {
   bottom: 20vh; /* Adjust the distance from bottom */
   left: 15vw;
   transform: translateX(-50%);
-  /* background: rgba(0, 0, 0, 0.7); */
+  background: #f9f9f1;
+  background: transparent;
+    border-bottom-color: rgba(255, 255, 255, 0.4);
+    background-color: #ffffff4d !important;
+    backdrop-filter: blur(10px);
   /* color: white; */
-  border: black solid 2px;
+  border: black solid 1px;
   padding: 1vw 2vw;
   font-size: 4.2vw;
   text-align: left;

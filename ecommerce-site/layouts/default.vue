@@ -1,5 +1,6 @@
 <template>
   <main class="min-h-full">
+    <TransitionComponent />
     <!-- Desktop Header -->
     <LayoutHeader
       :class="
@@ -32,7 +33,13 @@
 
   <script>
   import { mapActions, mapMutations } from 'vuex'
+  import TransitionComponent from "~/components/TransitionComponent.vue";
+
+
   export default {
+    components: {
+    TransitionComponent,
+  },
     methods: {
       ...mapActions(['setTitle']),
       ...mapMutations(['SET_FOOTER', 'CLOSE_MENU']),
