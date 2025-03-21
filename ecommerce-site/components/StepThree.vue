@@ -91,6 +91,23 @@
           </div>
         </div>
       </transition>
+
+
+      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+          <div v-if="currentChunk === 4" class="form-section">
+            <h3 class="smalllable1">BODY - STEP 2.21 (Modesty Check)</h3>
+            <label class="smalllable2">Are there any areas you would like to highlight in your outfits?</label>
+  
+            <!-- Custom Buttons -->
+            <div class="stepbtncontainer">
+              <button v-for="option in ['No', 'Neutral', 'Highlight']" :key="option" class="btns"
+                      :class="{ 'selected': modesty === option }" @click="selectOption('modesty', option)">
+                {{ option }}
+              </button>
+            </div>
+          </div>
+        </transition>
+
     </div>
 
     <button class="nextbtn" @click="nextStep">
@@ -185,7 +202,7 @@ export default {
       this.formData.footSize = size;
     },
     nextStep() {
-      if (this.currentChunk < 3) {
+      if (this.currentChunk < 4) {
         this.currentChunk++;
       } else {
         this.$emit('next', this.formData);

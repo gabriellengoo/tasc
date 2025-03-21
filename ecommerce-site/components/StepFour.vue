@@ -160,6 +160,20 @@ export default {
     };
   },
   methods: {
+    beforeEnter(el) {
+      el.style.opacity = 0;
+    },
+    enter(el, done) {
+      el.offsetHeight; // Trigger reflow
+      el.style.transition = 'opacity 0.5s';
+      el.style.opacity = 1;
+      done();
+    },
+    leave(el, done) {
+      el.style.transition = 'opacity 0.5s';
+      el.style.opacity = 0;
+      done();
+    },
     selectOption(category, option) {
       this.formData[category] = option;
       this.nextStep();

@@ -611,6 +611,21 @@ select option:hover {
    /* 1.5s duration, ease-out timing, run once */
 }
 
+.thumb-button svg.selectedlike {
+   /* background-color: rgb(81, 81, 81); */
+   fill: #50d447;
+   animation: flashl 1s ease-out 1;
+   /* 1.5s duration, ease-out timing, run once */
+}
+
+.thumb-button svg.selecteddisl {
+   /* background-color: rgb(81, 81, 81); */
+   fill: #b41d1d;
+   animation: flashl 1s ease-out 1;
+   /* 1.5s duration, ease-out timing, run once */
+}
+
+
 .budget-container button.selected {
    color: rgb(39, 149, 11);
    background-color: rgba(0, 0, 0, 0) !important;
@@ -646,6 +661,29 @@ select option:hover {
 
    100% {
       background-color: rgb(81, 81, 81);
+      color: rgb(231, 231, 231);
+   }
+}
+
+
+@keyframes flashl {
+   0% {
+      color: rgb(231, 231, 231);
+   }
+
+   25% {
+      color: rgb(81, 81, 81);
+   }
+
+   50% {
+      color: rgb(231, 231, 231);
+   }
+
+   75% {
+      color: rgb(81, 81, 81);
+   }
+
+   100% {
       color: rgb(231, 231, 231);
    }
 }
