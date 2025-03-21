@@ -58,16 +58,16 @@
 
       <!-- Stomach Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-  <div v-if="currentChunk === 4" class="form-section">
-    <h3 class="smalllable1">Stomach</h3>
-    <div class="stepbtncontainer">
-      <button v-for="option in stomachOptions" :key="option" @click="selectStomach(option)"
-        :class="{ 'selected': formData.stomach === option }" class="btns">
-        {{ option }}
-      </button>
-    </div>
-  </div>
-</transition>
+        <div v-if="currentChunk === 4" class="form-section">
+          <h3 class="smalllable1">Stomach</h3>
+          <div class="stepbtncontainer">
+            <button v-for="option in stomachOptions" :key="option" @click="selectStomach(option)"
+              :class="{ 'selected': formData.stomach === option }" class="btns">
+              {{ option }}
+            </button>
+          </div>
+        </div>
+      </transition>
 
       <!-- Bum Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
@@ -84,16 +84,16 @@
 
       <!-- Hips Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-  <div v-if="currentChunk === 6" class="form-section">
-    <h3 class="smalllable1">Hips</h3>
-    <div class="stepbtncontainer">
-      <button v-for="option in hipOptions" :key="option" @click="selectHips(option)"
-        :class="{ 'selected': formData.hips === option }" class="btns">
-        {{ option }}
-      </button>
-    </div>
-  </div>
-</transition>
+        <div v-if="currentChunk === 6" class="form-section">
+          <h3 class="smalllable1">Hips</h3>
+          <div class="stepbtncontainer">
+            <button v-for="option in hipOptions" :key="option" @click="selectHips(option)"
+              :class="{ 'selected': formData.hips === option }" class="btns">
+              {{ option }}
+            </button>
+          </div>
+        </div>
+      </transition>
 
       <!-- Legs Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
@@ -135,8 +135,8 @@ export default {
       morphMesh: {
         height: 0,
         sholders: 0,
-        waist:  0,
-        hips:  0,
+        waist: 0,
+        hips: 0,
       },
       currentChunk: 0,
       formData: {
@@ -170,15 +170,15 @@ export default {
       this.nextStep();
     },
     selectStomach(option) {
-    this.formData.stomach = option;
-    this.$set(this.morphMesh, 'waist', option === "Prominent Stomach" ? 1 : -1);
-    this.nextStep();
-  },
-  selectHips(option) {
-    this.formData.hips = option;
-    this.$set(this.morphMesh, 'hips', option === "Wide Hips" ? 1 : -1);
-    this.nextStep();
-  },
+      this.formData.stomach = option;
+      this.$set(this.morphMesh, 'waist', option === "Prominent Stomach" ? 1 : -1);
+      this.nextStep();
+    },
+    selectHips(option) {
+      this.formData.hips = option;
+      this.$set(this.morphMesh, 'hips', option === "Wide Hips" ? 1 : -1);
+      this.nextStep();
+    },
     updateHeight() {
       this.$set(this.morphMesh, 'height', this.heightValue);
     },
@@ -188,7 +188,10 @@ export default {
       } else {
         this.$emit('next', this.formData);
       }
+
     },
+
+    
   }
 };
 </script>

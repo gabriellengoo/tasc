@@ -46,7 +46,7 @@ export default {
         this.renderer.render(this.scene, this.camera);
       }
     },
-    
+
     initThreeJS() {
       console.log("🔧 Initializing Three.js scene...");
       this.scene = new THREE.Scene();
@@ -79,17 +79,17 @@ export default {
             const action = this.mixer.clipAction(gltf.animations[0]);
             action.play();
           }
-          
+
           this.logMorphTargets();
           this.applyMorphTargets();
-          
+
           const ambientLight = new THREE.AmbientLight(0xffffff, 1);
           this.scene.add(ambientLight);
-          
+
           const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-          directionalLight.position.set(5, 5, 5);
+          directionalLight.position.set(5, 50, 5);
           this.scene.add(directionalLight);
-          
+
           this.animate();
         },
         undefined,
@@ -119,11 +119,45 @@ export default {
       });
     },
 
+
+    zoomToPart(part) {
+      const positions = {
+        height: { position: new THREE.Vector3(0, 2, 2), lookAt: new THREE.Vector3(0, 1.8, 0) },
+        hips: { position: new THREE.Vector3(0, 0, 2), lookAt: new THREE.Vector3(0, -0.2, 0) },
+        shoulders: { position: new THREE.Vector3(0, 1.5, 2), lookAt: new THREE.Vector3(0, 1.5, 0) },
+        waist: { position: new THREE.Vector3(0, 0.5, 2), lookAt: new THREE.Vector3(0, 0.5, 0) },
+      };
+
+      if (!positions[part]) return;
+
+      const targetPos = positions[part].position;
+      const targetLookAt = positions[part].lookAt;
+
+      // Animate Camera
+      const duration = 1.5; // Time in seconds
+      let startTime = performance.now();
+
+      const animateZoom = (time) => {
+        let progress = (time - startTime) / (duration * 1000);
+        if (progress > 1) progress = 1;
+
+        this.camera.position.lerp(targetPos, progress);
+        this.camera.lookAt(targetLookAt);
+
+        if (progress < 1) {
+          requestAnimationFrame(animateZoom);
+        }
+      };
+
+      requestAnimationFrame(animateZoom);
+    },
+
+
     applyMorphTargets() {
       if (!this.morphMesh || !this.model) return;
       const morphValues = JSON.parse(JSON.stringify(this.morphMesh));
       console.log("🎭 Applying morph targets:", morphValues);
-      
+
       this.model.traverse((child) => {
         if (child.isMesh && child.morphTargetInfluences) {
           ["height", "hips", "sholders", "waist"].forEach((key) => {
