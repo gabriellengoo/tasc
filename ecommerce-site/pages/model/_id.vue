@@ -46,7 +46,7 @@ export default {
     this.modelPath = this.models[this.$route.params.id] || null;
   },
   methods: {
-  
+   
 },
 };
 </script>

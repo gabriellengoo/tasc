@@ -70,13 +70,33 @@ export default {
         (gltf) => {
           console.log("✅ Model loaded:", this.modelPath);
           this.model = gltf.scene;
-          this.model.scale.set(1.1, 1.1, 1.1);
-          this.model.position.set(0, -1, 0);
+
+          // Normalize model scale
+          const box = new THREE.Box3().setFromObject(this.model);
+          const size = box.getSize(new THREE.Vector3());
+          const maxDimension = Math.max(size.x, size.y, size.z);
+          const desiredSize = 2; // Adjust this for consistent size
+          const scaleFactor = desiredSize / maxDimension;
+
+          this.model.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+          // Center model
+          const center = box.getCenter(new THREE.Vector3());
+          this.model.position.sub(center); // Move to origin
+          this.model.position.set(0, -1, 0); // Adjust height
+
+          // Ensure model faces the correct direction
+          this.model.rotation.y = Math.PI + Math.PI ; // 180° + 90° = 270°
+
+          // If some models face sideways, try adjusting rotation.x or rotation.z
+
           this.scene.add(this.model);
 
+          // Handle animations
           if (gltf.animations.length > 0) {
             this.mixer = new THREE.AnimationMixer(this.model);
-            const action = this.mixer.clipAction(gltf.animations[0]);
+            const lastAnimation = gltf.animations[gltf.animations.length - 1];
+            const action = this.mixer.clipAction(lastAnimation);
             action.play();
           }
 
