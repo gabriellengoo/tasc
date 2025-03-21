@@ -9,9 +9,6 @@
       <Form :modelPath="modelPath" :morphMesh="morphMesh" @update-morph="applyMorphUpdate" />
     <!-- </div> -->
 
-
-    <!-- <ModelViewer :modelPath="modelPath" width="40vw" height="40vh" :morphMesh="morphMesh" /> -->
-  
   </div>
 </template>
 

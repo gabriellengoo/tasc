@@ -34,6 +34,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    border-top: black solid 1px;
     border-bottom: black solid 1px;
     background-color: #f9f9f2;
     /* margin: 1vw 2vw; */

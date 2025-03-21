@@ -9,7 +9,7 @@
       <Name />
     </div>
 
-
+ 
     <div  class="content">
 
       <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
@@ -26,13 +26,13 @@
 
       <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentStep === 3">
-          <step-three @next="nextStep" :model="model" />
+          <step-three @next="nextStep" :model="model" :modelPath="modelPath" :morphMesh="morphMesh" @update-morph="applyMorphUpdate" />
         </div>
       </transition>
 
       <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentStep === 4">
-          <step-four @next="nextStep" :model="model" />
+          <step-four @next="nextStep" :model="model" :modelPath="modelPath" :morphMesh="morphMesh" @update-morph="applyMorphUpdate" />
         </div>
       </transition>
 
@@ -70,7 +70,8 @@ export default {
   },
   props: {
     modelPath: String,
-    morphMesh: Object
+    morphMesh: Object,
+    model: Object,
   },
   data() {
     return {
@@ -80,10 +81,16 @@ export default {
         skinTone: null,
         bodySize: null,
       },
-      height: 0,
+      heightValue: 0, 
       canvas: null,
       modelPath: null,
-      morphMesh: {},
+    //   morphMesh: reactive({
+    //   height: 0,
+    // }),
+      // morphMesh: {},
+      morphMesh: {
+        height: 0, // Initialize height morph value
+      },
       models: {
         maovam: "/models/maovam.glb",
         squarem: "/models/squarem.glb",
@@ -96,6 +103,7 @@ export default {
         pearfem: "/models/pearfem.glb",
         athfm: "/models/athfm.glb",
       },
+    
     };
   },
   mounted() {
@@ -110,6 +118,9 @@ export default {
         this.currentStep++;
       }
     },
+    updateHeight() {
+    this.$set(this.morphMesh, 'height', this.heightValue); // Ensure Vue reactivity
+  },
     beforeEnter(el) {
       el.style.opacity = 0;
     },
@@ -125,10 +136,6 @@ export default {
       done();
     },
 
-    updateHeightInModel() {
-      // Emit event to the parent or model component
-      this.$emit('update-height', this.height);
-    },
   }
 };
 </script>
@@ -153,6 +160,7 @@ export default {
     justify-content: center;
     margin-top: 4vh;
     z-index: 0;
+ 
 }
 
 .model-viewer {
@@ -175,6 +183,7 @@ export default {
   color: #333;
   z-index: 2;
   border-right: #333 solid .1vw;
+  overflow: scroll;
 }
 
 .content1 {
@@ -188,6 +197,7 @@ export default {
   color: #333;
   z-index: 2;
   border-right: #333 solid .1vw;
+  overflow: scroll;
 }
 
 .content h1 {

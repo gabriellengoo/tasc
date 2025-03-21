@@ -1,18 +1,6 @@
 <template>
   <div class="model-container">
     <canvas ref="canvas"></canvas>
-    <div class="controls absolute">
-      <!-- Slider for controlling height morph target -->
-      <input 
-        type="range" 
-        min="0" 
-        max="1" 
-        step="0.01" 
-        v-model="heightValue"
-        @input="updateHeight"
-      />
-      <label>Height: {{ heightValue }}</label>
-    </div>
   </div>
 </template>
 
@@ -22,10 +10,9 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 export default {
- props: {
+  props: {
     modelPath: String,
     morphMesh: Object,
-    updateMorphTarget: Function,
   },
   data() {
     return {
@@ -36,7 +23,6 @@ export default {
       model: null,
       controls: null,
       mixer: null,
-      heightValue: 0, // Initial height value (from slider)
     };
   },
   mounted() {
@@ -45,16 +31,24 @@ export default {
       this.initThreeJS();
     }
   },
+  watch: {
+    morphMesh: {
+      handler(newVal) {
+        console.log("Updating morph targets:", newVal);
+        this.applyMorphTargets();
+      },
+      deep: true,
+    },
+  },
   methods: {
     renderScene() {
       if (this.renderer && this.scene && this.camera) {
         this.renderer.render(this.scene, this.camera);
       }
     },
+    
     initThreeJS() {
       console.log("🔧 Initializing Three.js scene...");
-
-      // Scene, Camera, Renderer setup
       this.scene = new THREE.Scene();
       this.scene.background = new THREE.Color(0xf9f9f1);
 
@@ -70,7 +64,6 @@ export default {
       this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
       this.renderer.setSize(this.$el.clientWidth, this.$el.clientHeight);
 
-      // Load the model
       const loader = new GLTFLoader();
       loader.load(
         this.modelPath,
@@ -79,23 +72,24 @@ export default {
           this.model = gltf.scene;
           this.model.scale.set(1.1, 1.1, 1.1);
           this.model.position.set(0, -1, 0);
-
           this.scene.add(this.model);
 
-          // Check for morph targets
+          if (gltf.animations.length > 0) {
+            this.mixer = new THREE.AnimationMixer(this.model);
+            const action = this.mixer.clipAction(gltf.animations[0]);
+            action.play();
+          }
+          
           this.logMorphTargets();
-
-          // Apply morph targets if provided
           this.applyMorphTargets();
-
-          // Lighting setup
+          
           const ambientLight = new THREE.AmbientLight(0xffffff, 1);
           this.scene.add(ambientLight);
-
+          
           const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
           directionalLight.position.set(5, 5, 5);
           this.scene.add(directionalLight);
-
+          
           this.animate();
         },
         undefined,
@@ -103,11 +97,21 @@ export default {
       );
     },
 
-    // Log morph target names when model is loaded
+    updateMorphTarget(targetName, value) {
+      if (this.model) {
+        this.model.traverse((child) => {
+          if (child.isMesh && child.morphTargetDictionary && targetName in child.morphTargetDictionary) {
+            const index = child.morphTargetDictionary[targetName];
+            child.morphTargetInfluences[index] = value;
+          }
+        });
+        this.renderScene();
+      }
+    },
+
     logMorphTargets() {
       if (!this.model) return;
       console.log("🔍 Checking for morph targets...");
-
       this.model.traverse((child) => {
         if (child.isMesh && child.morphTargetDictionary) {
           console.log(`🎭 Morph targets found on ${child.name}:`, child.morphTargetDictionary);
@@ -115,34 +119,23 @@ export default {
       });
     },
 
-    // Apply morph target influences based on morphMesh values
     applyMorphTargets() {
       if (!this.morphMesh || !this.model) return;
-
-      // Convert Vue reactive object to a plain JS object
       const morphValues = JSON.parse(JSON.stringify(this.morphMesh));
-
       console.log("🎭 Applying morph targets:", morphValues);
-
+      
       this.model.traverse((child) => {
         if (child.isMesh && child.morphTargetInfluences) {
-          Object.keys(morphValues).forEach((key) => {
+          ["height", "hips", "sholders", "waist"].forEach((key) => {
             if (child.morphTargetDictionary && child.morphTargetDictionary[key] !== undefined) {
               const index = child.morphTargetDictionary[key];
-              child.morphTargetInfluences[index] = parseFloat(morphValues[key]);
+              child.morphTargetInfluences[index] = parseFloat(morphValues[key] || 0);
               console.log(`👩‍💻✅ Updated ${key} to ${morphValues[key]}`);
             }
           });
         }
       });
-
-      this.renderer.render(this.scene, this.camera);
-    },
-
-    // Update height morph target dynamically when slider changes
-    updateHeight() {
-      this.morphMesh.height = this.heightValue; // Update the height value in morphMesh
-      this.applyMorphTargets(); // Reapply morph targets with updated height
+      this.renderScene();
     },
 
     animate() {
@@ -152,15 +145,8 @@ export default {
       this.renderer.render(this.scene, this.camera);
     },
   },
-  watch: {
-    morphMesh(newMorphMesh) {
-      console.log("🔄 morphMesh updated:", newMorphMesh);
-      this.applyMorphTargets(); // Apply changes when morphMesh updates
-    },
-  },
 };
 </script>
-
 
 <style scoped>
 .model-container {

@@ -1,20 +1,23 @@
 <template>
   <div>
     <h1 class="headerform">Step 1 - Basic Information</h1>
-    
+
     <div class="formstyle">
       <!-- Name Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentChunk === 0" class="form-section">
           <label class="smalllable" for="name">Full Name</label>
-          <input class="inputa" v-model="formData.name" id="name" placeholder="John Doe"/>
+          <input class="inputa" v-model="formData.name" id="name" placeholder="John Doe" />
 
           <label class="smalllable" for="email">E-mail</label>
           <input class="inputa" type="email" v-model="formData.email" id="email" placeholder="johndoe@myemail.com" />
-          <button class="nextbtn" @click="nextChunk"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M11 16L15 12M15 12L11 8M15 12H3M4.51555 17C6.13007 19.412 8.87958 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C8.87958 3 6.13007 4.58803 4.51555 7" stroke="#000000"
-          stroke-width="0.8879999999999999" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg></button>
+          <!-- <button class="nextbtn" @click="nextChunk"><svg viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M11 16L15 12M15 12L11 8M15 12H3M4.51555 17C6.13007 19.412 8.87958 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C8.87958 3 6.13007 4.58803 4.51555 7"
+                stroke="#000000" stroke-width="0.8879999999999999" stroke-linecap="round" stroke-linejoin="round">
+              </path>
+            </svg></button> -->
         </div>
       </transition>
 
@@ -24,19 +27,24 @@
         <div v-if="currentChunk === 1" class="form-section">
           <label class="smalllable" for="age">Age range</label>
           <div class="stepbtncontainer">
-            <button class="btns" v-for="(age, index) in ageRanges" :key="age" 
-                    :class="{ selected: formData.age === age }" 
-                    @click="selectAge(age)">
+            <button class="btns" v-for="(age, index) in ageRanges" :key="age"
+              :class="{ selected: formData.age === age }" @click="selectAge(age)">
               {{ alphabet[index] }}. {{ age }}
             </button>
           </div>
-          <button class="nextbtn" @click="submitForm"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M11 16L15 12M15 12L11 8M15 12H3M4.51555 17C6.13007 19.412 8.87958 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C8.87958 3 6.13007 4.58803 4.51555 7" stroke="#000000"
-          stroke-width="0.8879999999999999" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg></button>
+
         </div>
       </transition>
-    </div> 
+    </div>
+
+    <button class="nextbtn" @click="submitForm">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M11 16L15 12M15 12L11 8M15 12H3M4.51555 17C6.13007 19.412 8.87958 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C8.87958 3 6.13007 4.58803 4.51555 7"
+          stroke="#000000" stroke-width="0.8879999999999999" stroke-linecap="round" stroke-linejoin="round">
+        </path>
+      </svg>
+    </button>
 
     <!-- Already Have an Account -->
     <h3 class="smalllable2 m-[1vw]">
@@ -95,11 +103,13 @@ export default {
   flex-direction: column;
   align-items: flex-start;
 }
+
 .stepbtncontainer {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 .btns {
   padding: 10px;
   font-size: 1rem;
@@ -108,17 +118,22 @@ export default {
   text-align: left;
   border-radius: 5px;
 }
+
 .smalllable {
   font-size: 1.5vw;
   padding-bottom: 1vw;
 }
 
-.slide-enter-active, .slide-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: transform 0.5s ease;
 }
-.slide-enter, .slide-leave-to {
+
+.slide-enter,
+.slide-leave-to {
   transform: translateY(100%);
 }
+
 .nextbtn {
   margin-top: 20px;
 }
