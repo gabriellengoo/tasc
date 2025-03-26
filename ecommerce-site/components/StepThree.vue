@@ -81,10 +81,10 @@
 
       <!-- Foot Size Selection Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentChunk === 3" class="form-section">
-          <label class="smalllable" for="footSize">Please tell us your typical footwear size</label>
-          <div class="stepbtncontainer">
-            <button class="btns" v-for="size in footSizes" :key="size" @click="selectFootSize(size)"
+        <div v-if="currentChunk === 3" class="form-sectionfoot">
+          <label class="smalllable pb-[2vw]" for="footSize">Please tell us your typical footwear size</label>
+          <div class="stepbtncontainerfoot">
+            <button class="btnsfoot" v-for="size in footSizes" :key="size" @click="selectFootSize(size)"
               :class="{ 'selected': formData.footSize === size }">
               {{ size }}
             </button>
@@ -166,7 +166,8 @@ export default {
         L: "L (14-16)",
         XL: "XL+ (18+)",
       },
-      footSizes: [5, 6, 7, 8, 9, 10, 11, 12],
+      footSizes: ['5 UK', '6 UK', '7 UK', '8 UK', '9 UK', '10 UK', '11 UK', '12 UK'],
+
     };
   },
   computed: {

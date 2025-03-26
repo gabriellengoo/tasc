@@ -1,4 +1,4 @@
-<template>
+<template class="bg-[#f9f9f1]">
   <div v-if="!modelPath" class="error">Model Not Found</div>
 
 

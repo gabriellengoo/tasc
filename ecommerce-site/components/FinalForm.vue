@@ -7,18 +7,33 @@
             <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                 <div v-if="currentChunk === 0" class="form-section">
                     <h3 class="smalllable1 pt-[2vw]">BUDGET - STEP 3</h3>
-                    <div v-for="item in budgetItems" :key="item.key">
-                        <label class="smalllable2">{{ item.name }}</label>
+
+                    <!-- List of categories -->
+                    <div class="category-list">
+                        <div v-for="(item, index) in budgetItems" :key="item.key"
+                            :class="['category-item', { selectedbud: selectedCategory === item.key }]"
+                            @click="selectCategory(item.key)">
+                            <label class="">{{ item.name }}</label>
+                        </div>
+                    </div>
+
+                    <!-- Budget level selection for selected category -->
+                    <div v-if="selectedCategory" class="budget-selection pt-[2vw]">
+                        <h4>Select a Budget Level for {{ selectedCategoryName }}</h4>
                         <div class="budget-container">
-                            <button class="" v-for="level in ['💸', '💸💸', '💸💸💸', '💸💸💸💸']" :key="level"
-                                :class="{ 'selected': budget[item.key] === level, 'unselected': budget[item.key] !== level }"
-                                @click="selectBudget(item.key, level)">
+                            <button  class="btnsimgcol" v-for="level in ['£', '££', '£££', '££££']" :key="level" :class="{
+                                'selected': selectedBudget[selectedCategory] === level,
+
+                            }" @click="selectBudget('selectedBudget', level)">
                                 {{ level }}
                             </button>
                         </div>
                     </div>
                 </div>
             </transition>
+
+
+
 
             <!-- Preferences Section -->
             <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
@@ -36,39 +51,73 @@
                 </div>
             </transition>
 
-            <!-- Color Preferences Section -->
-            <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-                <div v-if="currentChunk === 2" class="form-section">
-                    <h3 class="smalllable1 pt-[2vw]">COLOR PREFERENCES</h3>
+          <!-- Favorite Colors -->
+<transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+    <div v-if="currentChunk === 2" class="form-section">
+        <h3 class="smalllable1 pt-[2vw]">COLOR PREFERENCES</h3>
 
-                    <label class="smalllable2">What are your favourite colours to wear? (Up to 4 colors)</label>
-                    <input v-model="colorInput" @input="onInput" @keydown.enter="addColor" type="text"
-                        class="color-input" placeholder="Start typing a color..." />
-                    <ul v-if="filteredColors.length > 0" class="suggestions">
-                        <li v-for="color in filteredColors" :key="color" @click="addColorFromSuggestion(color)">{{ color
-                            }}</li>
-                    </ul>
-                    <div class="color-tags">
-                        <span v-for="(color, index) in selectedColors" :key="index" class="color-tag">{{ color }}</span>
-                    </div>
+        <label class="smalllable2">What are your <span class="smalllable2 font-semibold">favourite</span> colours to wear? (Up to 4 colors)</label>
 
-                    <label class="smalllable2">What are your least favourite colours to wear? (Up to 4 colors)</label>
-                    <input v-model="leastColorInput" @input="onLeastInput" @keydown.enter="addLeastColor" type="text"
-                        class="color-input" placeholder="Start typing a color..." />
-                    <ul v-if="filteredLeastColors.length > 0" class="suggestions">
-                        <li v-for="color in filteredLeastColors" :key="color"
-                            @click="addLeastColorFromSuggestion(color)">{{ color }}</li>
-                    </ul>
-                    <div class="color-tags">
-                        <span v-for="(color, index) in selectedLeastColors" :key="index" class="color-tag">{{ color
-                            }}</span>
-                    </div>
-                </div>
-            </transition>
+        <!-- Color Picker -->
+        <input type="color" v-model="favoriteColor" @input="addColorFromPicker" class="color-picker" />
+        
+        <!-- Suggested Color Options -->
+        <!-- <div class="color-suggestions">
+            <span v-for="color in colorOptions" :key="color" 
+                  :style="{ backgroundColor: color }" 
+                  class="color-swatch"
+                  @click="addColorFromSuggestion(color)">
+            </span>
+        </div> -->
+
+        <!-- Selected Colors -->
+        <div class="color-tags">
+            <span v-for="(color, index) in selectedColors" :key="index" 
+                  :style="{ backgroundColor: color }" 
+                  class="color-tag">
+                  {{ color }}
+                  <span @click="removeColor(index)" class="remove-tag">✖</span>
+            </span>
+        </div>
+    </div>
+</transition>
+
+<!-- Least Favorite Colors -->
+<transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+    <div v-if="currentChunk === 3" class="form-section">
+        <h3 class="smalllable1 pt-[2vw]">COLOR PREFERENCES</h3>
+
+        <label class="smalllable2">What are your <span class="smalllable2 font-semibold">least favourite</span> colours to wear? (Up to 4 colors)</label>
+
+        <!-- Color Picker -->
+        <input type="color" v-model="leastFavoriteColor" @input="addLeastColorFromPicker" class="color-picker" />
+        
+        <!-- Suggested Color Options -->
+        <!-- <div class="color-suggestions">
+            <span v-for="color in colorOptions" :key="color" 
+                  :style="{ backgroundColor: color }" 
+                  class="color-swatch"
+                  @click="addLeastColorFromSuggestion(color)">
+            </span>
+        </div> -->
+
+        <!-- Selected Colors -->
+        <div class="color-tags">
+            <span v-for="(color, index) in selectedLeastColors" :key="index" 
+                  :style="{ backgroundColor: color }" 
+                  class="color-tag">
+                  {{ color }}
+                  <span @click="removeLeastColor(index)" class="remove-tag">✖</span>
+            </span>
+        </div>
+    </div>
+</transition>
+
+
 
             <!-- Adventurous Style Section -->
             <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-                <div v-if="currentChunk === 3" class="form-section">
+                <div v-if="currentChunk === 4" class="form-section">
                     <h3 class="smalllable1 pt-[2vw]">STYLE PREFERENCES</h3>
                     <label class="smalllable2">How adventurous would you describe your style? ( 1 to 10 )</label>
                     <input v-model="adventurousLevel" type="range" min="1" max="10" step="1" class="slider" />
@@ -79,7 +128,7 @@
 
             <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
 
-                <div v-if="currentChunk === 4" class="outfit-feedback">
+                <div v-if="currentChunk === 5" class="outfit-feedback">
 
                     <h3 class="smalllable1 pt-[2vw]">Please tell us how you feel about these looks?</h3>
                     <p class="smalllable2">This helps us better understand your style better. ( scroll )</p>
@@ -128,7 +177,7 @@
             </transition>
 
             <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-                <div v-if="currentChunk === 5">
+                <div v-if="currentChunk === 6">
                     <!-- Favorite Brands Section -->
                     <h3 class="smalllable1 pt-[2vw]">BRAND PREFERENCES</h3>
 
@@ -163,25 +212,28 @@
         </div>
 
         <!-- Navigation Buttons -->
-        <div class="navbutform" v-if="currentChunk !== 5">
+        <div class="navbutform" v-if="currentChunk !== 6">
             <button class="nextbtn" v-if="currentChunk > 0" @click="prevStep"><svg viewBox="0 0 24 24" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-              <path
-                d="M13 8L9 12M9 12L13 16M9 12H21M19.4845 7C17.8699 4.58803 15.1204 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C15.1204 21 17.8699 19.412 19.4845 17"
-                stroke="#000000" stroke-width="0.8879999999999999" stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </g>
-          </svg></button>
-            <button class="nextbtn" v-if="currentChunk < 5" @click="nextStep"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M11 16L15 12M15 12L11 8M15 12H3M4.51555 17C6.13007 19.412 8.87958 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C8.87958 3 6.13007 4.58803 4.51555 7" stroke="#000000"
-          stroke-width="0.8879999999999999" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg></button>
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M13 8L9 12M9 12L13 16M9 12H21M19.4845 7C17.8699 4.58803 15.1204 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C15.1204 21 17.8699 19.412 19.4845 17"
+                            stroke="#000000" stroke-width="0.8879999999999999" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </g>
+                </svg></button>
+            <button class="nextbtn" v-if="currentChunk < 6" @click="nextStep"><svg viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M11 16L15 12M15 12L11 8M15 12H3M4.51555 17C6.13007 19.412 8.87958 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C8.87958 3 6.13007 4.58803 4.51555 7"
+                        stroke="#000000" stroke-width="0.8879999999999999" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                </svg></button>
         </div>
 
-        <button class="headerformsub pt-[5vw]" v-if="currentChunk === 5" @click="submitFinalForm">Submit</button>
+        <button class="headerformsub pt-[5vw]" v-if="currentChunk === 6" @click="submitFinalForm">Submit</button>
     </div>
 </template>
 
@@ -206,6 +258,13 @@ export default {
             maxBrands: 10,
             filteredLeastColors: [],
             maxColors: 4,
+         
+            favoriteColor: "#ffffff", // Default color
+            leastFavoriteColor: "#ffffff", // Default color
+            selectedColors: [], // Stores favorite colors
+            selectedLeastColors: [], // Stores least favorite colors
+            colorOptions: ["#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FFD700", "#8A2BE2", "#00CED1"], // Suggested colors
+       
             adventurousLevel: 5,
             budget: {
                 outerwear: "",
@@ -217,6 +276,10 @@ export default {
                 accessories: "",
                 jewellery: "",
             },
+            // selectedCategory: {},
+            // budget: {},
+            selectedCategory: null,  // Store selected category key
+            selectedBudget: {},
             budgetItems: [
                 { name: "Outerwear", key: "outerwear" },
                 { name: "Knitwear", key: "knitwear" },
@@ -227,6 +290,7 @@ export default {
                 { name: "Accessories", key: "accessories" },
                 { name: "Jewellery", key: "jewellery" },
             ],
+
             outfits: [
                 { image: 'https://cdn.meideinthe.cloud/entirestudios.com/content/player/227-tricky-wearswares-pant-seal/entire-studios-wares-pant-seal-tricky-01-2.webp' },
                 { image: 'https://cdn.meideinthe.cloud/entirestudios.com/content/player/227-tricky-wearswares-pant-seal/entire-studios-wares-pant-seal-tricky-01-2.webp' },
@@ -243,6 +307,43 @@ export default {
         };
     },
     methods: {
+
+        addColorFromPicker() {
+            if (this.selectedColors.length < 4 && !this.selectedColors.includes(this.favoriteColor)) {
+                this.selectedColors.push(this.favoriteColor);
+            }
+        },
+        addLeastColorFromPicker() {
+            if (this.selectedLeastColors.length < 4 && !this.selectedLeastColors.includes(this.leastFavoriteColor)) {
+                this.selectedLeastColors.push(this.leastFavoriteColor);
+            }
+        },
+        addColorFromSuggestion(color) {
+            if (this.selectedColors.length < 4 && !this.selectedColors.includes(color)) {
+                this.selectedColors.push(color);
+            }
+        },
+        addLeastColorFromSuggestion(color) {
+            if (this.selectedLeastColors.length < 4 && !this.selectedLeastColors.includes(color)) {
+                this.selectedLeastColors.push(color);
+            }
+        },
+        removeColor(index) {
+            this.selectedColors.splice(index, 1);
+        },
+        removeLeastColor(index) {
+            this.selectedLeastColors.splice(index, 1);
+        },
+
+        // Select the category
+        selectCategory(categoryKey) {
+            this.selectedCategory = categoryKey;
+        },
+
+        // Select the budget for the currently selected category
+        selectBudget(level) {
+            this.$set(this.selectedBudget, this.selectedCategory, level);  // Set the selected budget for the category
+        },
         // Filter brand suggestions
         onBrandInput() {
             this.filteredBrands = this.allBrands.filter(brand =>
@@ -303,7 +404,7 @@ export default {
             this.feedback = Array(9).fill(null); // Reset feedback
         },
         nextStep() {
-            if (this.currentChunk < 5) this.currentChunk++;
+            if (this.currentChunk < 6) this.currentChunk++;
         },
         prevStep() {
             if (this.currentChunk > 0) this.currentChunk--;
@@ -359,7 +460,14 @@ export default {
         selectBudget(category, level) {
             this.budget[category] = level;
         },
-    }
+    },
+    computed: {
+        // Get the name of the selected category to display in the budget section
+        selectedCategoryName() {
+            const selectedCategory = this.budgetItems.find(item => item.key === this.selectedCategory);
+            return selectedCategory ? selectedCategory.name : '';
+        }
+    },
 };
 </script>
 
@@ -465,9 +573,10 @@ export default {
 }
 
 .color-tags span {
-    background: #ddd;
-    padding: 0.5vw;
-    margin-right: 0.5vw;
+    /* background: #ddd; */
+    color: white;
+    /* padding: 0.5vw; */
+    /* margin-right: 0.5vw; */
 }
 
 .slider {
@@ -487,21 +596,21 @@ export default {
     font-size: 2vw;
     color: rgb(199, 199, 199);
     transition: color 0.3s;
-    padding-right: 3vw;
+    /* padding-right: 3vw; */
 }
 
 .budget-container button.selected {
     color: rgb(39, 149, 11);
     background-color: rgba(0, 0, 0, 0) !important;
     opacity: .3;
-    /* font-weight: bold; */
+    /* font-weight: p class=" font-semibold"; */
 }
 
 .budget-container button:hover {
     color: black;
     background-color: rgba(0, 0, 0, 0) !important;
     opacity: .3;
-    /* font-weight: bold; */
+    /* font-weight: p class=" font-semibold"; */
 }
 
 

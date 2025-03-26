@@ -56,6 +56,7 @@ html {
    min-height: 100vh !important;
    overflow-x: hidden;
    background-color: #f9f9f1;
+   /* background-color: #000000; */
    /* overflow-y: hidden; */
 }
 
@@ -439,6 +440,7 @@ header {
 .smalllable {
    font-size: 1vw;
    padding-top: 3vw;
+   color: #979797;
 }
 
 .smalllable2 {
@@ -535,20 +537,24 @@ select option:hover {
    padding: 1vw;
    align-items: center;
    /* border: 1px solid #030303; */
-   background-color: rgba(113, 99, 87, 0.1);
+   background-color: rgb(242 242 242);
    box-shadow: rgba(60, 60, 60, 0.6) 0px;
-   box-shadow: rgb(72 72 72 / 60%) 0px 0px 0px 1px inset;
-   color: rgb(81 81 81);
+   background-color: rgb(242 242 242);
+   box-shadow: rgba(60, 60, 60, 0.6) 0px;
+   box-shadow: rgb(231, 231, 231) 0px 0px 0px 1px inset;
+   color: #7f828b;
    /* border: 2px solid black; */
    /* padding: 8px 12px; */
    border-radius: 50px;
    cursor: pointer;
    font-size: 14px;
+   font-weight: 300;
    transition: all 0.2s ease-in-out;
 }
 
 .btnsn {
    font-size: .7vw;
+   font-weight: 300;
    padding: 1vw;
    /* border: 1px solid #030303; */
    cursor: pointer;
@@ -591,13 +597,18 @@ select option:hover {
 }
 
 .btns:hover {
-   background-color: rgb(81 81 81);
-   color: rgb(231, 231, 231);
+   /* background-color: rgb(81 81 81); */
+   color: #7f828b;
+   box-shadow: rgba(60, 60, 60, 0.6) 0px;
+   box-shadow: #c3c3c3 0px 0px 0px 1.5px inset;
 }
 
 .btnsn:hover {
    background-color: rgb(210, 210, 210);
    color: rgb(231, 231, 231);
+   color: #7f828b;
+   box-shadow: rgba(60, 60, 60, 0.6) 0px;
+   box-shadow: #c3c3c3 0px 0px 0px 1.5px inset;
 }
 
 
@@ -605,11 +616,32 @@ select option:hover {
 
 /* Add animation to the selected class */
 .selected {
-   background-color: rgb(81, 81, 81);
-   color: rgb(231, 231, 231);
+   /* background-color: rgb(81, 81, 81); */
+   /* color: rgb(231, 231, 231); */
    animation: flash2 1s ease-out 1;
+  box-shadow: #222e3a 0px 0px 0px 1px inset;
    /* 1.5s duration, ease-out timing, run once */
 }
+
+/* Add animation to the selected class */
+.selectedbud {
+   /* background-color: rgb(81, 81, 81); */
+   /* color: rgb(231, 231, 231); */
+   animation: flashl 1s ease-out 1;
+  /* box-shadow: #222e3a 0px 0px 0px 1px inset; */
+   /* 1.5s duration, ease-out timing, run once */
+}
+
+.faded {
+   opacity: 0.5;  /* Adjust this value to control the fade */
+   transition: opacity 0.3s ease;
+}
+
+/* Hover effect */
+.faded:hover {
+   opacity: 1;  /* Full opacity when hovered */
+}
+
 
 .thumb-button svg.selectedlike {
    /* background-color: rgb(81, 81, 81); */
@@ -626,6 +658,64 @@ select option:hover {
 }
 
 
+/* Color Picker Input */
+.color-picker {
+    width: 50px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Suggested Colors */
+.color-suggestions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.color-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #ddd;
+    transition: transform 0.2s;
+}
+
+.color-swatch:hover {
+    transform: scale(1.1);
+}
+
+/* Selected Colors */
+.color-tags {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.color-tag {
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: white;
+    /* font-weight: bold; */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.remove-tag {
+    cursor: pointer;
+    font-size: 14px;
+    color: black;
+    /* background: white; */
+    border-radius: 50%;
+    padding: 2px;
+}
+
+
+
 .budget-container button.selected {
    color: rgb(39, 149, 11);
    background-color: rgba(0, 0, 0, 0) !important;
@@ -640,27 +730,38 @@ select option:hover {
 
 @keyframes flash2 {
    0% {
-      background-color: rgb(81, 81, 81);
+      /* background-color: rgb(81, 81, 81); */
+   
+      box-shadow: #c3c3c3 0px 0px 0px 1.5px inset;
       color: rgb(231, 231, 231);
    }
 
    25% {
-      background-color: rgb(231, 231, 231);
+      /* background-color: rgb(231, 231, 231); */
+      /* background-color: rgb(81, 81, 81); */
+     box-shadow: #c3c3c3 0px 0px 0px 1.5px inset;
       color: rgb(81, 81, 81);
    }
 
    50% {
-      background-color: rgb(81, 81, 81);
+      /* background-color: rgb(81, 81, 81); */
+      box-shadow: rgba(9, 9, 9, 0.6) 0px;
+      /* box-shadow: #c3c3c3 0px 0px 0px 1.5px inset; */
       color: rgb(231, 231, 231);
    }
 
    75% {
-      background-color: rgb(231, 231, 231);
+      /* background-color: rgb(231, 231, 231); */
+      /* background-color: rgb(81, 81, 81); */
+      box-shadow: #c3c3c3 0px 0px 0px 1.5px inset;
+      /* box-shadow: rgba(9, 9, 9, 0.6) 0px; */
       color: rgb(81, 81, 81);
    }
 
    100% {
-      background-color: rgb(81, 81, 81);
+
+      /* background-color: rgb(81, 81, 81); */
+      box-shadow: rgb(9, 9, 9) 0px;
       color: rgb(231, 231, 231);
    }
 }
@@ -728,9 +829,8 @@ select option:hover {
    counter-increment: option-counter;
 }
 
-.btns::before {
+/* .btns::before {
    content: counter(option-counter, upper-alpha) " ";
-   /* font-weight: bold; */
    padding: .1vw .7vw;
    border: solid #c3c3c3 .1vw;
    margin-right: 8px;
@@ -739,6 +839,53 @@ select option:hover {
 
 .btns::before:hover {
    color: #000000;
+} */
+
+.btnsfoot{
+   font-size: .7vw;
+   padding: 1vw;
+   align-items: center;
+   /* border: 1px solid #030303; */
+   background-color: rgb(242 242 242);
+   box-shadow: rgba(60, 60, 60, 0.6) 0px;
+   background-color: rgb(242 242 242);
+   box-shadow: rgba(60, 60, 60, 0.6) 0px;
+   box-shadow: rgb(231, 231, 231) 0px 0px 0px 1px inset;
+   color: #7f828b;
+   /* border: 2px solid black; */
+   /* padding: 8px 12px; */
+   border-radius: 50px;
+   cursor: pointer;
+   font-size: 14px;
+   font-weight: 300;
+   transition: all 0.2s ease-in-out;
+      display: flex;
+      align-items: center;
+      counter-increment: option-counter;
+   padding: 10px;
+   font-size: 1rem;
+   cursor: pointer;
+   width: 4vw;
+   min-width: max-content;
+   text-align: center;
+   /* text-align: left; */
+   border-radius: 5px;
+}
+
+.btnsfoot:hover {
+   /* background-color: rgb(81 81 81); */
+   color: #7f828b;
+   box-shadow: rgba(60, 60, 60, 0.6) 0px;
+   box-shadow: #c3c3c3 0px 0px 0px 1.5px inset;
+}
+
+.stepbtncontainerfoot{
+   display: flex;
+       justify-content: center;
+       gap: 10px;
+       flex-direction: row;
+       flex-wrap: wrap;
+       width: 65%;
 }
 
 
@@ -815,6 +962,8 @@ select option:hover {
    justify-content: center;
    gap: 10px;
    flex-direction: column;
+   flex-direction: row;
+   flex-wrap: wrap;
  }
  
  .stepbtncontainer2 {
@@ -830,7 +979,7 @@ select option:hover {
    padding: 10px;
      font-size: 1rem;
      cursor: pointer;
-     width: 24vw;
+     /* width: 24vw; */
      text-align: left;
      border-radius: 5px;
  }
@@ -894,3 +1043,77 @@ select option:hover {
 .slider:focus {
    background: #bbb;
 }
+
+
+.form-sectioncol{
+   display: flex;
+       flex-direction: column;
+       width: 100%;
+}
+
+.form-sectionfoot{
+   display: flex;
+       flex-direction: column;
+       width: 100%;
+       align-items: center;
+}
+
+.stepbtncontainer2col {
+   display: flex;
+   gap: 10px;
+   justify-content: center;
+ }
+ 
+ .btnsimgcol {
+   width: 5.5vw;
+   height: 5.5vw;
+   border: 1px solid #e5e5e5;
+   border-radius: 2px;
+  cursor: pointer;
+   transition: transform 0.2s ease, border-color 0.2s ease;
+ }
+ 
+ .selected2{
+   border-color: #fff; /* Highlight border color when selected */
+   transform: scale(1.1); /* Slight zoom effect when selected */
+ }
+
+
+ .btnsimgcol:hover {
+   border: 1px solid #222e3a;
+   cursor: pointer;
+   transform: scale(1.1);
+ }
+
+ /* .btnsfoot{
+   border: 1px solid #222e3a;
+   cursor: pointer;
+   transform: scale(1.1);
+ } */
+
+ .tooltip {
+   position: absolute;
+   /* background-color: rgba(0, 0, 0, 0.7); */
+   color: #afafaf;
+   /* left: 1px !important; */
+   padding: 5px;
+   width: 10vw;
+   top: 6vw !important;
+   border-radius: 5px;
+   font-size: 14px;
+   pointer-events: none;
+   transition: opacity 0.2s ease;
+ }
+
+
+ 
+ .stepbtncontainer2col {
+   position: relative;
+ }
+
+
+ 
+
+ 
+ 
+ 
