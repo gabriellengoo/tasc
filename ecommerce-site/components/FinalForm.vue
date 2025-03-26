@@ -21,7 +21,7 @@
                     <div v-if="selectedCategory" class="budget-selection pt-[2vw]">
                         <h4>Select a Budget Level for {{ selectedCategoryName }}</h4>
                         <div class="budget-container">
-                            <button  class="btnsimgcol" v-for="level in ['£', '££', '£££', '££££']" :key="level" :class="{
+                            <button class="btnsimgcol" v-for="level in ['£', '££', '£££', '££££']" :key="level" :class="{
                                 'selected': selectedBudget[selectedCategory] === level,
 
                             }" @click="selectBudget('selectedBudget', level)">
@@ -51,18 +51,19 @@
                 </div>
             </transition>
 
-          <!-- Favorite Colors -->
-<transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-    <div v-if="currentChunk === 2" class="form-section">
-        <h3 class="smalllable1 pt-[2vw]">COLOR PREFERENCES</h3>
+            <!-- Favorite Colors -->
+            <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+                <div v-if="currentChunk === 2" class="form-section">
+                    <h3 class="smalllable1 pt-[2vw]">COLOR PREFERENCES</h3>
 
-        <label class="smalllable2">What are your <span class="smalllable2 font-semibold">favourite</span> colours to wear? (Up to 4 colors)</label>
+                    <label class="smalllable2">What are your <span class="smalllable2 font-semibold">favourite</span>
+                        colours to wear? (Up to 4 colors)</label>
 
-        <!-- Color Picker -->
-        <input type="color" v-model="favoriteColor" @input="addColorFromPicker" class="color-picker" />
-        
-        <!-- Suggested Color Options -->
-        <!-- <div class="color-suggestions">
+                    <!-- Color Picker -->
+                    <input type="color" v-model="favoriteColor" @input="addColorFromPicker" class="color-picker" />
+
+                    <!-- Suggested Color Options -->
+                    <!-- <div class="color-suggestions">
             <span v-for="color in colorOptions" :key="color" 
                   :style="{ backgroundColor: color }" 
                   class="color-swatch"
@@ -70,30 +71,31 @@
             </span>
         </div> -->
 
-        <!-- Selected Colors -->
-        <div class="color-tags">
-            <span v-for="(color, index) in selectedColors" :key="index" 
-                  :style="{ backgroundColor: color }" 
-                  class="color-tag">
-                  {{ color }}
-                  <span @click="removeColor(index)" class="remove-tag">✖</span>
-            </span>
-        </div>
-    </div>
-</transition>
+                    <!-- Selected Colors -->
+                    <div class="color-tags">
+                        <span v-for="(color, index) in selectedColors" :key="index" :style="{ backgroundColor: color }"
+                            class="color-tag">
+                            {{ color }}
+                            <span @click="removeColor(index)" class="remove-tag">✖</span>
+                        </span>
+                    </div>
+                </div>
+            </transition>
 
-<!-- Least Favorite Colors -->
-<transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-    <div v-if="currentChunk === 3" class="form-section">
-        <h3 class="smalllable1 pt-[2vw]">COLOR PREFERENCES</h3>
+            <!-- Least Favorite Colors -->
+            <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+                <div v-if="currentChunk === 3" class="form-section">
+                    <h3 class="smalllable1 pt-[2vw]">COLOR PREFERENCES</h3>
 
-        <label class="smalllable2">What are your <span class="smalllable2 font-semibold">least favourite</span> colours to wear? (Up to 4 colors)</label>
+                    <label class="smalllable2">What are your <span class="smalllable2 font-semibold">least
+                            favourite</span> colours to wear? (Up to 4 colors)</label>
 
-        <!-- Color Picker -->
-        <input type="color" v-model="leastFavoriteColor" @input="addLeastColorFromPicker" class="color-picker" />
-        
-        <!-- Suggested Color Options -->
-        <!-- <div class="color-suggestions">
+                    <!-- Color Picker -->
+                    <input type="color" v-model="leastFavoriteColor" @input="addLeastColorFromPicker"
+                        class="color-picker" />
+
+                    <!-- Suggested Color Options -->
+                    <!-- <div class="color-suggestions">
             <span v-for="color in colorOptions" :key="color" 
                   :style="{ backgroundColor: color }" 
                   class="color-swatch"
@@ -101,17 +103,16 @@
             </span>
         </div> -->
 
-        <!-- Selected Colors -->
-        <div class="color-tags">
-            <span v-for="(color, index) in selectedLeastColors" :key="index" 
-                  :style="{ backgroundColor: color }" 
-                  class="color-tag">
-                  {{ color }}
-                  <span @click="removeLeastColor(index)" class="remove-tag">✖</span>
-            </span>
-        </div>
-    </div>
-</transition>
+                    <!-- Selected Colors -->
+                    <div class="color-tags">
+                        <span v-for="(color, index) in selectedLeastColors" :key="index"
+                            :style="{ backgroundColor: color }" class="color-tag">
+                            {{ color }}
+                            <span @click="removeLeastColor(index)" class="remove-tag">✖</span>
+                        </span>
+                    </div>
+                </div>
+            </transition>
 
 
 
@@ -181,59 +182,80 @@
                     <!-- Favorite Brands Section -->
                     <h3 class="smalllable1 pt-[2vw]">BRAND PREFERENCES</h3>
 
-                    <label class="smalllable2">Please tell us your favorite brands (Up to 10 brands)</label>
-                    <input v-model="brandInput" @input="onBrandInput" @keydown.enter="addBrand" type="text"
-                        class="color-input" placeholder="Start typing a brand..." />
-                    <ul v-if="filteredBrands.length > 0" class="suggestions">
+                    <label class="smalllable2">Please tell us your <span
+                            class="smalllable2 font-semibold">favourite</span> brands (Up to 10 brands)</label>
+                    <div v-if="!showBrandInput" class="flex items-center">
+                        <button @click="showBrandInput = true" class="plus-btn">+</button>
+                    </div>
+                    <div v-else class="flex items-center space-x-2">
+                        <input v-model="brandInput" @input="onBrandInput" type="text" class="color-input"
+                            placeholder="Start typing a brand..." />
+                        <button @click="addBrand" class="plus-btn">+</button>
+                    </div>
+
+                    <!-- <ul v-if="filteredBrands.length > 0" class="suggestions">
                         <li v-for="brand in filteredBrands" :key="brand" @click="addBrandFromSuggestion(brand)">{{ brand
-                        }}</li>
-                    </ul>
+                            }}</li>
+                    </ul> -->
+
                     <div class="color-tags">
                         <span v-for="(brand, index) in selectedBrands" :key="index" class="brand-tag">
                             {{ brand }} <button @click="removeBrand(index)">✕</button>
                         </span>
                     </div>
 
-                    <label class="smalllable2">Are there any brands you do not like to wear? (Up to 10 brands)</label>
-                    <input v-model="dislikeBrandInput" @input="onDislikeBrandInput" @keydown.enter="addDislikeBrand"
-                        type="text" class="color-input" placeholder="Start typing a brand..." />
-                    <ul v-if="filteredDislikeBrands.length > 0" class="suggestions">
+
+                </div>
+            </transition>
+
+            <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+                <div v-if="currentChunk === 7">
+                    <!-- Favorite Brands Section -->
+                    <h3 class="smalllable1 pt-[2vw]">BRAND PREFERENCES</h3>
+
+
+
+                    <label class="smalllable2">Are there any brands you <span class="smalllable2 font-semibold">do
+                            not</span> like to wear? (Up to 10 brands)</label>
+                    <div v-if="!showDislikeBrandInput" class="flex items-center">
+                        <button @click="showDislikeBrandInput = true" class="plus-btn">+</button>
+                    </div>
+                    <div v-else class="flex items-center space-x-2">
+                        <input v-model="dislikeBrandInput" @input="onDislikeBrandInput" type="text" class="color-input"
+                            placeholder="Start typing a brand..." />
+                        <button @click="addDislikeBrand" class="plus-btn">+</button>
+                    </div>
+
+                    <!-- <ul v-if="filteredDislikeBrands.length > 0" class="suggestions">
                         <li v-for="brand in filteredDislikeBrands" :key="brand"
                             @click="addDislikeBrandFromSuggestion(brand)">{{ brand }}</li>
-                    </ul>
+                    </ul> -->
+
                     <div class="color-tags">
                         <span v-for="(brand, index) in selectedDislikeBrands" :key="index" class="brand-tag">
                             {{ brand }} <button @click="removeDislikeBrand(index)">✕</button>
                         </span>
                     </div>
-
                 </div>
             </transition>
+
+
         </div>
 
         <!-- Navigation Buttons -->
-        <div class="navbutform" v-if="currentChunk !== 6">
-            <button class="nextbtn" v-if="currentChunk > 0" @click="prevStep"><svg viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <path
-                            d="M13 8L9 12M9 12L13 16M9 12H21M19.4845 7C17.8699 4.58803 15.1204 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C15.1204 21 17.8699 19.412 19.4845 17"
-                            stroke="#000000" stroke-width="0.8879999999999999" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                    </g>
-                </svg></button>
-            <button class="nextbtn" v-if="currentChunk < 6" @click="nextStep"><svg viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M11 16L15 12M15 12L11 8M15 12H3M4.51555 17C6.13007 19.412 8.87958 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C8.87958 3 6.13007 4.58803 4.51555 7"
-                        stroke="#000000" stroke-width="0.8879999999999999" stroke-linecap="round"
-                        stroke-linejoin="round"></path>
-                </svg></button>
+        <div class="navbutform" v-if="currentChunk !== 7">
+            <button class="nextbtn2" @click="nextStep">Skip?</button>
+
+            <div class="nav-buttons">
+                <button class="" @click="prevChunk" v-if="currentChunk > 0">↰</button>
+                <button class="bg-[white] text-[black]" @click="handleNextClick">
+                    {{ currentChunk === totalChunks - 7 ? "↳" : "↱" }}
+                </button>
+            </div>
+
         </div>
 
-        <button class="headerformsub pt-[5vw]" v-if="currentChunk === 6" @click="submitFinalForm">Submit</button>
+        <button class="headerformsub pt-[5vw]" v-if="currentChunk === 7" @click="submitFinalForm">Submit</button>
     </div>
 </template>
 
@@ -250,21 +272,31 @@ export default {
             filteredColors: [],
             brandInput: "",
             dislikeBrandInput: "",
-            selectedBrands: [],
-            selectedDislikeBrands: [],
-            allBrands: ['Nike', 'Adidas', 'Gucci', 'Zara', 'H&M', 'Balenciaga', 'Louis Vuitton', 'Puma', 'Reebok', 'Uniqlo'],
+
+
+
             filteredBrands: [],
             filteredDislikeBrands: [],
+            allBrands: ['Nike', 'Adidas', 'Gucci', 'Louis Vuitton', 'Zara', 'H&M', 'Chanel'], // Replace with API data
             maxBrands: 10,
+
+            brandInput: '',
+            dislikeBrandInput: '',
+            selectedBrands: [],
+            selectedDislikeBrands: [],
+            showBrandInput: false,
+            showDislikeBrandInput: false,
+
+            totalChunks: 7,
             filteredLeastColors: [],
             maxColors: 4,
-         
+
             favoriteColor: "#ffffff", // Default color
             leastFavoriteColor: "#ffffff", // Default color
             selectedColors: [], // Stores favorite colors
             selectedLeastColors: [], // Stores least favorite colors
             colorOptions: ["#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FFD700", "#8A2BE2", "#00CED1"], // Suggested colors
-       
+
             adventurousLevel: 5,
             budget: {
                 outerwear: "",
@@ -344,71 +376,109 @@ export default {
         selectBudget(level) {
             this.$set(this.selectedBudget, this.selectedCategory, level);  // Set the selected budget for the category
         },
+
+
         // Filter brand suggestions
         onBrandInput() {
             this.filteredBrands = this.allBrands.filter(brand =>
-                brand.toLowerCase().includes(this.brandInput.toLowerCase()) &&
-                !this.selectedBrands.includes(brand)
+                brand.toLowerCase().includes(this.brandInput.toLowerCase())
             );
         },
-        onDislikeBrandInput() {
-            this.filteredDislikeBrands = this.allBrands.filter(brand =>
-                brand.toLowerCase().includes(this.dislikeBrandInput.toLowerCase()) &&
-                !this.selectedDislikeBrands.includes(brand)
-            );
-        },
-
-        // Add brand from input
         addBrand() {
-            if (this.brandInput && this.selectedBrands.length < this.maxBrands && !this.selectedBrands.includes(this.brandInput)) {
+            if (this.brandInput && this.selectedBrands.length < 10) {
                 this.selectedBrands.push(this.brandInput);
+                this.brandInput = '';
+                this.filteredBrands = [];
             }
-            this.brandInput = "";
-            this.filteredBrands = [];
         },
-        addDislikeBrand() {
-            if (this.dislikeBrandInput && this.selectedDislikeBrands.length < this.maxBrands && !this.selectedDislikeBrands.includes(this.dislikeBrandInput)) {
-                this.selectedDislikeBrands.push(this.dislikeBrandInput);
-            }
-            this.dislikeBrandInput = "";
-            this.filteredDislikeBrands = [];
-        },
-
-        // Add brand from suggestions
         addBrandFromSuggestion(brand) {
-            if (this.selectedBrands.length < this.maxBrands) {
+            if (this.selectedBrands.length < 10) {
                 this.selectedBrands.push(brand);
             }
-            this.brandInput = "";
-            this.filteredBrands = [];
-        },
-        addDislikeBrandFromSuggestion(brand) {
-            if (this.selectedDislikeBrands.length < this.maxBrands) {
-                this.selectedDislikeBrands.push(brand);
-            }
-            this.dislikeBrandInput = "";
-            this.filteredDislikeBrands = [];
         },
 
-        // Remove brand
+
+        onDislikeBrandInput() {
+            this.filteredDislikeBrands = this.allBrands.filter(brand =>
+                brand.toLowerCase().includes(this.dislikeBrandInput.toLowerCase())
+            );
+        },
+
+        addDislikeBrandFromSuggestion(brand) {
+            if (this.selectedDislikeBrands.length < 10) {
+                this.selectedDislikeBrands.push(brand);
+            }
+        },
+
+        addBrand() {
+            if (this.brandInput.trim() && this.selectedBrands.length < 10) {
+                this.selectedBrands.push(this.brandInput.trim());
+                this.brandInput = '';
+                this.showBrandInput = false;
+            }
+        },
+        addDislikeBrand() {
+            if (this.dislikeBrandInput.trim() && this.selectedDislikeBrands.length < 10) {
+                this.selectedDislikeBrands.push(this.dislikeBrandInput.trim());
+                this.dislikeBrandInput = '';
+                this.showDislikeBrandInput = false;
+            }
+        },
         removeBrand(index) {
             this.selectedBrands.splice(index, 1);
         },
         removeDislikeBrand(index) {
             this.selectedDislikeBrands.splice(index, 1);
         },
+
+
         setFeedback(index, value) {
             this.feedback[index] = value;
         },
+
+
         skipAll() {
             this.feedback = Array(9).fill(null); // Reset feedback
         },
         nextStep() {
-            if (this.currentChunk < 6) this.currentChunk++;
+            if (this.currentChunk < 7) this.currentChunk++;
         },
         prevStep() {
             if (this.currentChunk > 0) this.currentChunk--;
         },
+        nextChunk() {
+            if (this.currentChunk < 7) {
+                this.currentChunk++;
+            }
+        },
+        selectAge(age) {
+            this.formData.age = age;
+        },
+        handleNextClick() {
+            if (this.currentChunk === this.totalChunks - 1) {
+                this.submitForm();
+            } else {
+                this.nextChunk();
+            }
+        },
+        nextChunk() {
+            if (this.currentChunk < this.totalChunks - 1) {
+                this.currentChunk++;
+            }
+        },
+        prevChunk() {
+            if (this.currentChunk > 0) {
+                this.currentChunk--;
+            }
+        },
+        submitForm() {
+            console.log("Form submitted:", this.formData);
+            // this.$emit("submit", this.formData);
+            this.$emit('next', this.formData);
+        },
+
+
+
         setPreference(index, preference) {
             this.$set(this.outfits, index, { ...this.outfits[index], preference });
         },
@@ -575,6 +645,7 @@ export default {
 .color-tags span {
     /* background: #ddd; */
     color: white;
+    color: #4a5764;
     /* padding: 0.5vw; */
     /* margin-right: 0.5vw; */
 }

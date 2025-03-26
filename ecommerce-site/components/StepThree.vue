@@ -5,44 +5,31 @@
     <div class="formstyle">
       <!-- Height Range Women Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentChunk === 0" class="form-section">
-          <label class="smalllable1" for="heightRangeWomen">Please select your height range</label>
-          <!-- Move the Height Slider here -->
-          <div class="slider-container">
+    <div v-if="currentChunk === 0" class="form-section">
+        <label class="smalllable1" for="heightRangeWomen">Please select your height range</label>
 
+        <div class="slider-container">
             <!-- Dynamic label based on slider value -->
             <p class="height-label">{{ currentHeightLabel }}</p>
 
-            <!-- <label for="height-slider">Height: {{ heightValue }}</label> -->
+            <!-- Range Slider with Marks -->
             <input class="slider" id="height-slider" type="range" min="1" max="4" step="1" v-model="heightValue"
-              @input="updateHeight" />
+                list="height-marks" @input="updateHeight" />
+
+            <!-- Marks for the slider -->
+            <datalist id="height-marks">
+                <option v-for="n in 4" :key="n" :value="n"></option>
+            </datalist>
 
             <!-- Gender selection -->
-            <div class="gender-toggle">
-              <button @click="selectedGender = 'women'" :class="{ active: selectedGender === 'women' }">Women</button>
-              <button @click="selectedGender = 'men'" :class="{ active: selectedGender === 'men' }">Men</button>
-            </div>
-
-            <!-- <div class="slider-container">
-          <label for="height-slider">Height: {{ heightValue }}</label>
-          <input
-          class="slider"
-            id="height-slider"
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            v-model="heightValue"
-            @input="updateHeight"
-          />
-        </div> -->
-
-
-          </div>
-          <!-- <input class="slider" type="range" min="1" max="4" v-model="formData.heightRangeWomen" @input="updateHeightLabelWomen" />
-          <p class="text-[#b2b2b2]">{{ heightLabelsWomen[formData.heightRangeWomen] }}</p> -->
+            <!-- <div class="gender-toggle">
+                <button @click="selectedGender = 'women'" :class="{ active: selectedGender === 'women' }">Women</button>
+                <button @click="selectedGender = 'men'" :class="{ active: selectedGender === 'men' }">Men</button>
+            </div> -->
         </div>
-      </transition>
+    </div>
+</transition>
+
 
       <!-- Height Range Men Section -->
       <!-- <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
@@ -110,13 +97,12 @@
 
     </div>
 
-    <button class="nextbtn" @click="nextStep">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M11 16L15 12M15 12L11 8M15 12H3M4.51555 17C6.13007 19.412 8.87958 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C8.87958 3 6.13007 4.58803 4.51555 7"
-          stroke="#000000" stroke-width="0.8879999999999999" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>
-    </button>
+    <div class="nav-buttons">
+      <button class="" @click="prevChunk" v-if="currentChunk > 0">↰</button>
+      <button class="bg-[white] text-[black]" @click="handleNextClick">
+        {{ currentChunk === totalChunks - 1 ? "↳" : "↱" }}
+      </button>
+    </div>
   </div>
 </template>
 
@@ -132,6 +118,7 @@ export default {
       morphMesh: {
         height: 0, // Initialize height morph value
       },
+      totalChunks: 4,
       currentChunk: 0,
       formData: {
         heightRangeWomen: 2,
@@ -208,6 +195,36 @@ export default {
       } else {
         this.$emit('next', this.formData);
       }
+    },
+    nextChunk() {
+      if (this.currentChunk < 4) {
+        this.currentChunk++;
+      }
+    },
+    selectAge(age) {
+      this.formData.age = age;
+    },
+    handleNextClick() {
+      if (this.currentChunk === this.totalChunks - 1) {
+        this.submitForm();
+      } else {
+        this.nextChunk();
+      }
+    },
+    nextChunk() {
+      if (this.currentChunk < this.totalChunks - 1) {
+        this.currentChunk++;
+      }
+    },
+    prevChunk() {
+      if (this.currentChunk > 0) {
+        this.currentChunk--;
+      }
+    },
+    submitForm() {
+      console.log("Form submitted:", this.formData);
+      // this.$emit("submit", this.formData);
+      this.$emit('next', this.formData);
     },
     beforeEnter(el) {
       el.style.transform = 'translateY(100%)';

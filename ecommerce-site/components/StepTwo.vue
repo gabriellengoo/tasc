@@ -95,13 +95,12 @@
       </transition>
     </div>
 
-    <button class="nextbtn" @click="nextStep">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M11 16L15 12M15 12L11 8M15 12H3M4.51555 17C6.13007 19.412 8.87958 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C8.87958 3 6.13007 4.58803 4.51555 7"
-          stroke="#000000" stroke-width="0.8879999999999999" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>
-    </button>
+    <div class="nav-buttons">
+      <button class="" @click="prevChunk" v-if="currentChunk > 0">↰</button>
+      <button class="bg-[white] text-[black]" @click="handleNextClick">
+        {{ currentChunk === totalChunks - 1 ? "↳" : "↱" }}
+      </button>
+    </div>
   </div>
 </template>
 
@@ -110,6 +109,7 @@ export default {
   data() {
     return {
       currentChunk: 0,
+      totalChunks: 4,
       selectedHairTexture: "",
       selectedHairLength: "",
       selectedHairColor: "",
@@ -159,7 +159,7 @@ export default {
         '#E5C28D': 'Medium Light',
         '#A56C42': 'Medium',
         '#5D3A29': 'Dark',
-        '#3E1F1B': 'Very Dark',
+        '#3E1F1B': 'Deep',
       };
       return skinToneNames[tone] || 'Unknown Tone';
     },
@@ -189,6 +189,28 @@ export default {
           eyeColor: this.selectedEyeColor,
         });
       }
+    },
+    handleNextClick() {
+      if (this.currentChunk === this.totalChunks - 1) {
+        this.submitForm();
+      } else {
+        this.nextChunk();
+      }
+    },
+    nextChunk() {
+      if (this.currentChunk < this.totalChunks - 1) {
+        this.currentChunk++;
+      }
+    },
+    prevChunk() {
+      if (this.currentChunk > 0) {
+        this.currentChunk--;
+      }
+    },
+    submitForm() {
+      console.log("Form submitted:", this.formData);
+      // this.$emit("submit", this.formData);
+      this.$emit('next', this.formData);
     },
     beforeEnter(el) {
       el.style.transform = 'translateY(100%)';

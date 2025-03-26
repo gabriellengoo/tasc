@@ -5,12 +5,16 @@
 
     <div class="model-wrapper  pt-[6vw]">
 
-    <div class="content1">
-      <Name />
-    </div>
+      <transition name="slide">
+  <div v-if="currentStep === 1" class="content1">
+    <Name />
+  </div>
+</transition>
+
 
  
-    <div  class="content">
+<div class="content" :class="{ 'content-wide': currentStep !== 1 }">
+
 
       <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentStep === 1">
@@ -152,6 +156,7 @@ export default {
     width: 100vw;
     height: 100%;
     /* top: 5vh; */
+    /* background-color: #ffffff; */
     /* padding-top: 5vh; */
     margin-top: 7vh;
     position: relative;
@@ -171,12 +176,13 @@ export default {
   justify-content: center;
 }
 
-.content {
-  width: 50%;
+.content-wide{
+  width: 100% !important;
+  /* width: 84% !important; */
   height: 100%;
   padding: 20px;
   background-color: #e7ecea;
-  background-color: #f2f2f2;
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -184,13 +190,30 @@ export default {
   z-index: 2;
   border-right: #333 solid .1vw;
   overflow: scroll;
+  transition: width 0.5s ease-in-out;
+}
+
+.content {
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+  background-color: #e7ecea;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  z-index: 2;
+  border-right: #333 solid .1vw;
+  overflow: scroll;
+  transition: width 0.5s ease-in-out;
 }
 
 .content1 {
   width: 30%;
   height: 100%;
   padding: 20px;
-  /* background-color: #f0f0f0; */
+  background-color: #f9f9f1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -203,5 +226,92 @@ export default {
 .content h1 {
   font-size: 2rem;
   text-align: center;
+}
+
+.slide-enter-active, .slide-leave-active {
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.slide-enter {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-enter-to {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slide-leave {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slide-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+  .model-wrapper{
+    display: flex;
+    width: 100vw;
+    height: 100%;
+    top: 40vh;
+    /* top: 5vh; */
+    /* background-color: #ffffff; */
+    /* padding-top: 5vh; */
+    position: relative;
+    /* border-top: #333 solid .1vw; */
+    /* border-bottom: #333 solid .1vw; */
+    justify-content: center;
+    margin-top: 4vh;
+    z-index: 0;
+    flex-direction: column;
+}
+
+.content1{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: #f9f9f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    z-index: 2;
+    border-right: #333 solid .1vw;
+    overflow: visible;
+}
+
+.content {
+  width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: #e7ecea;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    z-index: 2;
+    border-right: #333 solid .1vw;
+    overflow: visible;
+    transition: width 0.5s ease-in-out;
+
+}
+
+.model-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    overflow: visible;
+    height: max-content;
+}
+
 }
 </style>

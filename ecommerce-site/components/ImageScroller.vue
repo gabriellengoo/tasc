@@ -3,21 +3,20 @@
     <div class="scroller" @mouseover="isHovered = true" @mouseleave="isHovered = false">
       <div v-for="(pair, index) in pairedImages" :key="index" class="image-group">
         <div v-for="(image, imgIndex) in pair" :key="imgIndex" class="image-loop"
-          :class="imgIndex === 0 ? 'higher' : 'lower'" 
-          @mouseover="hoveredIndex = image.default"
+          :class="imgIndex === 0 ? 'higher' : 'lower'" @mouseover="hoveredIndex = image.default"
           @mouseleave="hoveredIndex = null">
-          
+
           <router-link :to="`/model/${image.model}`">
             <img :src="image.default" alt="Scrolling image" class="loop-image" @click="selectModel(image)" />
           </router-link>
-        
+
         </div>
       </div>
     </div>
 
-    <!-- Hover text box outside the image-group -->
+    <!-- Hover text box outside the image-group  -->
     <div class="hover-text-box" v-if="hoveredIndex">
-      <p class=" text-lg uppercase">current selection:</p>
+      <p class=" text-[1vw] uppercase">current selection</p>
       <span v-html="getText(hoveredIndex)"></span>
     </div>
   </div>
@@ -41,15 +40,15 @@ import { ref, computed } from "vue";
 const images = [
   {
     id: "M_01",
-    default: "/ovalm.png",
+    default: "/ovalmale.png",
     model: "maovam",
-    hover: "/ovalm.png",
+    hover: "/ovalmale.png",
   },
   {
     id: "W_01",
-    default: "/pear.png",
+    default: "/paer.png",
     model: "pearfem",
-    hover: "/pear.png",
+    hover: "/paer.png",
   },
 
 
@@ -71,9 +70,9 @@ const images = [
   // { id: "M_03", default: "/intrim.png", model: "intrim.glb", hover: "/intrim.png" },
   {
     id: "M_03",
-    default: "/menhh.png",
+    default: "/inrimam.png",
     model: "inrimam",
-    hover: "/menhh.png",
+    hover: "/inrimam.png",
   },
   {
     id: "W_03",
@@ -85,9 +84,9 @@ const images = [
 
   {
     id: "M_04",
-    default: "/trim.png",
+    default: "/trimam.png",
     model: "trim",
-    hover: "/trim.png",
+    hover: "/trimam.png",
   },
 
   {
@@ -100,15 +99,15 @@ const images = [
 
   {
     id: "M_05",
-    default: "/mende.png",
+    default: "/maledefult.png",
     model: "maledefault",
-    hover: "/menhh.png",
+    hover: "/maledefult.png",
   },
   {
     id: "W_05",
-    default: "/femh.png",
+    default: "/femdefult.png",
     model: "hour",
-    hover: "/femh.png",
+    hover: "/femdefult.png",
   },
 
   // { id: "W_02", default: "/squw.png", model: "squw.glb", hover: "/squw.png" },
@@ -129,21 +128,21 @@ const hoveredIndex = ref(null);
 const isHovered = ref(false);
 
 const getText = (image) => {
-  if (image.includes("pear")) return "WOMENSWEAR <br> Pear Body <br> 01/10";
-  if (image.includes("squw")) return "WOMENSWEAR <br> Square Body <br> 02/10";
+  if (image.includes("pear")) return "WOMENSWEAR Pear Body";
+  if (image.includes("squw")) return "WOMENSWEAR Square Body";
   if (image.includes("intriw"))
-    return "WOMENSWEAR <br> Inverted Triangle Body <br> 03/10";
-  if (image.includes("apple")) return "WOMENSWEAR <br> Apple Body <br> 04/10";
+    return "WOMENSWEAR Inverted Triangle Body";
+  if (image.includes("apple")) return "WOMENSWEAR Apple Body";
   if (image.includes("femh"))
-    return "WOMENSWEAR <br> Hourglass Body <br> 05/10";
+    return "WOMENSWEAR Hourglass Body";
   if (image.includes("mende"))
-    return "MENSWEAR <br> Trapezoid Body <br> 06/10";
-  if (image.includes("ovalm")) return "MENSWEAR <br> Oval Body <br> 07/10";
-  if (image.includes("auth")) return "WOMENSWEAR <br> Oval Body <br> 07/10";
-  if (image.includes("squarem")) return "MENSWEAR <br> Square Body <br> 08/10";
+    return "MENSWEAR Trapezoid Body";
+  if (image.includes("ovalm")) return "MENSWEAR Oval Body";
+  if (image.includes("auth")) return "WOMENSWEAR Oval Body";
+  if (image.includes("squarem")) return "MENSWEAR Square Body";
   if (image.includes("menhh"))
-    return "MENSWEAR <br> Inverted Triangle Body <br> 09/10";
-  if (image.includes("trim")) return "MENSWEAR <br> Triangle Body <br> 10/10";
+    return "MENSWEAR Inverted Triangle Body";
+  if (image.includes("trim")) return "MENSWEAR Triangle Body";
 
   return "";
 };
@@ -156,11 +155,13 @@ const getText = (image) => {
   height: 100vh;
   white-space: nowrap;
   position: absolute;
-  top: 13vh;
+  /* top: 13vh; */
   left: 0;
 }
 
 .scroller {
+  top: 20vh;
+  position: relative;
   display: flex;
   gap: 2px;
   width: max-content;
@@ -177,6 +178,7 @@ const getText = (image) => {
   display: flex;
   flex-direction: column;
   gap: 3vw;
+  gap: 0vw;
   min-width: 10vw;
   min-width: 20vw;
 }
@@ -203,14 +205,15 @@ const getText = (image) => {
 
 .hover-text-box {
   position: absolute;
-  bottom: 20vh; /* Adjust the distance from bottom */
-  left: 15vw;
+  top: 5vh;
+  z-index: 10000000;
+  left: 50vw;
   transform: translateX(-50%);
   background: #f9f9f1;
   background: transparent;
-    border-bottom-color: rgba(255, 255, 255, 0.4);
-    background-color: #ffffff4d !important;
-    backdrop-filter: blur(10px);
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+  background-color: #ffffff4d !important;
+  backdrop-filter: blur(10px);
   /* color: white; */
   border: black solid 1px;
   padding: 1vw 2vw;
@@ -218,7 +221,7 @@ const getText = (image) => {
   text-align: left;
   white-space: nowrap;
   border-radius: 0px;
-  width: 20vw;
+  min-width: max-content;
   transition: opacity 0.3s ease-in-out;
   opacity: 1;
 }
@@ -290,6 +293,7 @@ const getText = (image) => {
   gap: 1vw;
   min-width: 20vw;
   padding: 5vw;
+  padding: 1vw;
 }
 
 .image-loop {
@@ -300,7 +304,7 @@ const getText = (image) => {
 
 .loop-image {
   width: auto;
-  height: 36vw;
+  height: 33vw;
   object-fit: contain;
   opacity: 1;
 }
@@ -312,6 +316,7 @@ const getText = (image) => {
 
 .lower {
   transform: translateY(-5vw);
+  /* height: 5.5vw; */
 
   /*     transform: translateY(-4vw);
     height: 20vw;
