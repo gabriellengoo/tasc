@@ -3,22 +3,12 @@
     <transition name="screen-transition" mode="out-in">
       <div v-if="isTransitionActive" class="black-screen">
         <div class="flex h-screen w-screen justify-center align-middle items-center mx-auto">
-          <!-- <h1 class="loading-text">Loading...</h1> -->
-  
-          <p class="logo pr-[2vw]" >Tasc</p>
+          <p class="logo2 pr-[2vw]" >onboarding</p>
         </div>
       </div>
     </transition>
 
-    <!-- Text content outside the black-screen div -->
-    <div v-if="isTransitionActive" class="white-screen"></div>
-    <div class="text-content" :class="{ 'active': isTextVisible }">
-      <div class="flex uppercase w-screen content-center flex-wrap text-[#2a2a2a] h-screen justify-center p-10">
-        <div>
-       
-        </div>
-      </div>
-    </div>
+  
   </div>
 </template>
 
@@ -47,16 +37,12 @@ export default {
     toggleTransition() {
       this.isTransitionActive = true;
 
-      // Set a timeout to show the text after 1.5 seconds
-      setTimeout(() => {
-        this.isTextVisible = true;
-      }, 1000); // Delay text visibility by 1.5 seconds
-
+    
       // Set a timeout to hide the text and end the transition after 3.5 seconds
       setTimeout(() => {
         this.isTextVisible = false;
         this.isTransitionActive = false;
-      }, 1000); // Adjust the duration of text visibility as needed
+      }, 3000); // Adjust the duration of text visibility as needed
     }
   },
 
@@ -68,36 +54,14 @@ export default {
 </script>
 
 <style scoped>
-.loading-text {
-  font-size: 1.3vw;; /* Adjust as needed */
-  text-transform: uppercase;
-  font-family: 'NHaas';
-  /* kerning: 2vw; */
-  letter-spacing: .04vw;
-  color: rgb(13, 13, 13); /* Adjust color if needed */
-  animation: flash 1.5s ease-in-out infinite;
-}
 
-@media only screen and (max-width: 768px) {
-  .loading-text {
-    font-size: 5vw; /* Adjust as needed */
-    text-transform: uppercase;
-    color: rgb(13, 13, 13); /* Adjust color if needed */
-    animation: flash 1.5s ease-in-out infinite;
-  }
-  .loader{
-    width: 20vw;
-  }
-}
 
-/* Flash animation */
-@keyframes flash {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+.logo2 {
+   /* font-family: 'Algerian', sans-serif; */
+   text-transform: uppercase;
+   font-size: 3vw;
+   top: .6vh;
+   position: relative;
 }
 
 .text-content {
@@ -177,9 +141,9 @@ pointer-events: none;
   height: 100vh;
   transition: opacity 1.5s ease; /* Adjust the duration to match the transition */
   background-color: #f9f9f1; 
-  background-color: #ffffff4d !important;
-   backdrop-filter: blur(10px);
-   -webkit-backdrop-filter: blur(10px);
+  /* background-color: #ffffff4d !important; */
+   /* backdrop-filter: blur(10px); */
+   /* -webkit-backdrop-filter: blur(10px); */
   z-index: 1000000002;
   z-index: 102 !important;
   pointer-events: none;
@@ -212,7 +176,7 @@ pointer-events: none;
 /* Transition animation */
 .screen-transition-enter-active,
 .screen-transition-leave-active {
-  transition: opacity 3.5s ease; /* Adjust the duration to match the transition */
+  transition: opacity .5s ease; /* Adjust the duration to match the transition */
 }
 
 .screen-transition-enter {

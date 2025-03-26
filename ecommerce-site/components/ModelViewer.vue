@@ -58,7 +58,7 @@ export default {
         0.1,
         1000
       );
-      this.camera.position.set(0, 0, 3);
+      this.camera.position.set(0, 0, 4);
 
       this.canvas = this.$refs.canvas;
       this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });

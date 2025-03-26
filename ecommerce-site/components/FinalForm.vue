@@ -138,6 +138,11 @@
                         <div v-for="(outfit, index) in outfits" :key="index" class="outfit-item">
                             <img :src="outfit.image" :alt="`Outfit ${index + 1}`" class="outfit-image" />
                             <div class="button-group">
+
+                                <div class="flex text-black p-[.1vw] dresst flex-col w-[50%]">
+                                    <p>Dress code:</p>
+                                    <p>Smart casual</p>
+                                </div>
                                 <!-- Thumbs Up Button -->
                                 <button @click="setPreference(index, 'like')" class="thumb-button">
                                     <svg :class="{ selectedlike: outfit.preference === 'like' }" viewBox="0 0 24 24"
@@ -564,9 +569,9 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 1px;
     background-color: rgba(149, 149, 149, 0.1);
-    box-shadow: #bbbbbb 0px 0px 0px 1px inset;
+    box-shadow: #222e3a 0px 0px 0px 1px inset;
     color: #c3c3c3;
     max-width: 100%;
     outline: 0px;
@@ -578,17 +583,36 @@ export default {
     cursor: pointer;
     opacity: 1;
     margin: 1vw 0vw;
-    padding: 0vw 1vw;
+    /* padding: 0vw 1vw; */
     justify-content: space-evenly;
+    flex-direction: column;
+    width: 20vw;
+}
+
+.dresst{
+    line-height: normal;
+    color: black;
+    padding: 1vw 1.5vw;
+    line-height: normal;
 }
 
 .outfit-image {
-    height: 17vw;
+    height: 30vw;
     padding: 2vw;
+    /* border-bottom: solid black 1px; */
     -o-object-fit: cover;
     object-fit: contain;
-    border-radius: 10px;
+    border-radius: 0;
+}
 
+.button-group {
+    width: 100%;
+    display: flex;
+    background: white;
+    border: black solid 1px;
+    /* border-top: 0; */
+    /* border-bottom: 0;  */
+    justify-content: space-evenly;
 }
 
 .buttons {
@@ -600,11 +624,14 @@ export default {
     border: none;
     cursor: pointer;
     padding: 5px;
+    border-left: black solid 1px;
+    border-bottom: 0;
+    border-top: 0;
 }
 
 .thumb-button svg {
-    width: 32px;
-    height: 32px;
+    /* width: 12%; */
+    height: 29px;
     transition: fill 0.3s ease, stroke 0.3s ease;
     stroke: #999;
     /* Default stroke color */

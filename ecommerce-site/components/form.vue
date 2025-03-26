@@ -3,54 +3,136 @@
     <!-- Progress Bar -->
     <ProgressBar :currentStep="currentStep" />
 
-    <div class="model-wrapper  pt-[6vw]">
+    <div class="model-wrapper  ">
 
       <transition name="slide">
-  <div v-if="currentStep === 1" class="content1">
-    <Name />
+        <div v-if="currentStep === 1 || currentStep === 2" class="content1">
+          <!-- <Name /> -->
+          <div class="name">
+
+            <h1 class="signuphead text-[2vw] w-[60%] pb-[1vw] ">
+              Sign Up to Start Shopping
+            </h1>
+
+            <p class="subti pb-[1vw]">It takes 3 minutes to complete.</p>
+
+            <p class="pb-[5vw]">
+
+              Complete a short style profile to unlock a curated fashion marketplace. Every ready-to-shop outfit is
+              tailored to your taste, budget, and fit—guided by professional stylist principles. No endless scrolling.
+              No guesswork. Just the pieces that make sense for you.
+            </p>
+
+
+            <p class="text-[1.2vw] subti  pb-[1vw]">About The Questions</p>
+
+            <p>
+
+              The style profile is made up of 3 simple steps.
+              <br /> <br />
+              We'll begin with a few essentials—details about you and your appearance (e.g., name, height), to guide fit
+              and styling with intention. Then, your preferences: what style you gravitate toward, what you avoid, and
+              what works for your budget.
+              <br /> <br />
+              Each answer refines your shopping experience. Consider it a starting point—for style that's personal, not
+              generic.
+
+            </p>
+
+            <!-- <button class="smalllable2 font-semibold">Get Started</button> -->
+          </div>
+        </div>
+        <div v-if="currentStep === 3 || currentStep === 4" class="content1">
+          <!-- <Name /> -->
+          <div class="name">
+
+            <h1 class="signuphead text-[2vw] w-[60%] pb-[1vw] ">
+              Sizeing
+            </h1>
+
+            <p class="subti pb-[1vw]">It takes 2 minutes to complete.</p>
+
+            <p class="pb-[5vw]">
+              We are gathering your size info. Please provide accurate measurements to ensure the best fit for your personalized shopping experience.
+            </p>
+
+
+            <p class="text-[1.2vw] subti  pb-[1vw]">About The Questions</p>
+
+            <p>
+
+              The sizing will be stored to suggest you better items.
+              <br /> <br />
+             
+
+            </p>
+
+            <!-- <button class="smalllable2 font-semibold">Get Started</button> -->
+          </div>
+        </div>
+        <div v-if="currentStep === 5" class="content1">
+          <!-- <Name /> -->
+          <div class="name">
+
+            <h1 class="signuphead text-[2vw] w-[60%] pb-[1vw] ">
+              Budget & Preferences
+            </h1>
+
+            <p class="subti pb-[1vw]">It takes 4 minutes to complete.</p>
+
+            <p class="pb-[5vw]">
+
+             Select your Budget & Preferences.
+            </p>
+
+
+            <!-- <button class="smalllable2 font-semibold">Get Started</button> -->
+          </div>
+        </div>
+      </transition>
+
+
+<!-- :class="{ 'content-wide': currentStep !== 1 }" -->
+      <div class="content" >
+
+
+        <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+          <div v-if="currentStep === 1">
+            <step-one @next="nextStep" />
+          </div>
+        </transition>
+
+        <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+          <div v-if="currentStep === 2">
+            <step-two @next="nextStep" :model="model" />
+          </div>
+        </transition>
+
+        <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+          <div v-if="currentStep === 3">
+            <step-three @next="nextStep" :model="model" :modelPath="modelPath" :morphMesh="morphMesh"
+              @update-morph="applyMorphUpdate" />
+          </div>
+        </transition>
+
+        <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+          <div v-if="currentStep === 4">
+            <step-four @next="nextStep" :model="model" :modelPath="modelPath" :morphMesh="morphMesh"
+              @update-morph="applyMorphUpdate" />
+          </div>
+        </transition>
+
+        <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+          <div v-if="currentStep === 5">
+            <final-form @next="nextStep" :model="model" />
+          </div>
+        </transition>
+      </div>
+
+      <ModelViewer :modelPath="modelPath" width="40vw" height="40vh" :morphMesh="morphMesh" />
+
+    </div>
   </div>
-</transition>
-
-
- 
-<div class="content" :class="{ 'content-wide': currentStep !== 1 }">
-
-
-      <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentStep === 1">
-          <step-one @next="nextStep" />
-        </div>
-      </transition>
-
-      <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentStep === 2">
-          <step-two @next="nextStep" :model="model" />
-        </div>
-      </transition>
-
-      <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentStep === 3">
-          <step-three @next="nextStep" :model="model" :modelPath="modelPath" :morphMesh="morphMesh" @update-morph="applyMorphUpdate" />
-        </div>
-      </transition>
-
-      <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentStep === 4">
-          <step-four @next="nextStep" :model="model" :modelPath="modelPath" :morphMesh="morphMesh" @update-morph="applyMorphUpdate" />
-        </div>
-      </transition>
-
-      <transition name="fade" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentStep === 5">
-          <final-form @next="nextStep" :model="model" />
-        </div>
-      </transition>
-    </div>
-
-    <ModelViewer :modelPath="modelPath" width="40vw" height="40vh" :morphMesh="morphMesh" />
-  
-    </div>
-</div>
 </template>
 
 <script>
@@ -85,12 +167,12 @@ export default {
         skinTone: null,
         bodySize: null,
       },
-      heightValue: 0, 
+      heightValue: 0,
       canvas: null,
       modelPath: null,
-    //   morphMesh: reactive({
-    //   height: 0,
-    // }),
+      //   morphMesh: reactive({
+      //   height: 0,
+      // }),
       // morphMesh: {},
       morphMesh: {
         height: 0, // Initialize height morph value
@@ -107,7 +189,7 @@ export default {
         pearfem: "/models/pearfem.glb",
         athfm: "/models/athfm.glb",
       },
-    
+
     };
   },
   mounted() {
@@ -123,8 +205,8 @@ export default {
       }
     },
     updateHeight() {
-    this.$set(this.morphMesh, 'height', this.heightValue); // Ensure Vue reactivity
-  },
+      this.$set(this.morphMesh, 'height', this.heightValue); // Ensure Vue reactivity
+    },
     beforeEnter(el) {
       el.style.opacity = 0;
     },
@@ -145,7 +227,33 @@ export default {
 </script>
 
 <style scoped>
-.formall{
+.signuphead{
+  font-weight: 800;
+  line-height: 110%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.name{
+  pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    font-size: .9vw;
+
+    font-weight: 100;
+    font-family: 'inter';
+    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
+    /* font-family: 'typewriter'; */
+}
+
+.subti{
+  font-weight: 400;
+}
+
+.formall {
   width: 100%;
   height: 100%;
   height: 100vh;
@@ -153,19 +261,19 @@ export default {
 
 .model-wrapper {
   display: flex;
-    width: 100vw;
-    height: 100%;
-    /* top: 5vh; */
-    /* background-color: #ffffff; */
-    /* padding-top: 5vh; */
-    margin-top: 7vh;
-    position: relative;
-    /* border-top: #333 solid .1vw; */
-    /* border-bottom: #333 solid .1vw; */
-    justify-content: center;
-    margin-top: 4vh;
-    z-index: 0;
- 
+  width: 100vw;
+  height: 100%;
+  /* top: 5vh; */
+  /* background-color: #ffffff; */
+  /* padding-top: 5vh; */
+  /* margin-top: 7vh; */
+  position: relative;
+  /* border-top: #333 solid .1vw; */
+  /* border-bottom: #333 solid .1vw; */
+  justify-content: center;
+  /* margin-top: 4vh; */
+  z-index: 0;
+
 }
 
 .model-viewer {
@@ -176,7 +284,7 @@ export default {
   justify-content: center;
 }
 
-.content-wide{
+.content-wide {
   width: 100% !important;
   /* width: 84% !important; */
   height: 100%;
@@ -228,7 +336,8 @@ export default {
   text-align: center;
 }
 
-.slide-enter-active, .slide-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
@@ -255,7 +364,7 @@ export default {
 
 @media only screen and (max-width: 768px) {
 
-  .model-wrapper{
+  .model-wrapper {
     display: flex;
     width: 100vw;
     height: 100%;
@@ -270,9 +379,9 @@ export default {
     margin-top: 4vh;
     z-index: 0;
     flex-direction: column;
-}
+  }
 
-.content1{
+  .content1 {
     width: 100%;
     height: 100%;
     padding: 20px;
@@ -284,10 +393,10 @@ export default {
     z-index: 2;
     border-right: #333 solid .1vw;
     overflow: visible;
-}
+  }
 
-.content {
-  width: 100%;
+  .content {
+    width: 100%;
     height: 100%;
     padding: 20px;
     background-color: #e7ecea;
@@ -301,9 +410,9 @@ export default {
     overflow: visible;
     transition: width 0.5s ease-in-out;
 
-}
+  }
 
-.model-container {
+  .model-container {
     position: relative;
     display: flex;
     align-items: center;
@@ -311,7 +420,7 @@ export default {
     overflow: hidden;
     overflow: visible;
     height: max-content;
-}
+  }
 
 }
 </style>

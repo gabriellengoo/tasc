@@ -1,11 +1,14 @@
 <template>
     <div class="progress-bar-container">
+      <p class="logo pr-[2vw]" >Tasc</p>
+     <div class="w-[100%]">
       <div class="progress-bar">
         <span :style="{ width: progressPercentage + '%' }"></span>
       </div>
       <div class="progress-text">
         Step {{ currentStep }} of 5
       </div>
+     </div>
     </div>
   </template>
   
@@ -27,19 +30,21 @@
   
   <style scoped>
   .progress-bar-container {
-    width: 96vw;
     width: 100vw;
     /* margin-top: 20px; */
     text-align: center;
     position: absolute;
     top: 0;
+    display: flex;
     left: 0;
     border-top: black solid 1px;
     border-bottom: black solid 1px;
     background-color: #f9f9f2;
     /* margin: 1vw 2vw; */
-   padding: 1vw 2vw;
-   margin-top: 6vw;
+    padding: 1vw 2vw;
+    /* margin-top: 6vw; */
+    flex-direction: row;
+    align-items:baseline;
   }
   
   .progress-bar {
