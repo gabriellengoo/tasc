@@ -87,6 +87,15 @@ export default {
     //     },
     //   });
     // },
+  
+    extend(config, { isClient }) {
+      if (isClient) {
+        config.module.rules.push({
+          test: /\.js$/,
+          exclude: /(node_modules\/three)/,
+        })
+      }
+    },
 
     transpile: ['three'],
     // build: {
