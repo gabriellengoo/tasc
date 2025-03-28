@@ -42,6 +42,7 @@
     background-color: #f9f9f2;
     /* margin: 1vw 2vw; */
     padding: 1vw 2vw;
+    padding: 0vw 2vw;
     /* margin-top: 6vw; */
     flex-direction: row;
     align-items:baseline;

@@ -6,7 +6,7 @@
       <!-- Height Range Women Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
     <div v-if="currentChunk === 0" class="form-section">
-        <label class="smalllable1" for="heightRangeWomen">Please select your height range</label>
+        <label class="smalllable" for="heightRangeWomen">Please select your height range</label>
 
         <div class="slider-container">
             <!-- Dynamic label based on slider value -->
@@ -21,12 +21,39 @@
                 <option v-for="n in 4" :key="n" :value="n"></option>
             </datalist>
 
-            <!-- Gender selection -->
-            <!-- <div class="gender-toggle">
-                <button @click="selectedGender = 'women'" :class="{ active: selectedGender === 'women' }">Women</button>
-                <button @click="selectedGender = 'men'" :class="{ active: selectedGender === 'men' }">Men</button>
-            </div> -->
+         
         </div>
+
+         <!-- Top Size Selection Section -->
+        <label class="smalllable">Please tell us your typical size for tops</label>
+          <div class="stepbtncontainer">
+            <button class="btns" v-for="(size, key) in topSizes" :key="key"
+              :class="{ 'selected': formData.topSize === key }" @click="selectTopSize(key)">
+              {{ size }}
+            </button>
+          </div>
+
+         <!-- Bottom Size Selection Section -->
+  
+          <label class="smalllable">Please tell us your typical size for bottoms</label>
+          <div class="stepbtncontainer">
+            <button class="btns" v-for="(size, key) in bottomSizes" :key="key"
+              :class="{ 'selected': formData.bottomSize === key }" @click="selectBottomSize(key)">
+              {{ size }}
+            </button>
+          </div>
+       
+
+
+        <!-- Foot Size Selection Section -->
+        <label class="smalllable pb-[2vw]" for="footSize">Please tell us your typical footwear size</label>
+          <div class="stepbtncontainerfoot">
+            <button class="btnsfoot" v-for="size in footSizes" :key="size" @click="selectFootSize(size)"
+              :class="{ 'selected': formData.footSize === size }">
+              {{ size }}
+            </button>
+          </div>
+
     </div>
 </transition>
 
@@ -40,60 +67,10 @@
         </div>
       </transition> -->
 
-      <!-- Top Size Selection Section -->
-      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentChunk === 1" class="form-section">
-          <label class="smalllable">Please tell us your typical size for tops</label>
-          <div class="stepbtncontainer">
-            <button class="btns" v-for="(size, key) in topSizes" :key="key"
-              :class="{ 'selected': formData.topSize === key }" @click="selectTopSize(key)">
-              {{ size }}
-            </button>
-          </div>
-        </div>
-      </transition>
-
-      <!-- Bottom Size Selection Section -->
-      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentChunk === 2" class="form-section">
-          <label class="smalllable">Please tell us your typical size for bottoms</label>
-          <div class="stepbtncontainer">
-            <button class="btns" v-for="(size, key) in bottomSizes" :key="key"
-              :class="{ 'selected': formData.bottomSize === key }" @click="selectBottomSize(key)">
-              {{ size }}
-            </button>
-          </div>
-        </div>
-      </transition>
-
-      <!-- Foot Size Selection Section -->
-      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentChunk === 3" class="form-sectionfoot">
-          <label class="smalllable pb-[2vw]" for="footSize">Please tell us your typical footwear size</label>
-          <div class="stepbtncontainerfoot">
-            <button class="btnsfoot" v-for="size in footSizes" :key="size" @click="selectFootSize(size)"
-              :class="{ 'selected': formData.footSize === size }">
-              {{ size }}
-            </button>
-          </div>
-        </div>
-      </transition>
+ 
 
 
-      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-          <div v-if="currentChunk === 4" class="form-section">
-            <h3 class="smalllable1">BODY - STEP 2.21 (Modesty Check)</h3>
-            <label class="smalllable2">Are there any areas you would like to highlight in your outfits?</label>
-  
-            <!-- Custom Buttons -->
-            <div class="stepbtncontainer">
-              <button v-for="option in ['No', 'Neutral', 'Highlight']" :key="option" class="btns"
-                      :class="{ 'selected': modesty === option }" @click="selectOption('modesty', option)">
-                {{ option }}
-              </button>
-            </div>
-          </div>
-        </transition>
+    
 
     </div>
 
@@ -118,7 +95,7 @@ export default {
       morphMesh: {
         height: 0, // Initialize height morph value
       },
-      totalChunks: 4,
+      totalChunks: 1,
       currentChunk: 0,
       formData: {
         heightRangeWomen: 2,
@@ -190,14 +167,14 @@ export default {
       this.formData.footSize = size;
     },
     nextStep() {
-      if (this.currentChunk < 4) {
+      if (this.currentChunk < 1) {
         this.currentChunk++;
       } else {
         this.$emit('next', this.formData);
       }
     },
     nextChunk() {
-      if (this.currentChunk < 4) {
+      if (this.currentChunk < 1) {
         this.currentChunk++;
       }
     },
@@ -271,7 +248,9 @@ export default {
 
 .height-label {
   margin-top: 10px;
-  font-weight: bold;
+  font-weight: 400;
+  font-size: .7vw;
+  color: #d3d3d3;
 }
 
 /* .form-section {

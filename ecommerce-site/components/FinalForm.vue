@@ -6,10 +6,10 @@
             <!-- Budget Section -->
             <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                 <div v-if="currentChunk === 0" class="form-section">
-                    <h3 class="smalllable1 pt-[2vw]">BUDGET - STEP 3</h3>
+                    <h3 class="headerform">BUDGET - STEP 3</h3>
 
                     <!-- List of categories -->
-                    <div class="category-list">
+                    <div class="body-parts-container">
                         <div v-for="(item, index) in budgetItems" :key="item.key"
                             :class="['category-item', { selectedbud: selectedCategory === item.key }]"
                             @click="selectCategory(item.key)">
@@ -19,9 +19,9 @@
 
                     <!-- Budget level selection for selected category -->
                     <div v-if="selectedCategory" class="budget-selection pt-[2vw]">
-                        <h4>Select a Budget Level for {{ selectedCategoryName }}</h4>
+                        <h4  class="smalllable">Select a Budget Level for {{ selectedCategoryName }}</h4>
                         <div class="budget-container">
-                            <button class="btnsimgcol" v-for="level in ['£', '££', '£££', '££££']" :key="level" :class="{
+                            <button class="btnsimgcolbud" v-for="level in ['£', '££', '£££', '££££']" :key="level" :class="{
                                 'selected': selectedBudget[selectedCategory] === level,
 
                             }" @click="selectBudget('selectedBudget', level)">
@@ -38,13 +38,49 @@
             <!-- Preferences Section -->
             <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                 <div v-if="currentChunk === 1" class="form-section">
-                    <h3 class="smalllable1 pt-[2vw]">PREFERENCES - STEP 4</h3>
-                    <label class="smalllable2">How do you like your clothes to fit?</label>
+                    <h3 class="headerform pt-[2vw]">Preferences</h3>
+                    <label class="smalllable">How do you like your clothes to fit?</label>
 
-                    <!-- Custom Buttons -->
+                    <!-- Standard Fit Selection -->
                     <div class="stepbtncontainer">
                         <button v-for="option in ['Fitted', 'True to Size', 'Oversized']" :key="option" class="btns"
                             :class="{ selected: fit === option }" @click="selectOption('fit', option)">
+                            {{ option }}
+                        </button>
+                    </div>
+
+                    <!-- Fit Challenges Section -->
+                    <h3 class="smalllable pt-[2vw]">Please tell us about any fit challenges</h3>
+
+                    <div class="body-parts-container">
+                        <div v-for="(part, index) in bodyParts" :key="index" class="body-part"
+                            @click="toggleBodyPart(part)">
+                            {{ part }}
+
+                            <!-- Show Fit Options if Selected -->
+                            <div v-if="selectedBodyParts.includes(part)" class="fit-options">
+                                <button v-for="option in ['Fitted', 'True to Size', 'Oversized']" :key="option"
+                                    class="btnsfit" :class="{ selected: fitChallenges[part] === option }"
+                                    @click.stop="selectFitChallenge(part, option)">
+                                    {{ option }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                
+                </div>
+            </transition>
+
+            <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
+                <div v-if="currentChunk === 2" class="form-section">
+                    <h3 class="headerform">BODY - (Modesty Check)</h3>
+                    <label class="smalllable">Are there any areas you would like to highlight in your outfits?</label>
+
+                    <!-- Custom Buttons -->
+                    <div class="stepbtncontainer">
+                        <button v-for="option in ['No', 'Neutral', 'Highlight']" :key="option" class="btns"
+                            :class="{ 'selected': modesty === option }" @click="selectOption('modesty', option)">
                             {{ option }}
                         </button>
                     </div>
@@ -53,23 +89,15 @@
 
             <!-- Favorite Colors -->
             <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-                <div v-if="currentChunk === 2" class="form-section">
-                    <h3 class="smalllable1 pt-[2vw]">COLOR PREFERENCES</h3>
+                <div v-if="currentChunk === 3" class="form-section">
+                    <h3 class="headerform pt-[2vw]">Color preferences</h3>
 
-                    <label class="smalllable2">What are your <span class="smalllable2 font-semibold">favourite</span>
+                    <label class="smalllable">What are your <span class="smalllable2 font-semibold">favourite</span>
                         colours to wear? (Up to 4 colors)</label>
 
                     <!-- Color Picker -->
                     <input type="color" v-model="favoriteColor" @input="addColorFromPicker" class="color-picker" />
 
-                    <!-- Suggested Color Options -->
-                    <!-- <div class="color-suggestions">
-            <span v-for="color in colorOptions" :key="color" 
-                  :style="{ backgroundColor: color }" 
-                  class="color-swatch"
-                  @click="addColorFromSuggestion(color)">
-            </span>
-        </div> -->
 
                     <!-- Selected Colors -->
                     <div class="color-tags">
@@ -84,24 +112,17 @@
 
             <!-- Least Favorite Colors -->
             <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-                <div v-if="currentChunk === 3" class="form-section">
-                    <h3 class="smalllable1 pt-[2vw]">COLOR PREFERENCES</h3>
+                <div v-if="currentChunk === 4" class="form-section">
+                    <h3 class="headerform pt-[2vw]">Color preferences</h3>
 
-                    <label class="smalllable2">What are your <span class="smalllable2 font-semibold">least
+                    <label class="smalllable">What are your <span class="smalllable2 font-semibold">least
                             favourite</span> colours to wear? (Up to 4 colors)</label>
 
                     <!-- Color Picker -->
                     <input type="color" v-model="leastFavoriteColor" @input="addLeastColorFromPicker"
                         class="color-picker" />
 
-                    <!-- Suggested Color Options -->
-                    <!-- <div class="color-suggestions">
-            <span v-for="color in colorOptions" :key="color" 
-                  :style="{ backgroundColor: color }" 
-                  class="color-swatch"
-                  @click="addLeastColorFromSuggestion(color)">
-            </span>
-        </div> -->
+
 
                     <!-- Selected Colors -->
                     <div class="color-tags">
@@ -116,79 +137,84 @@
 
 
 
-            <!-- Adventurous Style Section -->
-            <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-                <div v-if="currentChunk === 4" class="form-section">
-                    <h3 class="smalllable1 pt-[2vw]">STYLE PREFERENCES</h3>
-                    <label class="smalllable2">How adventurous would you describe your style? ( 1 to 10 )</label>
-                    <input v-model="adventurousLevel" type="range" min="1" max="10" step="1" class="slider" />
-                    <span class="slider-value">{{ adventurousLevel }}</span>
-                </div>
-            </transition>
+
+
 
 
             <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
 
-                <div v-if="currentChunk === 5" class="outfit-feedback">
+                <!-- Adventurous Style Section -->
+                <div v-if="currentChunk === 5">
+                    <div class="form-section">
+                        <h3 class="headerform pt-[2vw]">Style preferences</h3>
+                        <label class="smalllable">How adventurous would you describe your style? ( 1 to 10 )</label>
+                        <input v-model="adventurousLevel" type="range" min="1" max="10" step="1" class="slider" />
+                        <span class="slider-value">{{ adventurousLevel }}</span>
+                    </div>
 
-                    <h3 class="smalllable1 pt-[2vw]">Please tell us how you feel about these looks?</h3>
-                    <p class="smalllable2">This helps us better understand your style better. ( scroll )</p>
+                    <div class="outfit-feedback">
 
-                    <div class="outfits">
-                        <div v-for="(outfit, index) in outfits" :key="index" class="outfit-item">
-                            <img :src="outfit.image" :alt="`Outfit ${index + 1}`" class="outfit-image" />
-                            <div class="button-group">
+                        <h3 class="headerform pt-[2vw]">Please tell us how you feel about these looks?</h3>
+                        <p class="smalllable">This helps us better understand your style better. ( scroll )</p>
 
-                                <div class="flex text-black p-[.1vw] dresst flex-col w-[50%]">
-                                    <p>Dress code:</p>
-                                    <p>Smart casual</p>
+                        <div class="outfits">
+                            <div v-for="(outfit, index) in outfits" :key="index" class="outfit-item">
+                                <img :src="outfit.image" :alt="`Outfit ${index + 1}`" class="outfit-image" />
+                                <div class="button-group">
+
+                                    <div class="flex text-black p-[.1vw] dresst flex-col w-[50%]">
+                                        <p>Dress code:</p>
+                                        <p>Smart casual</p>
+                                    </div>
+                                    <!-- Thumbs Up Button -->
+                                    <button @click="setPreference(index, 'like')" class="thumb-button">
+                                        <svg :class="{ selectedlike: outfit.preference === 'like' }" viewBox="0 0 24 24"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                            </g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path
+                                                    d="M8 14V20M8 20L4 20V9.99998H8L13.1956 3.93847C13.6886 3.3633 14.4642 3.11604 15.1992 3.29977L15.2467 3.31166C16.5885 3.64711 17.1929 5.21057 16.4258 6.36135L14 9.99998H18.5604C19.8225 9.99998 20.7691 11.1546 20.5216 12.3922L19.3216 18.3922C19.1346 19.3271 18.3138 20 17.3604 20M8 20H12"
+                                                    stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                            </g>
+                                        </svg>
+                                    </button>
+
+                                    <!-- Thumbs Down Button -->
+                                    <button @click="setPreference(index, 'dislike')" class="thumb-button">
+                                        <svg :class="{ selecteddisl: outfit.preference === 'dislike' }"
+                                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                            </g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path
+                                                    d="M8 10V4M8 4L4 4.00002V14H8L13.1956 20.0615C13.6886 20.6367 14.4642 20.884 15.1992 20.7002L15.2467 20.6883C16.5885 20.3529 17.1929 18.7894 16.4258 17.6387L14 14H18.5604C19.8225 14 20.7691 12.8454 20.5216 11.6078L19.3216 5.60779C19.1346 4.67294 18.3138 4.00002 17.3604 4.00002M8 4H12"
+                                                    stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                            </g>
+                                        </svg>
+                                    </button>
                                 </div>
-                                <!-- Thumbs Up Button -->
-                                <button @click="setPreference(index, 'like')" class="thumb-button">
-                                    <svg :class="{ selectedlike: outfit.preference === 'like' }" viewBox="0 0 24 24"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
-                                        </g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path
-                                                d="M8 14V20M8 20L4 20V9.99998H8L13.1956 3.93847C13.6886 3.3633 14.4642 3.11604 15.1992 3.29977L15.2467 3.31166C16.5885 3.64711 17.1929 5.21057 16.4258 6.36135L14 9.99998H18.5604C19.8225 9.99998 20.7691 11.1546 20.5216 12.3922L19.3216 18.3922C19.1346 19.3271 18.3138 20 17.3604 20M8 20H12"
-                                                stroke="#000000" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round"></path>
-                                        </g>
-                                    </svg>
-                                </button>
-
-                                <!-- Thumbs Down Button -->
-                                <button @click="setPreference(index, 'dislike')" class="thumb-button">
-                                    <svg :class="{ selecteddisl: outfit.preference === 'dislike' }" viewBox="0 0 24 24"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
-                                        </g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path
-                                                d="M8 10V4M8 4L4 4.00002V14H8L13.1956 20.0615C13.6886 20.6367 14.4642 20.884 15.1992 20.7002L15.2467 20.6883C16.5885 20.3529 17.1929 18.7894 16.4258 17.6387L14 14H18.5604C19.8225 14 20.7691 12.8454 20.5216 11.6078L19.3216 5.60779C19.1346 4.67294 18.3138 4.00002 17.3604 4.00002M8 4H12"
-                                                stroke="#000000" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round"></path>
-                                        </g>
-                                    </svg>
-                                </button>
                             </div>
+
                         </div>
 
                     </div>
-
                 </div>
             </transition>
 
             <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
                 <div v-if="currentChunk === 6">
                     <!-- Favorite Brands Section -->
-                    <h3 class="smalllable1 pt-[2vw]">BRAND PREFERENCES</h3>
+                    <h3 class="headerform pt-[2vw]">Brand Preferences</h3>
 
-                    <label class="smalllable2">Please tell us your <span
-                            class="smalllable2 font-semibold">favourite</span> brands (Up to 10 brands)</label>
+                    <label class="smalllable">Please tell us your <span
+                            class="smalllable font-semibold">favourite</span> brands (Up to 5 brands)</label>
                     <div v-if="!showBrandInput" class="flex items-center">
                         <button @click="showBrandInput = true" class="plus-btn">+</button>
                     </div>
@@ -198,29 +224,13 @@
                         <button @click="addBrand" class="plus-btn">+</button>
                     </div>
 
-                    <!-- <ul v-if="filteredBrands.length > 0" class="suggestions">
-                        <li v-for="brand in filteredBrands" :key="brand" @click="addBrandFromSuggestion(brand)">{{ brand
-                            }}</li>
-                    </ul> -->
-
                     <div class="color-tags">
                         <span v-for="(brand, index) in selectedBrands" :key="index" class="brand-tag">
                             {{ brand }} <button @click="removeBrand(index)">✕</button>
                         </span>
                     </div>
 
-
-                </div>
-            </transition>
-
-            <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-                <div v-if="currentChunk === 7">
-                    <!-- Favorite Brands Section -->
-                    <h3 class="smalllable1 pt-[2vw]">BRAND PREFERENCES</h3>
-
-
-
-                    <label class="smalllable2">Are there any brands you <span class="smalllable2 font-semibold">do
+                    <label class="smalllable">Are there any brands you <span class="smalllable2 font-semibold">do
                             not</span> like to wear? (Up to 10 brands)</label>
                     <div v-if="!showDislikeBrandInput" class="flex items-center">
                         <button @click="showDislikeBrandInput = true" class="plus-btn">+</button>
@@ -231,36 +241,61 @@
                         <button @click="addDislikeBrand" class="plus-btn">+</button>
                     </div>
 
-                    <!-- <ul v-if="filteredDislikeBrands.length > 0" class="suggestions">
-                        <li v-for="brand in filteredDislikeBrands" :key="brand"
-                            @click="addDislikeBrandFromSuggestion(brand)">{{ brand }}</li>
-                    </ul> -->
-
                     <div class="color-tags">
                         <span v-for="(brand, index) in selectedDislikeBrands" :key="index" class="brand-tag">
                             {{ brand }} <button @click="removeDislikeBrand(index)">✕</button>
+                        </span>
+                    </div>
+
+                    <!-- New Multi-Selection for Avoid Items -->
+                    <h3 class="headerform pt-[2vw]">Items to Avoid</h3>
+                    <label class="smalllable">Is there anything we should avoid when recommending items for
+                        you?</label>
+                    <div class="avoid-items-container">
+                        <button v-for="(item, index) in avoidOptions" :key="index" class="avoid-item-btn"
+                            :class="{ selected: selectedAvoidItems.includes(item) }" @click="toggleAvoidItem(item)">
+                            {{ item }}
+                        </button>
+
+                        <!-- + Button for Custom Avoid Items -->
+                        <button class="avoid-item-btn custom-btn" @click="showCustomAvoidInput = true">+</button>
+                    </div>
+
+                    <!-- Input for Custom Avoid Items -->
+                    <div v-if="showCustomAvoidInput" class="flex items-center space-x-2">
+                        <input v-model="customAvoidInput" type="text" class="color-input"
+                            placeholder="Enter item to avoid..." />
+                        <button @click="addCustomAvoidItem" class="plus-btn">+</button>
+                    </div>
+
+                    <!-- Display Selected Avoid Items -->
+                    <div class="color-tags">
+                        <span v-for="(item, index) in selectedAvoidItems" :key="index" class="brand-tag">
+                            {{ item }} <button @click="removeAvoidItem(index)">✕</button>
                         </span>
                     </div>
                 </div>
             </transition>
 
 
+
+
         </div>
 
         <!-- Navigation Buttons -->
-        <div class="navbutform" v-if="currentChunk !== 7">
+        <div class="navbutform" v-if="currentChunk !== 6">
             <button class="nextbtn2" @click="nextStep">Skip?</button>
 
             <div class="nav-buttons">
                 <button class="" @click="prevChunk" v-if="currentChunk > 0">↰</button>
                 <button class="bg-[white] text-[black]" @click="handleNextClick">
-                    {{ currentChunk === totalChunks - 7 ? "↳" : "↱" }}
+                    {{ currentChunk === totalChunks - 6 ? "↳" : "↱" }}
                 </button>
             </div>
 
         </div>
 
-        <button class="headerformsub pt-[5vw]" v-if="currentChunk === 7" @click="submitFinalForm">Submit</button>
+        <button class="headerformsub pt-[5vw]" v-if="currentChunk === 6" @click="submitFinalForm">Submit</button>
     </div>
 </template>
 
@@ -284,6 +319,12 @@ export default {
             filteredDislikeBrands: [],
             allBrands: ['Nike', 'Adidas', 'Gucci', 'Louis Vuitton', 'Zara', 'H&M', 'Chanel'], // Replace with API data
             maxBrands: 10,
+
+
+            fit: null,
+            bodyParts: ['Shoulders', 'Chest', 'Waist', 'Hips', 'Arms', 'Legs'],
+            selectedBodyParts: [],
+            fitChallenges: {},
 
             brandInput: '',
             dislikeBrandInput: '',
@@ -339,12 +380,52 @@ export default {
                 { image: 'https://cdn.meideinthe.cloud/entirestudios.com/content/player/227-tricky-wearswares-pant-seal/entire-studios-wares-pant-seal-tricky-01-2.webp' },
                 { image: 'https://cdn.meideinthe.cloud/entirestudios.com/content/player/227-tricky-wearswares-pant-seal/entire-studios-wares-pant-seal-tricky-01-2.webp' }
             ],
-            feedback: Array(9).fill(null)
-
+            feedback: Array(9).fill(null),
+            // Avoid items
+            avoidOptions: ["Hats", "Bags", "Eyewear", "Jewellery", "Prints", "Patterns"],
+            selectedAvoidItems: [],
+            showCustomAvoidInput: false,
+            customAvoidInput: "",
         };
     },
     methods: {
-
+        selectOption(type, value) {
+            this[type] = value;
+        },
+        toggleBodyPart(part) {
+            if (this.selectedBodyParts.includes(part)) {
+                this.selectedBodyParts = this.selectedBodyParts.filter(p => p !== part);
+                delete this.fitChallenges[part]; // Remove selection if body part is deselected
+            } else {
+                this.selectedBodyParts.push(part);
+            }
+        },
+        selectFitChallenge(part, option) {
+            this.fitChallenges[part] = option;
+        },
+        skipChallenges() {
+            this.selectedBodyParts = [];
+            this.fitChallenges = {};
+            this.nextStep();
+        },
+        // Avoid Item Selection
+        toggleAvoidItem(item) {
+            if (this.selectedAvoidItems.includes(item)) {
+                this.selectedAvoidItems = this.selectedAvoidItems.filter((i) => i !== item);
+            } else {
+                this.selectedAvoidItems.push(item);
+            }
+        },
+        addCustomAvoidItem() {
+            if (this.customAvoidInput && !this.selectedAvoidItems.includes(this.customAvoidInput)) {
+                this.selectedAvoidItems.push(this.customAvoidInput);
+                this.customAvoidInput = "";
+                this.showCustomAvoidInput = false;
+            }
+        },
+        removeAvoidItem(index) {
+            this.selectedAvoidItems.splice(index, 1);
+        },
         addColorFromPicker() {
             if (this.selectedColors.length < 4 && !this.selectedColors.includes(this.favoriteColor)) {
                 this.selectedColors.push(this.favoriteColor);
@@ -390,14 +471,14 @@ export default {
             );
         },
         addBrand() {
-            if (this.brandInput && this.selectedBrands.length < 10) {
+            if (this.brandInput && this.selectedBrands.length < 5) {
                 this.selectedBrands.push(this.brandInput);
                 this.brandInput = '';
                 this.filteredBrands = [];
             }
         },
         addBrandFromSuggestion(brand) {
-            if (this.selectedBrands.length < 10) {
+            if (this.selectedBrands.length < 5) {
                 this.selectedBrands.push(brand);
             }
         },
@@ -410,20 +491,20 @@ export default {
         },
 
         addDislikeBrandFromSuggestion(brand) {
-            if (this.selectedDislikeBrands.length < 10) {
+            if (this.selectedDislikeBrands.length < 5) {
                 this.selectedDislikeBrands.push(brand);
             }
         },
 
         addBrand() {
-            if (this.brandInput.trim() && this.selectedBrands.length < 10) {
+            if (this.brandInput.trim() && this.selectedBrands.length < 5) {
                 this.selectedBrands.push(this.brandInput.trim());
                 this.brandInput = '';
                 this.showBrandInput = false;
             }
         },
         addDislikeBrand() {
-            if (this.dislikeBrandInput.trim() && this.selectedDislikeBrands.length < 10) {
+            if (this.dislikeBrandInput.trim() && this.selectedDislikeBrands.length < 5) {
                 this.selectedDislikeBrands.push(this.dislikeBrandInput.trim());
                 this.dislikeBrandInput = '';
                 this.showDislikeBrandInput = false;
@@ -547,8 +628,117 @@ export default {
 </script>
 
 <style scoped>
-.outfit-feedback {
-    /* text-align: center; */
+
+.btnsfit{
+    /* padding: 10px; */
+    font-size: .7rem;
+    display: block;
+    cursor: pointer;
+    /* width: 24vw; */
+    width: 9vw;
+    min-width: -moz-max-content;
+    min-width: max-content;
+    text-align: center;
+    border-radius: 5px;
+    color: #ddd;
+     transition: all 0.2s ease-in-out;
+}
+
+.btnsfit.selected{
+    color: #000000;
+}
+
+.btnsfit:hover{
+    color: #000000;
+}
+
+.fit-options{
+    font-family: "Inter", sans-serif;
+}
+
+.body-part{
+    width: 35%;
+    min-width: max-content;
+}
+
+.budget-container{
+    display: flex;
+    pointer-events: auto;
+    padding: 1vw;
+    justify-content: space-around;
+}
+
+.body-parts-container {
+    /* font-family: 'Algerian'; */
+    font-family: "Inter", sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    /* width: 25%; */
+}
+
+.body-part-item {
+    flex: 1 1 calc(33.333% - 1rem);
+    text-align: center;
+    width: 35%;
+}
+
+.body-part-btn {
+    background: white;
+    border: 2px solid black;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.body-part-btn.selected {
+    background: black;
+    color: white;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.skip-btn,
+.next-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    cursor: pointer;
+}
+
+.next-btn {
+    background: black;
+    color: white;
+}
+
+/* Avoid Items Container */
+.avoid-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Avoid Item Buttons */
+.avoid-item-btn {
+    background: rgba(0, 0, 0, 0);
+    border: 1px solid rgb(231, 231, 231);
+    box-shadow: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    color: #c3c3c3;
+    transition: background 0.3s;
+}
+
+.avoid-item-btn.selected {
+
+    color: #000000;
+    box-shadow: none;
+    border: 1px solid #000000;
 }
 
 .outfits {
@@ -589,7 +779,7 @@ export default {
     width: 20vw;
 }
 
-.dresst{
+.dresst {
     line-height: normal;
     color: black;
     padding: 1vw 1.5vw;
@@ -687,6 +877,7 @@ export default {
     display: block;
     text-align: center;
     margin-top: 1vw;
+    font-family: 'Algerian';
 }
 
 .budget-container button {

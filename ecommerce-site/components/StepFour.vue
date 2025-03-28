@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2 class="headerform">Fit Challenges</h2>
     <h2 class="smalllable2 font-semibold pb-[2vw]">Please tell us about any clothing fit challenges you face (optional)
     </h2>
 
@@ -7,7 +8,7 @@
       <!-- Neck Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentChunk === 0" class="form-section">
-          <h3 class="smalllable1">Neck</h3>
+          <h3 class="smalllable">Neck</h3>
           <div class="stepbtncontainer">
             <button v-for="option in neckOptions" :key="option" @click="selectOption('neck', option)"
               :class="{ 'selected': formData.neck === option }" class="btns">
@@ -20,7 +21,7 @@
       <!-- Shoulders Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentChunk === 1" class="form-section">
-          <h3 class="smalllable1">Shoulders</h3>
+          <h3 class="smalllable">Shoulders</h3>
           <div class="stepbtncontainer">
             <button v-for="option in shoulderOptions" :key="option" @click="selectSholders(option)"
               :class="{ 'selected': formData.sholders === option }" class="btns">
@@ -33,7 +34,7 @@
       <!-- Arms Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentChunk === 2" class="form-section">
-          <h3 class="smalllable1">Arms</h3>
+          <h3 class="smalllable">Arms</h3>
           <div class="stepbtncontainer">
             <button v-for="option in armOptions" :key="option" @click="selectOption('arms', option)"
               :class="{ 'selected': formData.arms === option }" class="btns">
@@ -46,7 +47,7 @@
       <!-- Bust Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentChunk === 3" class="form-section">
-          <h3 class="smalllable1">Bust</h3>
+          <h3 class="smalllable">Bust</h3>
           <div class="stepbtncontainer">
             <button v-for="option in bustOptions" :key="option" @click="selectOption('bust', option)"
               :class="{ 'selected': formData.bust === option }" class="btns">
@@ -59,7 +60,7 @@
       <!-- Stomach Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentChunk === 4" class="form-section">
-          <h3 class="smalllable1">Stomach</h3>
+          <h3 class="smalllable">Stomach</h3>
           <div class="stepbtncontainer">
             <button v-for="option in stomachOptions" :key="option" @click="selectStomach(option)"
               :class="{ 'selected': formData.stomach === option }" class="btns">
@@ -72,7 +73,7 @@
       <!-- Bum Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentChunk === 5" class="form-section">
-          <h3 class="smalllable1">Bum</h3>
+          <h3 class="smalllable">Bum</h3>
           <div class="stepbtncontainer">
             <button v-for="option in bumOptions" :key="option" @click="selectOption('bum', option)"
               :class="{ 'selected': formData.bum === option }" class="btns">
@@ -85,7 +86,7 @@
       <!-- Hips Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentChunk === 6" class="form-section">
-          <h3 class="smalllable1">Hips</h3>
+          <h3 class="smalllable">Hips</h3>
           <div class="stepbtncontainer">
             <button v-for="option in hipOptions" :key="option" @click="selectHips(option)"
               :class="{ 'selected': formData.hips === option }" class="btns">
@@ -98,7 +99,7 @@
       <!-- Legs Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentChunk === 7" class="form-section">
-          <h3 class="smalllable1">Legs</h3>
+          <h3 class="smalllable">Legs</h3>
           <div class="stepbtncontainer">
             <button v-for="option in legOptions" :key="option" @click="selectOption('legs', option)"
               :class="{ 'selected': formData.legs === option }" class="btns">

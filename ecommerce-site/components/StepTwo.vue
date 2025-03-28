@@ -6,48 +6,38 @@
       <!-- Hair Texture Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
         <div v-if="currentChunk === 0" class="form-section">
-          <h3 class="smalllable1">Hair Texture</h3>
+          <!-- <h3 class="smalllable1">Hair</h3> -->
+          <h3 class="smalllable">Hair Texture</h3>
           <div class="stepbtncontainer ">
             <button v-for="option in ['Straight', 'Wavy', 'Curly', 'Afro']" :key="option" class="btns"
               :class="{ selected: selectedHairTexture === option }" @click="selectOption('hairTexture', option)">
               {{ option }}
             </button>
           </div>
-        </div>
-      </transition>
-
-      <!-- Hair Length Section -->
-      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentChunk === 1" class="form-section">
-          <h3 class="smalllable1">Hair Length</h3>
+          <h3 class="smalllable">Hair Length</h3>
           <div class="stepbtncontainer">
             <button v-for="option in ['Bald', 'Short', 'Medium', 'Long']" :key="option" class="btns"
               :class="{ selected: selectedHairLength === option }" @click="selectOption('hairLength', option)">
               {{ option }}
             </button>
           </div>
-        </div>
-      </transition>
-
-      <!-- Hair Color Section -->
-      <!-- Hair Color Section -->
-      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentChunk === 2" class="form-sectioncol">
-          <h3 class="smalllable1">Hair Colour</h3>
+          <h3 class="smalllable">Hair Colour</h3>
           <div class="stepbtncontainer2col">
-            <button v-for="(color, index) in ['#000000', '#3E1F1B', '#6B4F2C', '#F2D14E', '#D24D29', '#A7A7A7']"
-              :key="index" class="btnsimgcol"
+            <!-- Predefined Color Buttons -->
+            <button v-for="(color, index) in hairColors" :key="index" class="btnsimgcol"
               :class="{ selected2: selectedHairColor === color, 'tooltip-active': tooltipVisible && tooltipIndex === index }"
-              @click="selectOption('hairColor', color)" @mouseover="showTooltip(color, $event, index)"
-              @mouseleave="hideTooltip" :style="{ backgroundColor: color }">
-
-              <!-- Tooltip inside the button -->
+              @click="selectOption(color)" @mouseover="showTooltip(color, $event, index)" @mouseleave="hideTooltip"
+              :style="{ backgroundColor: color }">
+              <!-- Tooltip -->
               <div v-if="tooltipVisible && tooltipIndex === index" class="tooltip"
                 :style="{ top: '-25px', left: '50%', transform: 'translateX(-50%)' }">
                 {{ tooltipText }}
               </div>
-
             </button>
+
+            <!-- + Button for Custom Color -->
+            <button class="btnsimgcol custom-color-btn" @click="triggerColorPicker">+</button>
+            <input type="color" ref="colorPicker" class="hidden" @change="addCustomColor" />
           </div>
         </div>
       </transition>
@@ -61,8 +51,8 @@
 
       <!-- Skin Tone Section -->
       <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentChunk === 3" class="form-sectioncol">
-          <h3 class="smalllable1">Skin Tone Selection</h3>
+        <div v-if="currentChunk === 1" class="form-sectioncol">
+          <h3 class="smalllable">Skin Tone Selection</h3>
           <div class="stepbtncontainer2col">
             <button v-for="(tone, index) in ['#F1C27D', '#E5C28D', '#A56C42', '#5D3A29', '#3E1F1B']" :key="index"
               class="btnsimgcol"
@@ -76,15 +66,8 @@
               </div>
             </button>
           </div>
-        </div>
-      </transition>
-
-
-
-      <!-- Eye Colour Section -->
-      <transition name="slide" @before-enter="beforeEnter" @enter="enter" @leave="leave">
-        <div v-if="currentChunk === 4" class="form-section">
-          <h3 class="smalllable1">Eye Colour</h3>
+          <!-- Eye Colour Section -->
+          <h3 class="smalllable">Eye Colour</h3>
           <div class="stepbtncontainer">
             <button v-for="option in ['Blue', 'Green', 'Brown', 'Hazel', 'Grey']" :key="option" class="btns"
               :class="{ selected: selectedEyeColor === option }" @click="selectOption('eyeColor', option)">
@@ -93,6 +76,10 @@
           </div>
         </div>
       </transition>
+
+
+
+
     </div>
 
     <div class="nav-buttons">
@@ -109,7 +96,7 @@ export default {
   data() {
     return {
       currentChunk: 0,
-      totalChunks: 4,
+      totalChunks: 2,
       selectedHairTexture: "",
       selectedHairLength: "",
       selectedHairColor: "",
@@ -117,14 +104,40 @@ export default {
       selectedEyeColor: "",
       tooltipVisible: false,
       tooltipText: '',
+      hairColors: ['#000000', '#3E1F1B', '#6B4F2C', '#F2D14E', '#D24D29', '#A7A7A7'],
       tooltipPosition: { top: '0px', left: '0px' },
       tooltipIndex: null, // Tracks the index of the button with tooltip
     };
   },
   methods: {
+    selectOption(type, color) {
+      this.selectedHairColor = color;
+    },
+    showTooltip(color, event, index) {
+      this.tooltipText = color;
+      this.tooltipVisible = true;
+      this.tooltipIndex = index;
+    },
+    hideTooltip() {
+      this.tooltipVisible = false;
+    },
+    triggerColorPicker() {
+      this.$refs.colorPicker.click();
+    },
+    addCustomColor(event) {
+      const newColor = event.target.value;
+
+      // Only add the color if it's not already in the list
+      if (this.hairColors && !this.hairColors.includes(newColor)) {
+        this.hairColors.push(newColor);
+      }
+
+      // Apply the selected color only after the picker closes
+      this.selectedHairColor = newColor;
+    },
     selectOption(category, option) {
       this[`selected${this.capitalize(category)}`] = option;
-      this.nextStep();
+      // this.nextStep();
     },
     getColorName(color) {
       const colorNames = {
@@ -151,7 +164,7 @@ export default {
 
     selectSkinTone(tone) {
       this.selectedSkinTone = tone;
-      this.nextStep();
+      // this.nextStep();
     },
     getSkinToneName(tone) {
       const skinToneNames = {
@@ -178,7 +191,7 @@ export default {
       return str.charAt(0).toUpperCase() + str.slice(1);
     },
     nextStep() {
-      if (this.currentChunk < 4) {
+      if (this.currentChunk < 2) {
         this.currentChunk++;
       } else {
         this.$emit("next", {

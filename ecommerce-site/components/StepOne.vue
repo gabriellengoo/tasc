@@ -56,9 +56,9 @@
         <div v-if="currentChunk === 2" class="form-section">
           <label class="smalllable" for="age">Age range</label>
           <div class="stepbtncontainer">
-            <button class="btns" v-for="(age, index) in ageRanges" :key="age"
+            <button class="btns" v-for="(age) in ageRanges" :key="age"
               :class="{ selected: formData.age === age }" @click="selectAge(age)">
-              {{ alphabet[index] }}. {{ age }}
+              {{ age }}
             </button>
           </div>
 
@@ -67,7 +67,7 @@
     </div>
 
     <div v-if="currentChunk !== 0" class="nav-buttons">
-      <button class="" @click="prevChunk" v-if="currentChunk > 2">↰</button>
+      <button class="" @click="prevChunk" v-if="currentChunk > 3">↰</button>
       <button class="bg-[white] text-[black]" @click="handleNextClick">
         {{ currentChunk === totalChunks - 1 ? "↳" : "↱" }}
       </button>
@@ -88,7 +88,7 @@ export default {
   data() {
     return {
       currentChunk: 0,
-      totalChunks: 2,
+      totalChunks: 3,
       formData: {
         name: '',
         email: '',
@@ -96,7 +96,7 @@ export default {
       },
       showPassword: false, 
       ageRanges: ["18-24", "25-34", "35-44", "45-59", "60+"],
-      alphabet: ["A", "B", "C", "D", "E"], // Add letters for options
+      // alphabet: ["A", "B", "C", "D", "E"], 
     };
   },
   methods: {
@@ -180,20 +180,20 @@ export default {
   transition: 0.5s ease-in-out;
 }
 
-.stepbtncontainer {
+/* .stepbtncontainer {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
+} */
 
-.btns {
+/* .btns {
   padding: 10px;
   font-size: 1rem;
   cursor: pointer;
   width: 24vw;
   text-align: left;
   border-radius: 5px;
-}
+} */
 
 .smalllable {
   font-size: 1.5vw;
